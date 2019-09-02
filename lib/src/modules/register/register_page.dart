@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../src/shared/widgets/fields/stream_input_field.dart';
 
+import '../../../src/shared/widgets/fields/stream_input_field.dart';
 import 'register_bloc.dart';
 import 'widgets/register_button.dart';
 

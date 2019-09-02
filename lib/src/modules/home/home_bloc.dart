@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-//import 'package:rxdart/rxdart.dart';
 
 import '../../app_bloc.dart';
 import 'home_validators.dart';
@@ -18,7 +17,7 @@ class HomeBloc extends ChangeNotifier with HomeValidators {
 class Home extends HomeBloc {
   Home(AppBloc appBloc) : super(appBloc);
 
-  /*
+/*
   * Getters here
   * */
 }
@@ -26,7 +25,7 @@ class Home extends HomeBloc {
 class HomeProvider extends Home {
   HomeProvider(AppBloc appBloc) : super(appBloc);
 
-  /*
+/*
   * Functions here
   * */
 }

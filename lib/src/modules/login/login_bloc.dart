@@ -4,8 +4,8 @@ import 'package:rxdart/subjects.dart';
 
 import '../../app_bloc.dart';
 import '../../repositories/hasura/user/hasura_user_repository.dart';
-import '../../shared/models/user/user_model.dart';
 import '../../shared/languages/pt-br/strings.dart';
+import '../../shared/models/user/user_model.dart';
 import 'login_validators.dart';
 
 enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
@@ -69,11 +69,10 @@ class LoginProvider extends Login {
         return false;
       }
 
-      _appBloc.setUser(user);
+      await _appBloc.setUser(user);
       _stateController.add(LoginState.SUCCESS);
       return true;
-    } catch (ex) {
-      print(ex);
+    } catch (e) {
       message = Strings.loginMessageError;
       _stateController.add(LoginState.FAIL);
       return false;

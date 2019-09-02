@@ -17,18 +17,18 @@ class SideDrawer extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: _bloc.getUser != null
                     ? Text(
-                  _bloc.getUser.name,
-                  style: TextStyle(fontSize: 18.0),
-                )
+                        _bloc.getUser.name,
+                        style: TextStyle(fontSize: 18.0),
+                      )
                     : Container(),
               ),
               Divider(),
               ListTile(
                 leading: Icon(Icons.exit_to_app),
                 title: Text(Strings.logout),
-                onTap: () {
+                onTap: () async {
                   Navigator.pop(context);
-                  _bloc.cleanUser();
+                  await _bloc.cleanUser();
                 },
               ),
             ],

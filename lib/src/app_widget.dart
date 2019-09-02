@@ -9,12 +9,38 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<AppProvider>(context);
+    _bloc.userIsLogged();
     return MaterialApp(
       title: 'Flutter Slidy',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _bloc.getUser != null ? HomeModule() : LoginModule(),
+      home: StreamBuilder<LoginState>(
+          stream: _bloc.streamState,
+          builder: (context, snapshot) {
+            switch (snapshot.data) {
+              case LoginState.LOADING:
+                {
+                  return CircularProgressIndicator();
+                }
+                break;
+              case LoginState.SUCCESS:
+                {
+                  return HomeModule();
+                }
+                break;
+              case LoginState.IDLE:
+              case LoginState.FAIL:
+                {
+                  return LoginModule();
+                }
+                break;
+              default:
+                {
+                  return LoginModule();
+                }
+            }
+          }),
     );
   }
 }

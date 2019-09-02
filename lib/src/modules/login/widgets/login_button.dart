@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../shared/languages/pt-br/strings.dart';
 
+import '../../../shared/languages/pt-br/strings.dart';
 import '../login_bloc.dart';
 
 class LoginButton extends StatelessWidget {

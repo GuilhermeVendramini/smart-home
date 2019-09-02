@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import '../../shared/languages/pt-br/strings.dart';
 
 class LoginValidators {
