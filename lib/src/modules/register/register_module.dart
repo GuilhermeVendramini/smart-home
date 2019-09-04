@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../app_bloc.dart';
 import '../../modules/register/register_bloc.dart';
 import '../../modules/register/register_page.dart';
-import '../../repositories/hasura/user/hasura_user_repository.dart';
+import '../../repositories/hasura/users/hasura_users_repository.dart';
 
 class RegisterModule extends StatelessWidget {
   @override
@@ -14,7 +14,7 @@ class RegisterModule extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<RegisterProvider>(
             builder: (_) => RegisterProvider(
-                  HasuraUserRepository(),
+                  HasuraUsersRepository(),
                   _bloc,
                 )),
       ],

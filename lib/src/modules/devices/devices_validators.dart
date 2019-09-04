@@ -1,6 +1,6 @@
 import 'dart:async';
 
-class HomeValidators {
+class DevicesValidators {
   final validateMessage = StreamTransformer<String, String>.fromHandlers(
       handleData: (message, sink) {
     if (message.isNotEmpty) {

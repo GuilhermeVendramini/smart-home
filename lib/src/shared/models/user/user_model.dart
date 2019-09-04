@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
@@ -10,7 +11,7 @@ class UserModel {
 
   UserModel({
     this.name,
-    this.id,
+    @required this.id,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => new UserModel(

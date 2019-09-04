@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
         title: Text(Strings.login),
       ),
       body: StreamBuilder<LoginState>(
-        stream: _bloc.streamState,
+        stream: _bloc.getState,
         builder: (context, snapshot) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -32,13 +32,13 @@ class _LoginPageState extends State<LoginPage> {
               StreamInputField(
                 hint: Strings.userName,
                 obscure: false,
-                stream: _bloc.streamName,
+                stream: _bloc.getName,
                 onChanged: _bloc.changeName,
               ),
               StreamInputField(
                 hint: Strings.userPassword,
                 obscure: true,
-                stream: _bloc.streamPassword,
+                stream: _bloc.getPassword,
                 onChanged: _bloc.changePassword,
               ),
               LoginButton(),

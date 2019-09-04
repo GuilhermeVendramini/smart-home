@@ -1,7 +1,7 @@
 import '../../../shared/models/user/user_model.dart';
 import '../hasura_connection.dart';
 
-class HasuraUserRepository extends HasuraConnection {
+class HasuraUsersRepository extends HasuraConnection {
   Future<UserModel> getUser({String name, String password}) async {
     String query = """
       getUser(\$name:String!, \$password:String){

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app_bloc.dart';
-import 'modules/home/home_module.dart';
+import 'modules/places/places_module.dart';
 import 'modules/login/login_module.dart';
 
 class AppWidget extends StatelessWidget {
@@ -11,7 +11,7 @@ class AppWidget extends StatelessWidget {
     final _bloc = Provider.of<AppProvider>(context);
     _bloc.userIsLogged();
     return MaterialApp(
-      title: 'Flutter Slidy',
+      title: 'Devices',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -26,7 +26,7 @@ class AppWidget extends StatelessWidget {
                 break;
               case LoginState.SUCCESS:
                 {
-                  return HomeModule();
+                  return PlacesModule();
                 }
                 break;
               case LoginState.IDLE:

@@ -2,14 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../app_bloc.dart';
-import '../../repositories/hasura/user/hasura_user_repository.dart';
+import '../../repositories/hasura/users/hasura_users_repository.dart';
 import '../../shared/models/user/user_model.dart';
 import 'register_validators.dart';
 
 enum RegisterState { IDLE, LOADING, SUCCESS, FAIL }
 
 class RegisterBloc extends ChangeNotifier with RegisterValidators {
-  final HasuraUserRepository _userRepository;
+  final HasuraUsersRepository _userRepository;
   final AppProvider _appBloc;
 
   RegisterBloc(this._userRepository, this._appBloc);
@@ -30,7 +30,7 @@ class RegisterBloc extends ChangeNotifier with RegisterValidators {
 }
 
 class Register extends RegisterBloc {
-  Register(HasuraUserRepository userRepository, AppProvider appBloc)
+  Register(HasuraUsersRepository userRepository, AppProvider appBloc)
       : super(userRepository, appBloc);
 
   Stream<String> get streamName =>
@@ -50,7 +50,7 @@ class Register extends RegisterBloc {
 }
 
 class RegisterProvider extends Register {
-  RegisterProvider(HasuraUserRepository userRepository, AppProvider appBloc)
+  RegisterProvider(HasuraUsersRepository userRepository, AppProvider appBloc)
       : super(userRepository, appBloc);
 
   Future<bool> register() async {
@@ -74,7 +74,8 @@ class RegisterProvider extends Register {
       _appBloc.setUser(user);
       _stateController.add(RegisterState.SUCCESS);
       return true;
-    } catch (ex) {
+    } catch (e) {
+      print('register_bloc:register() $e');
       _stateController.add(RegisterState.FAIL);
       message = 'Internal error. Please, try later';
       return false;

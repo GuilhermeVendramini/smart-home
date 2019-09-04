@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 import '../../../src/shared/languages/pt-br/strings.dart';
 import '../../../src/shared/widgets/components/side_drawer.dart';
-//import 'home_bloc.dart';
+//import 'devices_bloc.dart';
 
-class HomePage extends StatefulWidget {
+class DevicesPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _DevicesPageState createState() => _DevicesPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _DevicesPageState extends State<DevicesPage> {
   @override
   Widget build(BuildContext context) {
-    //final _bloc = Provider.of<HomeProvider>(context);
+    //final _bloc = Provider.of<DevicesProvider>(context);
     return Scaffold(
       drawer: SideDrawer(),
       appBar: AppBar(
         title: Text(Strings.appName),
       ),
-      body: Text('My Home'),
+      body: Text('My Devices'),
     );
   }
 }

@@ -50,6 +50,7 @@ class AppProvider extends App {
       _stateController.add(LoginState.IDLE);
       return false;
     } catch (e) {
+      print('app_bloc:userIsLogged() $e');
       _stateController.add(LoginState.FAIL);
       return false;
     }
