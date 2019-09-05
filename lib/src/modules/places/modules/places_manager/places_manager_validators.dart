@@ -1,12 +1,14 @@
 import 'dart:async';
 
+import '../../../../shared/languages/pt-br/strings.dart';
+
 class PlacesManagerValidators {
   final validateName =
       StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
     if (name.isNotEmpty) {
       sink.add(name);
     } else {
-      sink.addError("Name is required");
+      sink.addError(Strings.placesRequiredName);
     }
   });
 
@@ -15,7 +17,7 @@ class PlacesManagerValidators {
     if (icon.isNotEmpty) {
       sink.add(icon);
     } else {
-      sink.addError("Icon is required");
+      sink.addError(Strings.icon);
     }
   });
 }

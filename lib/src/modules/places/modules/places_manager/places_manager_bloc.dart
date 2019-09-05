@@ -41,7 +41,9 @@ class PlacesManager extends PlacesManagerBloc {
 
   Function(String) get changeName => _nameController.sink.add;
 
-  Function(String) get changePassword => _iconController.sink.add;
+  set setIcon(String icon) {
+    _iconController.sink.add(icon);
+  }
 
   Stream<bool> get outSubmitValid =>
       Observable.combineLatest2(getName, getIcon, (a, b) => true);

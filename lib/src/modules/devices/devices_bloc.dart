@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-// import '../../app_bloc.dart';
 import 'devices_validators.dart';
 
 class DevicesBloc extends ChangeNotifier with DevicesValidators {

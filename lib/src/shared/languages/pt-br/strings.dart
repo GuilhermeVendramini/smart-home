@@ -3,12 +3,14 @@ class Strings {
 
   // Generic
   static const String save = "Salvar";
+  static const String name = "Nome";
+  static const String icon = "Ícone";
 
   // App
   static const String appName = "SMART HOME";
 
   // Auth
-  static const String authName = "Nome";
+  static const String authName = "Nome do usuário";
   static const String authPassword = "Senha";
   static const String authLogout = "Sair";
   static const String authLogin = "Login";
@@ -26,5 +28,11 @@ class Strings {
   static const String devicesTitle = "Devices";
 
   // Places
+  static const String placesAdd = "Adicionar local";
+  static const String placesRequiredName = "Nome é obrigatório";
+  static const String placesRequiredIcon = "Ícone é obrigatório";
   static const String placesLoadingMessageError = "Erro ao carregar as áreas";
+
+  // Icon Picker
+  static const String iconPickerTitleBox = "Selecione um ícone";
 }

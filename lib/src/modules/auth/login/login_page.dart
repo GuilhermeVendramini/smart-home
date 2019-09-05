@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../shared/languages/pt-br/strings.dart';
 
-import '../../../../src/shared/widgets/fields/stream_input_field.dart';
+import '../../../shared/languages/pt-br/strings.dart';
+import '../../../shared/widgets/fields/stream_input/stream_input_field.dart';
 import 'login_bloc.dart';
 import 'widgets/login_button.dart';
 //import 'widgets/register_button.dart';
