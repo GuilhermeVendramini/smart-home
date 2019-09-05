@@ -78,4 +78,7 @@ flutter:
     - family: SmartHomeIcons
       fonts:
         - asset: assets/fonts/SmartHome.ttf
+    - family: SmartHomeDevicesIcons
+      fonts:
+        - asset: assets/fonts/SmartHomeDevices.ttf
 

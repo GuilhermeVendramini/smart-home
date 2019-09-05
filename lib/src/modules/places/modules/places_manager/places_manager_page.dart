@@ -19,7 +19,7 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
   @override
   void initState() {
     super.initState();
-    _icon = SmartHomeIcons.home_panel;
+    _icon = SmartHomeIcons.house;
   }
 
   @override
