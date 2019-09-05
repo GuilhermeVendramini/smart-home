@@ -1,6 +1,6 @@
 import 'dart:async';
 
-class RegisterValidators {
+class PlacesManagerValidators {
   final validateName =
       StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
     if (name.isNotEmpty) {
@@ -10,12 +10,12 @@ class RegisterValidators {
     }
   });
 
-  final validatePassword = StreamTransformer<String, String>.fromHandlers(
-      handleData: (password, sink) {
-    if (password.isNotEmpty) {
-      sink.add(password);
+  final validateIcon =
+      StreamTransformer<String, String>.fromHandlers(handleData: (icon, sink) {
+    if (icon.isNotEmpty) {
+      sink.add(icon);
     } else {
-      sink.addError("Password is required");
+      sink.addError("Icon is required");
     }
   });
 }

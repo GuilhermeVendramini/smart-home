@@ -1,7 +1,9 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
-DeviceModel deviceModelFromJson(String str) => DeviceModel.fromJson(json.decode(str));
+DeviceModel deviceModelFromJson(String str) =>
+    DeviceModel.fromJson(json.decode(str));
 
 String deviceModelToJson(DeviceModel data) => json.encode(data.toJson());
 
@@ -17,14 +19,14 @@ class DeviceModel {
   });
 
   factory DeviceModel.fromJson(Map<String, dynamic> json) => new DeviceModel(
-    id: json["id"],
-    name: json["name"],
-    icon: json["icon"],
-  );
+        id: json["id"],
+        name: json["name"],
+        icon: json["icon"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "icon": icon,
-  };
+        "id": id,
+        "name": name,
+        "icon": icon,
+      };
 }

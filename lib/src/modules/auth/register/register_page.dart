@@ -1,48 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../src/shared/languages/pt-br/strings.dart';
-import '../../../src/shared/widgets/fields/stream_input_field.dart';
-import 'login_bloc.dart';
-import 'widgets/login_button.dart';
-//import 'widgets/register_button.dart';
+import '../../../../src/shared/widgets/fields/stream_input_field.dart';
+import '../../../shared/languages/pt-br/strings.dart';
+import 'register_bloc.dart';
+import 'widgets/register_button.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    final _bloc = Provider.of<LoginProvider>(context);
+    final _bloc = Provider.of<RegisterProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.login),
+        title: Text(Strings.authRegister),
       ),
-      body: StreamBuilder<LoginState>(
-        stream: _bloc.getState,
+      body: StreamBuilder<RegisterState>(
+        stream: _bloc.streamState,
         builder: (context, snapshot) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              snapshot.data == LoginState.LOADING
+              snapshot.data == RegisterState.LOADING
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
               StreamInputField(
-                hint: Strings.userName,
+                hint: Strings.authName,
                 obscure: false,
                 stream: _bloc.getName,
                 onChanged: _bloc.changeName,
               ),
               StreamInputField(
-                hint: Strings.userPassword,
+                hint: Strings.authPassword,
                 obscure: true,
                 stream: _bloc.getPassword,
                 onChanged: _bloc.changePassword,
               ),
-              LoginButton(),
-              //RegisterButton(),
+              RegisterButton(),
             ],
           );
         },

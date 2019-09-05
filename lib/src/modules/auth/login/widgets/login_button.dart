@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../shared/languages/pt-br/strings.dart';
 
-import '../register_bloc.dart';
+import '../login_bloc.dart';
 
-class RegisterButton extends StatelessWidget {
+class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _bloc = Provider.of<RegisterProvider>(context);
+    final _bloc = Provider.of<LoginProvider>(context);
     void _submit() async {
-      bool result = await _bloc.register();
+      bool result = await _bloc.login();
       if (!result) {
         Scaffold.of(context).showSnackBar(
           SnackBar(
@@ -16,8 +17,6 @@ class RegisterButton extends StatelessWidget {
             duration: Duration(seconds: 3),
           ),
         );
-      } else {
-        Navigator.pop(context);
       }
     }
 
@@ -25,7 +24,7 @@ class RegisterButton extends StatelessWidget {
       stream: _bloc.outSubmitValid,
       builder: (context, snapshot) {
         return RaisedButton(
-          child: Text("Register"),
+          child: Text(Strings.authLogin),
           onPressed: snapshot.hasData ? _submit : null,
         );
       },

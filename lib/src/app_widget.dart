@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app_bloc.dart';
+import 'modules/auth/login/login_module.dart';
 import 'modules/places/places_module.dart';
-import 'modules/login/login_module.dart';
+import 'shared/languages/pt-br/strings.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class AppWidget extends StatelessWidget {
     final _bloc = Provider.of<AppProvider>(context);
     _bloc.userIsLogged();
     return MaterialApp(
-      title: 'Devices',
+      title: Strings.devicesTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

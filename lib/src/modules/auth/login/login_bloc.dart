@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../app_bloc.dart';
-import '../../repositories/hasura/users/hasura_users_repository.dart';
-import '../../shared/languages/pt-br/strings.dart';
-import '../../shared/models/user/user_model.dart';
+import '../../../app_bloc.dart';
+import '../../../repositories/hasura/users/hasura_users_repository.dart';
+import '../../../shared/languages/pt-br/strings.dart';
+import '../../../shared/models/user/user_model.dart';
 import 'login_validators.dart';
 
 enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
@@ -17,7 +17,8 @@ class LoginBloc extends ChangeNotifier with LoginValidators {
 
   final BehaviorSubject<String> _nameController = BehaviorSubject<String>();
   final BehaviorSubject<String> _passwordController = BehaviorSubject<String>();
-  final BehaviorSubject<LoginState> _stateController = BehaviorSubject<LoginState>();
+  final BehaviorSubject<LoginState> _stateController =
+      BehaviorSubject<LoginState>();
 
   String message;
 
@@ -34,8 +35,7 @@ class Login extends LoginBloc {
   Login(HasuraUsersRepository userRepository, AppProvider appBloc)
       : super(userRepository, appBloc);
 
-  Stream<String> get getName =>
-      _nameController.stream.transform(validateName);
+  Stream<String> get getName => _nameController.stream.transform(validateName);
 
   Stream<String> get getPassword =>
       _passwordController.stream.transform(validatePassword);
@@ -63,7 +63,7 @@ class LoginProvider extends Login {
       );
 
       if (user == null) {
-        message = Strings.loginMessageWarning;
+        message = Strings.authLoginMessageWarning;
         _stateController.add(LoginState.FAIL);
         return false;
       }
@@ -73,7 +73,7 @@ class LoginProvider extends Login {
       return true;
     } catch (e) {
       print('login_bloc:login() $e');
-      message = Strings.loginMessageError;
+      message = Strings.authLoginMessageError;
       _stateController.add(LoginState.FAIL);
       return false;
     }

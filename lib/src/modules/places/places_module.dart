@@ -12,8 +12,8 @@ class PlacesModule extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<PlacesProvider>(
             builder: (_) => PlacesProvider(
-              HasuraPlacesRepository(),
-            )),
+                  HasuraPlacesRepository(),
+                )),
       ],
       child: PlacesPage(),
     );

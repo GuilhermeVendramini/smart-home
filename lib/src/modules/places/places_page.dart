@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'widgets/places_list.dart';
 
 import '../../../src/shared/languages/pt-br/strings.dart';
 import '../../../src/shared/widgets/components/side_drawer.dart';
+import 'widgets/places_load.dart';
 
 class PlacesPage extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _PlacesPageState extends State<PlacesPage> {
       appBar: AppBar(
         title: Text(Strings.appName),
       ),
-      body: PlacesList(),
+      body: PlacesLoad(),
     );
   }
 }

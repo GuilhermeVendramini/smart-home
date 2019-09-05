@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../app_bloc.dart';
-import '../../repositories/hasura/users/hasura_users_repository.dart';
-import '../../shared/models/user/user_model.dart';
+import '../../../app_bloc.dart';
+import '../../../repositories/hasura/users/hasura_users_repository.dart';
+import '../../../shared/languages/pt-br/strings.dart';
+import '../../../shared/models/user/user_model.dart';
 import 'register_validators.dart';
 
 enum RegisterState { IDLE, LOADING, SUCCESS, FAIL }
@@ -33,16 +34,15 @@ class Register extends RegisterBloc {
   Register(HasuraUsersRepository userRepository, AppProvider appBloc)
       : super(userRepository, appBloc);
 
-  Stream<String> get streamName =>
-      _nameController.stream.transform(validateName);
+  Stream<String> get getName => _nameController.stream.transform(validateName);
 
-  Stream<String> get streamPassword =>
+  Stream<String> get getPassword =>
       _passwordController.stream.transform(validatePassword);
 
   Stream<RegisterState> get streamState => _stateController.stream;
 
   Stream<bool> get outSubmitValid =>
-      Observable.combineLatest2(streamName, streamPassword, (a, b) => true);
+      Observable.combineLatest2(getName, getPassword, (a, b) => true);
 
   Function(String) get changeName => _nameController.sink.add;
 
@@ -56,28 +56,28 @@ class RegisterProvider extends Register {
   Future<bool> register() async {
     try {
       _stateController.add(RegisterState.LOADING);
-      UserModel user = await _userRepository.getUser(
+      UserModel _user = await _userRepository.getUser(
         name: _nameController.value,
       );
 
-      if (user != null) {
+      if (_user != null) {
         _stateController.add(RegisterState.FAIL);
-        message = 'User name already exists';
+        message = Strings.authUserAlreadyExists;
         return false;
       }
 
-      user = await _userRepository.createUser(
+      _user = await _userRepository.createUser(
         name: _nameController.value,
         password: _passwordController.value,
       );
 
-      _appBloc.setUser(user);
+      _appBloc.setUser(_user);
       _stateController.add(RegisterState.SUCCESS);
       return true;
     } catch (e) {
       print('register_bloc:register() $e');
       _stateController.add(RegisterState.FAIL);
-      message = 'Internal error. Please, try later';
+      message = Strings.authRegisterMessageError;
       return false;
     }
   }

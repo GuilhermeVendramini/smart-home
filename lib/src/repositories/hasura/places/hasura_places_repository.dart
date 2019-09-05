@@ -9,7 +9,6 @@ class HasuraPlacesRepository extends HasuraConnection {
         id
         name
         icon
-        devices 
       }
     }
     """;
@@ -26,10 +25,10 @@ class HasuraPlacesRepository extends HasuraConnection {
     }
   }
 
-/*  Future<PlaceModel> createPlaces({String name, String password}) async {
+  Future<PlaceModel> createPlaces({String name, String icon}) async {
     String query = """
-      mutation createPlaces(\$name:String!, \$password:String!) {
-        insert_places(objects: {name: \$name, password: \$password}) {
+      mutation createPlaces(\$name:String!, \$icon:String!) {
+        insert_places(objects: {name: \$name, icon: \$icon}) {
           returning {
             id
           }
@@ -38,10 +37,10 @@ class HasuraPlacesRepository extends HasuraConnection {
     """;
 
     Map<String, dynamic> data = await hasuraConnect
-        .mutation(query, variables: {"name": name, "password": password});
+        .mutation(query, variables: {"name": name, "icon": icon});
     int id = data["data"]["insert_places"]["returning"][0]["id"];
-    return PlaceModel(id: id, name: name);
-  }*/
+    return PlaceModel(id: id, name: name, icon: icon);
+  }
 
   @override
   void dispose() {

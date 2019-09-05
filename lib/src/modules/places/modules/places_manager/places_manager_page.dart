@@ -1,42 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../shared/widgets/fields/stream_input_field.dart';
 
-import '../../../src/shared/widgets/fields/stream_input_field.dart';
-import 'register_bloc.dart';
-import 'widgets/register_button.dart';
+import './widgets/register_button.dart';
+import 'places_manager_bloc.dart';
 
-class RegisterPage extends StatefulWidget {
-  @override
-  _RegisterPageState createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
+class PlacesManagerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _bloc = Provider.of<RegisterProvider>(context);
+    final _bloc = Provider.of<PlacesManagerProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text("Add Item"),
       ),
-      body: StreamBuilder<RegisterState>(
+      body: StreamBuilder<PlacesManagerState>(
         stream: _bloc.streamState,
         builder: (context, snapshot) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              snapshot.data == RegisterState.LOADING
+              snapshot.data == PlacesManagerState.LOADING
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
               StreamInputField(
                 hint: "Name",
-                obscure: false,
-                stream: _bloc.streamName,
+                stream: _bloc.getName,
                 onChanged: _bloc.changeName,
               ),
               StreamInputField(
-                hint: "Password",
-                obscure: true,
-                stream: _bloc.streamPassword,
+                hint: "Icon",
+                stream: _bloc.getIcon,
                 onChanged: _bloc.changePassword,
               ),
               RegisterButton(),

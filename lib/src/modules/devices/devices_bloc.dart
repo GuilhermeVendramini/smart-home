@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 
-import '../../app_bloc.dart';
+// import '../../app_bloc.dart';
 import 'devices_validators.dart';
 
 class DevicesBloc extends ChangeNotifier with DevicesValidators {
-  final AppProvider _appBloc;
+  //final AppProvider _appBloc;
 
-  DevicesBloc(this._appBloc);
+  //DevicesBloc(this._appBloc);
 
   @override
   void dispose() async {
@@ -15,7 +15,7 @@ class DevicesBloc extends ChangeNotifier with DevicesValidators {
 }
 
 class Devices extends DevicesBloc {
-  Devices(AppBloc appBloc) : super(appBloc);
+  //Devices(AppBloc appBloc) : super(appBloc);
 
 /*
   * Getters here
@@ -23,7 +23,7 @@ class Devices extends DevicesBloc {
 }
 
 class DevicesProvider extends Devices {
-  DevicesProvider(AppBloc appBloc) : super(appBloc);
+  //DevicesProvider(AppBloc appBloc) : super(appBloc);
 
 /*
   * Functions here

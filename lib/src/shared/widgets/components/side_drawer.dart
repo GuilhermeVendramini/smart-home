@@ -25,7 +25,7 @@ class SideDrawer extends StatelessWidget {
               Divider(),
               ListTile(
                 leading: Icon(Icons.exit_to_app),
-                title: Text(Strings.logout),
+                title: Text(Strings.authLogout),
                 onTap: () async {
                   Navigator.pop(context);
                   await _bloc.cleanUser();

@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));

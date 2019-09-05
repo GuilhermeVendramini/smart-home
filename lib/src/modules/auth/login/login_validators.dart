@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../shared/languages/pt-br/strings.dart';
+import '../../../shared/languages/pt-br/strings.dart';
 
 class LoginValidators {
   final validateName =
@@ -8,7 +8,7 @@ class LoginValidators {
     if (name.isNotEmpty) {
       sink.add(name);
     } else {
-      sink.addError(Strings.loginRequiredName);
+      sink.addError(Strings.authRequiredName);
     }
   });
 
@@ -17,7 +17,7 @@ class LoginValidators {
     if (password.isNotEmpty) {
       sink.add(password);
     } else {
-      sink.addError(Strings.loginRequiredPassword);
+      sink.addError(Strings.authRequiredPassword);
     }
   });
 }
