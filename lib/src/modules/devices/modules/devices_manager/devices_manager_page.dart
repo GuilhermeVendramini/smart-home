@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './widgets/register_button.dart';
-import '../../../../shared/fonts/smart_home_places_icons.dart';
-import '../../../../shared/icons_list/places_icons_list.dart';
+import '../../../../shared/fonts/smart_home_devices_icons.dart';
+import '../../../../shared/icons_list/devices_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
 import '../../../../shared/widgets/fields/stream_input/stream_input_field.dart';
-import 'places_manager_bloc.dart';
+import 'devices_manager_bloc.dart';
 
-class PlacesManagerPage extends StatefulWidget {
+class DevicesManagerPage extends StatefulWidget {
   @override
-  _PlacesManagerPageState createState() => _PlacesManagerPageState();
+  _DevicesManagerPageState createState() => _DevicesManagerPageState();
 }
 
-class _PlacesManagerPageState extends State<PlacesManagerPage> {
+class _DevicesManagerPageState extends State<DevicesManagerPage> {
   IconData _icon;
 
   @override
   void initState() {
     super.initState();
-    _icon = SmartHomePlacesIcons.house;
+    _icon = SmartHomeDevicesIcons.home;
   }
 
   @override
@@ -30,19 +30,19 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _bloc = Provider.of<PlacesManagerProvider>(context);
+    final _bloc = Provider.of<DevicesManagerProvider>(context);
     _bloc.setIcon = _icon.codePoint.toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.placesAdd),
+        title: Text(Strings.devicesAdd),
       ),
-      body: StreamBuilder<PlacesManagerState>(
+      body: StreamBuilder<DevicesManagerState>(
         stream: _bloc.streamState,
         builder: (context, snapshot) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              snapshot.data == PlacesManagerState.LOADING
+              snapshot.data == DevicesManagerState.LOADING
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
               StreamInputField(
@@ -55,8 +55,8 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
               ),
               FieldIconPicker(
                 iconData: _icon,
-                fontFamily: 'SmartHomePlacesIcons',
-                icons: placesIconsList,
+                fontFamily: 'SmartHomeDevicesIcons',
+                icons: devicesIconsList,
                 action: (newIcon) => setState(() {
                   _bloc.setIcon = newIcon.codePoint.toString();
                   _icon = newIcon;

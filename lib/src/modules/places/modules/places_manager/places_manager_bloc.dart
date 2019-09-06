@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../repositories/hasura/places/hasura_places_repository.dart';
+import '../../../../shared/languages/pt-br/strings.dart';
 import '../../../../shared/models/place/place_model.dart';
 import '../../places_bloc.dart';
 import 'places_manager_validators.dart';
@@ -59,19 +60,19 @@ class PlacesManagerProvider extends PlacesManager {
       _stateController.add(PlacesManagerState.LOADING);
       PlaceModel _place;
 
-      _place = await _placesRepository.createPlaces(
+      _place = await _placesRepository.createPlace(
         name: _nameController.value,
         icon: _iconController.value,
       );
 
-      message = 'Item successfully added';
+      message = Strings.placesSavedSuccessfully;
       _placesProvider.addPlace(_place);
       _stateController.add(PlacesManagerState.SUCCESS);
       return _place;
     } catch (e) {
       print('places_bloc:addUser() $e');
       _stateController.add(PlacesManagerState.FAIL);
-      message = 'Error adding Place';
+      message = Strings.placesErrorSaving;
       return null;
     }
   }

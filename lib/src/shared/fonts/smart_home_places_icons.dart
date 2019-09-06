@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-class SmartHomeIcons {
-  SmartHomeIcons._();
+class SmartHomePlacesIcons {
+  SmartHomePlacesIcons._();
 
-  static const _kFontFam = 'SmartHomeIcons';
+  static const _kFontFam = 'SmartHomePlacesIcons';
 
   static const IconData alarmclock =
       const IconData(0xe800, fontFamily: _kFontFam);

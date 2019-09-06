@@ -25,7 +25,8 @@ class PlacesCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(
-              IconData(int.tryParse(_place.icon), fontFamily: 'SmartHomeIcons'),
+              IconData(int.tryParse(_place.icon),
+                  fontFamily: 'SmartHomePlacesIcons'),
             ),
             Text(_place.name),
           ],

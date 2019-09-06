@@ -18,7 +18,7 @@ import 'package:flutter/widgets.dart';
 class SmartHomeDevicesIcons {
   SmartHomeDevicesIcons._();
 
-  static const _kFontFam = 'SmartHomeDevices';
+  static const _kFontFam = 'SmartHomeDevicesIcons';
 
   static const IconData airconditioner =
       const IconData(0xe800, fontFamily: _kFontFam);

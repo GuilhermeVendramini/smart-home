@@ -25,9 +25,9 @@ class Devices extends DevicesBloc {
   Devices(HasuraDevicesRepository devicesRepository, PlaceModel place)
       : super(devicesRepository, place);
 
-  get getPlace => _place;
+  PlaceModel get getPlace => _place;
 
-  get getDevices => _devices;
+  List<DeviceModel> get getDevices => _devices;
 }
 
 class DevicesProvider extends Devices {
@@ -51,6 +51,16 @@ class DevicesProvider extends Devices {
     } catch (e) {
       print('devices_bloc:loadDevices() $e');
       return DevicesState.FAIL;
+    }
+  }
+
+  bool addDevice(DeviceModel device) {
+    try {
+      _devices.add(device);
+      return true;
+    } catch (e) {
+      print('devices_bloc:addDevice() $e');
+      return false;
     }
   }
 }

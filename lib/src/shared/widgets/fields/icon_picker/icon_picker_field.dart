@@ -7,9 +7,13 @@ import 'icon_picker.dart';
 class FieldIconPicker extends StatelessWidget {
   final IconData iconData;
   final ValueChanged<IconData> action;
+  final String fontFamily;
+  final List<IconData> icons;
 
   FieldIconPicker({
     @required this.iconData,
+    @required this.fontFamily,
+    @required this.icons,
     @required this.action,
   });
 
@@ -31,6 +35,8 @@ class FieldIconPicker extends StatelessWidget {
               content: SingleChildScrollView(
                 child: IconPicker(
                   currentIconData: iconData,
+                  fontFamily: fontFamily,
+                  icons: icons,
                   onIconChanged: action,
                 ),
               ),
@@ -40,6 +46,7 @@ class FieldIconPicker extends StatelessWidget {
       },
       child: IconDisplay(
         codePoint: iconData.codePoint,
+        fontFamily: fontFamily,
       ),
     );
   }

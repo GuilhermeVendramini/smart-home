@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/fonts/smart_home_icons.dart';
 import 'icon_display.dart';
 
 class IconPicker extends StatefulWidget {
   final ValueChanged<IconData> onIconChanged;
   final IconData currentIconData;
   final Color highlightColor;
+  final String fontFamily;
+  final List<IconData> icons;
 
-  final List<IconData> icons = [
+/*  final List<IconData> icons = [
     SmartHomeIcons.house,
     SmartHomeIcons.alarmclock,
     SmartHomeIcons.aquarium,
@@ -60,11 +61,13 @@ class IconPicker extends StatefulWidget {
     SmartHomeIcons.wallpaper,
     SmartHomeIcons.wardrobe,
     SmartHomeIcons.window,
-  ];
+  ];*/
 
   IconPicker({
     @required this.currentIconData,
     @required this.onIconChanged,
+    @required this.fontFamily,
+    @required this.icons,
     Color highlightColor,
   }) : this.highlightColor = highlightColor ?? Colors.blue;
 
@@ -104,6 +107,7 @@ class _IconPickerState extends State<IconPicker> {
               borderRadius: BorderRadius.circular(50.0),
               child: IconDisplay(
                 codePoint: iconData.codePoint,
+                fontFamily: widget.fontFamily,
                 outlineColor:
                     iconData == selectedIconData ? widget.highlightColor : null,
               ),

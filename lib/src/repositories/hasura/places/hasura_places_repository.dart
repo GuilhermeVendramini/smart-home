@@ -25,9 +25,9 @@ class HasuraPlacesRepository extends HasuraConnection {
     }
   }
 
-  Future<PlaceModel> createPlaces({String name, String icon}) async {
+  Future<PlaceModel> createPlace({String name, String icon}) async {
     String query = """
-      mutation createPlaces(\$name:String!, \$icon:String!) {
+      mutation createPlace(\$name:String!, \$icon:String!) {
         insert_places(objects: {name: \$name, icon: \$icon}) {
           returning {
             id

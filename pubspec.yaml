@@ -75,10 +75,10 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
-    - family: SmartHomeIcons
+    - family: SmartHomePlacesIcons
       fonts:
-        - asset: assets/fonts/SmartHome.ttf
+        - asset: assets/fonts/SmartHomePlacesIcons.ttf
     - family: SmartHomeDevicesIcons
       fonts:
-        - asset: assets/fonts/SmartHomeDevices.ttf
+        - asset: assets/fonts/SmartHomeDevicesIcons.ttf
 

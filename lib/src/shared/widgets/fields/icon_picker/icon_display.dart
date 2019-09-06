@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class IconDisplay extends StatelessWidget {
   final int codePoint;
   final Color outlineColor;
+  final String fontFamily;
 
   IconDisplay({
     @required this.codePoint,
+    @required this.fontFamily,
     Color outlineColor,
   }) : this.outlineColor = outlineColor ?? Colors.black;
 
@@ -20,7 +22,7 @@ class IconDisplay extends StatelessWidget {
       child: Icon(
         IconData(
           codePoint,
-          fontFamily: 'SmartHomeIcons',
+          fontFamily: fontFamily,
         ),
       ),
     );

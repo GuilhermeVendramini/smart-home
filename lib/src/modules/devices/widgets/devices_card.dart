@@ -17,7 +17,7 @@ class DevicesCard extends StatelessWidget {
           children: <Widget>[
             Icon(
               IconData(int.tryParse(_device.icon),
-                  fontFamily: 'SmartHomeIcons'),
+                  fontFamily: 'SmartHomeDevicesIcons'),
             ),
             Text(_device.name),
           ],
