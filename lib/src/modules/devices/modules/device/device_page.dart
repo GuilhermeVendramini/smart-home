@@ -23,6 +23,12 @@ class _DevicePageState extends State<DevicePage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context, false),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Text('List Plugins'),
     );
