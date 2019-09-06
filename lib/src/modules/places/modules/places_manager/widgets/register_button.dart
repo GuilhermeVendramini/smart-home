@@ -22,7 +22,8 @@ class RegisterButton extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => DevicesModule(
+              builder: (context) =>
+                  DevicesModule(
                     _place,
                   )),
         );

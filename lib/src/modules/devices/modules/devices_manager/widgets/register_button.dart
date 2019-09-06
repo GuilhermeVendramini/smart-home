@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../../modules/devices/modules/device/device_module.dart';
 
 import '../../../../../shared/languages/pt-br/strings.dart';
 import '../../../../../shared/models/device/device_model.dart';
@@ -10,15 +11,21 @@ class RegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _bloc = Provider.of<DevicesManagerProvider>(context);
     void _submit() async {
-      DeviceModel _place = await _bloc.addDevice();
+      DeviceModel _device = await _bloc.addDevice();
       Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text(_bloc.message),
           duration: Duration(seconds: 3),
         ),
       );
-      if (_place != null) {
-        Navigator.pop(context);
+      if (_device != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DeviceModule(
+                _device,
+              )),
+        );
       }
     }
 
