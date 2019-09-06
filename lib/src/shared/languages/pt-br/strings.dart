@@ -45,4 +45,7 @@ class Strings {
 
   // Icon Picker
   static const String iconPickerTitleBox = "Selecione um ícone";
+
+  // Plugins
+  static const String pluginsTitle = "Plugins";
 }

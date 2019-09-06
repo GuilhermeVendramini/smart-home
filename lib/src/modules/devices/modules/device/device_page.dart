@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../modules/plugins/plugins_module.dart';
 import '../../../../shared/models/device/device_model.dart';
 import '../../../../shared/widgets/components/side_drawer.dart';
 
@@ -26,7 +27,12 @@ class _DevicePageState extends State<DevicePage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PluginsModule()),
+              );
+            },
           ),
         ],
       ),
