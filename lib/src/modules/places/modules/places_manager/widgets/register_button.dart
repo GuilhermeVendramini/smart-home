@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../shared/languages/pt-br/strings.dart';
 import '../../../../../shared/models/place/place_model.dart';
+import '../../../../devices/devices_module.dart';
 import '../places_manager_bloc.dart';
 
 class RegisterButton extends StatelessWidget {
@@ -18,7 +19,13 @@ class RegisterButton extends StatelessWidget {
         ),
       );
       if (_place != null) {
-        Navigator.pop(context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DevicesModule(
+                    _place,
+                  )),
+        );
       }
     }
 

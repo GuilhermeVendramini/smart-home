@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/SmartHomeDevices.ttf
 ///
-/// 
+///
 ///
 import 'package:flutter/widgets.dart';
 
@@ -20,54 +20,83 @@ class SmartHomeDevicesIcons {
 
   static const _kFontFam = 'SmartHomeDevices';
 
-  static const IconData airconditioner = const IconData(0xe800, fontFamily: _kFontFam);
+  static const IconData airconditioner =
+      const IconData(0xe800, fontFamily: _kFontFam);
   static const IconData alarm = const IconData(0xe801, fontFamily: _kFontFam);
   static const IconData booking = const IconData(0xe802, fontFamily: _kFontFam);
-  static const IconData calculator = const IconData(0xe803, fontFamily: _kFontFam);
+  static const IconData calculator =
+      const IconData(0xe803, fontFamily: _kFontFam);
   static const IconData cctv = const IconData(0xe804, fontFamily: _kFontFam);
-  static const IconData cctv_wifi = const IconData(0xe805, fontFamily: _kFontFam);
+  static const IconData cctv_wifi =
+      const IconData(0xe805, fontFamily: _kFontFam);
   static const IconData cloud = const IconData(0xe806, fontFamily: _kFontFam);
   static const IconData cpu = const IconData(0xe807, fontFamily: _kFontFam);
   static const IconData curtain = const IconData(0xe808, fontFamily: _kFontFam);
-  static const IconData coffeemachine = const IconData(0xe809, fontFamily: _kFontFam);
+  static const IconData coffeemachine =
+      const IconData(0xe809, fontFamily: _kFontFam);
   static const IconData door = const IconData(0xe80a, fontFamily: _kFontFam);
-  static const IconData door_wifi = const IconData(0xe80b, fontFamily: _kFontFam);
-  static const IconData electricity = const IconData(0xe80c, fontFamily: _kFontFam);
-  static const IconData emergency = const IconData(0xe80d, fontFamily: _kFontFam);
+  static const IconData door_wifi =
+      const IconData(0xe80b, fontFamily: _kFontFam);
+  static const IconData electricity =
+      const IconData(0xe80c, fontFamily: _kFontFam);
+  static const IconData emergency =
+      const IconData(0xe80d, fontFamily: _kFontFam);
   static const IconData fan = const IconData(0xe80e, fontFamily: _kFontFam);
   static const IconData home = const IconData(0xe80f, fontFamily: _kFontFam);
   static const IconData garage = const IconData(0xe810, fontFamily: _kFontFam);
-  static const IconData home_sinal = const IconData(0xe811, fontFamily: _kFontFam);
-  static const IconData insurance = const IconData(0xe812, fontFamily: _kFontFam);
+  static const IconData home_sinal =
+      const IconData(0xe811, fontFamily: _kFontFam);
+  static const IconData insurance =
+      const IconData(0xe812, fontFamily: _kFontFam);
   static const IconData kettle = const IconData(0xe813, fontFamily: _kFontFam);
   static const IconData laptop = const IconData(0xe814, fontFamily: _kFontFam);
   static const IconData laundry = const IconData(0xe815, fontFamily: _kFontFam);
-  static const IconData lightning = const IconData(0xe816, fontFamily: _kFontFam);
-  static const IconData microphone = const IconData(0xe817, fontFamily: _kFontFam);
-  static const IconData microwave = const IconData(0xe818, fontFamily: _kFontFam);
-  static const IconData motionsensor = const IconData(0xe819, fontFamily: _kFontFam);
+  static const IconData lightning =
+      const IconData(0xe816, fontFamily: _kFontFam);
+  static const IconData microphone =
+      const IconData(0xe817, fontFamily: _kFontFam);
+  static const IconData microwave =
+      const IconData(0xe818, fontFamily: _kFontFam);
+  static const IconData motionsensor =
+      const IconData(0xe819, fontFamily: _kFontFam);
   static const IconData music = const IconData(0xe81a, fontFamily: _kFontFam);
   static const IconData outlet = const IconData(0xe81b, fontFamily: _kFontFam);
   static const IconData oven = const IconData(0xe81c, fontFamily: _kFontFam);
   static const IconData power = const IconData(0xe81d, fontFamily: _kFontFam);
-  static const IconData power_energy = const IconData(0xe81e, fontFamily: _kFontFam);
-  static const IconData refrigerator = const IconData(0xe81f, fontFamily: _kFontFam);
+  static const IconData power_energy =
+      const IconData(0xe81e, fontFamily: _kFontFam);
+  static const IconData refrigerator =
+      const IconData(0xe81f, fontFamily: _kFontFam);
   static const IconData router = const IconData(0xe820, fontFamily: _kFontFam);
-  static const IconData remotecontrol = const IconData(0xe821, fontFamily: _kFontFam);
+  static const IconData remotecontrol =
+      const IconData(0xe821, fontFamily: _kFontFam);
   static const IconData safebox = const IconData(0xe822, fontFamily: _kFontFam);
-  static const IconData settings = const IconData(0xe823, fontFamily: _kFontFam);
-  static const IconData smarthome = const IconData(0xe824, fontFamily: _kFontFam);
-  static const IconData smartphone_control = const IconData(0xe825, fontFamily: _kFontFam);
-  static const IconData smartphone_light = const IconData(0xe826, fontFamily: _kFontFam);
-  static const IconData smartphone_lock = const IconData(0xe827, fontFamily: _kFontFam);
-  static const IconData smartwatch = const IconData(0xe828, fontFamily: _kFontFam);
-  static const IconData smokedetector = const IconData(0xe829, fontFamily: _kFontFam);
-  static const IconData solarpanel = const IconData(0xe82a, fontFamily: _kFontFam);
-  static const IconData sprinkler = const IconData(0xe82b, fontFamily: _kFontFam);
+  static const IconData settings =
+      const IconData(0xe823, fontFamily: _kFontFam);
+  static const IconData smarthome =
+      const IconData(0xe824, fontFamily: _kFontFam);
+  static const IconData smartphone_control =
+      const IconData(0xe825, fontFamily: _kFontFam);
+  static const IconData smartphone_light =
+      const IconData(0xe826, fontFamily: _kFontFam);
+  static const IconData smartphone_lock =
+      const IconData(0xe827, fontFamily: _kFontFam);
+  static const IconData smartwatch =
+      const IconData(0xe828, fontFamily: _kFontFam);
+  static const IconData smokedetector =
+      const IconData(0xe829, fontFamily: _kFontFam);
+  static const IconData solarpanel =
+      const IconData(0xe82a, fontFamily: _kFontFam);
+  static const IconData sprinkler =
+      const IconData(0xe82b, fontFamily: _kFontFam);
   static const IconData tap = const IconData(0xe82c, fontFamily: _kFontFam);
-  static const IconData temperature = const IconData(0xe82d, fontFamily: _kFontFam);
-  static const IconData temperature_cold = const IconData(0xe82e, fontFamily: _kFontFam);
-  static const IconData virtualreality = const IconData(0xe82f, fontFamily: _kFontFam);
-  static const IconData watering = const IconData(0xe830, fontFamily: _kFontFam);
+  static const IconData temperature =
+      const IconData(0xe82d, fontFamily: _kFontFam);
+  static const IconData temperature_cold =
+      const IconData(0xe82e, fontFamily: _kFontFam);
+  static const IconData virtualreality =
+      const IconData(0xe82f, fontFamily: _kFontFam);
+  static const IconData watering =
+      const IconData(0xe830, fontFamily: _kFontFam);
   static const IconData webcam = const IconData(0xe831, fontFamily: _kFontFam);
 }

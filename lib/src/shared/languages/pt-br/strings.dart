@@ -31,7 +31,13 @@ class Strings {
   static const String placesAdd = "Adicionar local";
   static const String placesRequiredName = "Nome é obrigatório";
   static const String placesRequiredIcon = "Ícone é obrigatório";
-  static const String placesLoadingMessageError = "Erro ao carregar as áreas";
+  static const String placesLoadingMessageError = "Erro ao carregar áreas";
+
+  // Devices
+  static const String devicesAdd = "Adicionar device";
+  static const String devicesRequiredName = "Nome é obrigatório";
+  static const String devicesRequiredIcon = "Ícone é obrigatório";
+  static const String devicesLoadingMessageError = "Erro ao carregar devices";
 
   // Icon Picker
   static const String iconPickerTitleBox = "Selecione um ícone";

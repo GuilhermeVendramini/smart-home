@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../modules/devices/devices_module.dart';
 import '../../../shared/models/place/place_model.dart';
 
 class PlacesCard extends StatelessWidget {
@@ -10,7 +11,15 @@ class PlacesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DevicesModule(
+                    _place,
+                  )),
+        );
+      },
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

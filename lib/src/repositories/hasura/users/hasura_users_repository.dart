@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
+
 import '../../../shared/models/user/user_model.dart';
 import '../hasura_connection.dart';
 
 class HasuraUsersRepository extends HasuraConnection {
-  Future<UserModel> getUser({String name, String password}) async {
+  Future<UserModel> getUser({@required String name, String password}) async {
     String query = """
       getUser(\$name:String!, \$password:String){
         users(where: {name: {_eq: \$name}, password: {_eq: \$password}}) {

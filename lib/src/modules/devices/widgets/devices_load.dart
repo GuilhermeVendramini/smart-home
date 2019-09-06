@@ -2,33 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/languages/pt-br/strings.dart';
-import '../places_bloc.dart';
-import 'places_list.dart';
+import '../devices_bloc.dart';
+import 'devices_list.dart';
 
-class PlacesLoad extends StatelessWidget {
+class DevicesLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _bloc = Provider.of<PlacesProvider>(context);
-    return FutureBuilder<PlacesState>(
-      future: _bloc.loadPlaces(),
-      initialData: PlacesState.LOADING,
-      builder: (BuildContext context, AsyncSnapshot<PlacesState> snapshot) {
+    final _bloc = Provider.of<DevicesProvider>(context);
+    return FutureBuilder<DevicesState>(
+      future: _bloc.loadDevices(),
+      initialData: DevicesState.LOADING,
+      builder: (BuildContext context, AsyncSnapshot<DevicesState> snapshot) {
         switch (snapshot.data) {
-          case PlacesState.LOADING:
+          case DevicesState.LOADING:
             {
               return Center(
                 child: CircularProgressIndicator(),
               );
             }
             break;
-          case PlacesState.FAIL:
+          case DevicesState.FAIL:
             {
-              return Text(Strings.placesLoadingMessageError);
+              return Text(Strings.devicesLoadingMessageError);
             }
             break;
-          case PlacesState.SUCCESS:
+          case DevicesState.SUCCESS:
             {
-              return PlacesList();
+              return DevicesList();
             }
             break;
           default:

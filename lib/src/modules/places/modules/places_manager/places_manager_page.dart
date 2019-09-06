@@ -57,7 +57,6 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
                 action: (newIcon) => setState(() {
                   _bloc.setIcon = newIcon.codePoint.toString();
                   _icon = newIcon;
-                  ;
                 }),
               ),
               RegisterButton(),
