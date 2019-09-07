@@ -59,4 +59,6 @@ class Strings {
   static const String mqttUser = "Usuário";
   static const String mqttClientIdentifier = "Client Identifier";
   static const String mqttSaveMessageError = "Erro ao salvar MQTT";
+  static const String mqttConnect = "Conectar";
+  static const String mqttConnectMessageError = "Erro ao conectar MQTT";
 }

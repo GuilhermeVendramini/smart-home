@@ -45,10 +45,14 @@ class _MqttPageState extends State<MqttPage> {
         initialData: {},
         builder: (context, snapshot) {
           Map<String, dynamic> _data = snapshot.data;
-          _mqttBrokerController.text =  _data['mqttBroker'] != null ? _data['mqttBroker'] : '';
-          _mqttClientIdentifier.text =  _data['mqttClientIdentifier'] != null ? _data['mqttClientIdentifier'] : '';
-          _mqttUser.text =  _data['mqttUser'] != null ? _data['mqttUser'] : '';
-          _mqttPassword.text =  _data['mqttPassword'] != null ? _data['mqttPassword'] : '';
+          _mqttBrokerController.text =
+              _data['mqttBroker'] != null ? _data['mqttBroker'] : '';
+          _mqttClientIdentifier.text = _data['mqttClientIdentifier'] != null
+              ? _data['mqttClientIdentifier']
+              : '';
+          _mqttUser.text = _data['mqttUser'] != null ? _data['mqttUser'] : '';
+          _mqttPassword.text =
+              _data['mqttPassword'] != null ? _data['mqttPassword'] : '';
 
           return StreamBuilder<MqttState>(
             stream: _bloc.getState,
@@ -56,7 +60,8 @@ class _MqttPageState extends State<MqttPage> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  snapshot.data == MqttState.SAVING
+                  snapshot.data == MqttState.SAVING ||
+                          snapshot.data == MqttState.CONNECTING
                       ? CircularProgressIndicator()
                       : SizedBox(height: 35.0),
                   StreamInputField(

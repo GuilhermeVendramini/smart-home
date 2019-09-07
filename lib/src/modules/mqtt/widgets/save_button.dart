@@ -8,6 +8,7 @@ class SaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<MqttProvider>(context);
+
     void _submit() async {
       bool result = await _bloc.save();
       if (!result) {

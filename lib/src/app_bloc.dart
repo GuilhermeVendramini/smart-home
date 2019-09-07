@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +10,7 @@ enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
 class AppBloc with ChangeNotifier {
   UserModel _user;
   final _stateController = BehaviorSubject<LoginState>();
+  mqtt.MqttClient _mqttClient;
 
   @override
   void dispose() {
@@ -20,6 +22,14 @@ class AppBloc with ChangeNotifier {
 class App extends AppBloc {
   UserModel get getUser {
     return _user;
+  }
+
+  set setMqttClient(mqtt.MqttClient mqttClient) {
+    _mqttClient = mqttClient;
+  }
+
+  mqtt.MqttClient get getMqttClient {
+    return _mqttClient;
   }
 
   Stream<LoginState> get streamState => _stateController.stream;
