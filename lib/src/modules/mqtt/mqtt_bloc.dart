@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_home/src/shared/languages/pt-br/strings.dart';
@@ -23,8 +22,6 @@ class MqttBloc extends ChangeNotifier with MqttValidators {
   final BehaviorSubject<String> _portController = BehaviorSubject<String>();
   final BehaviorSubject<MqttState> _stateController =
       BehaviorSubject<MqttState>();
-
-  //mqtt.MqttClient _mqttClient;
 
   String message;
 
@@ -94,7 +91,7 @@ class MqttProvider extends Mqtt {
       _prefs.setString('mqttPassword', _mqttPasswordController.value);
       _prefs.setString('mqttPort', _portController.value);
       _stateController.add(MqttState.CONNECTING);
-      final bool connectResult = await connect();
+      final bool connectResult = await _appBloc.mqttConnect();
 
       if (!connectResult) {
         _stateController.add(MqttState.FAIL);
@@ -140,41 +137,6 @@ class MqttProvider extends Mqtt {
     } catch (e) {
       print('mqtt_bloc:getMqttValues() $e');
       return {};
-    }
-  }
-
-  void _disconnect() {
-    _appBloc.getMqttClient.disconnect();
-    _onDisconnected();
-  }
-
-  void _onDisconnected() {
-    _appBloc.setMqttClient = null;
-    print('MQTT client disconnected');
-  }
-
-  Future<bool> connect() async {
-    _appBloc.setMqttClient = mqtt.MqttClient(_brokerController.value, '');
-    _appBloc.getMqttClient.logging(on: true);
-    _appBloc.getMqttClient.keepAlivePeriod = 30;
-    _appBloc.getMqttClient.onDisconnected = _onDisconnected;
-    final mqtt.MqttConnectMessage connMess = mqtt.MqttConnectMessage()
-        .withClientIdentifier(_clientIdentifierController.value)
-        .startClean()
-        .keepAliveFor(30)
-        .withWillQos(mqtt.MqttQos.atLeastOnce);
-    print('MQTT client connecting....');
-    print(_portController.value);
-    _appBloc.getMqttClient.connectionMessage = connMess;
-    _appBloc.getMqttClient.port = int.tryParse(_portController.value);
-    try {
-      await _appBloc.getMqttClient
-          .connect(_mqttUserController.value, _mqttPasswordController.value);
-      return true;
-    } catch (e) {
-      _disconnect();
-      print('mqtt_bloc:connect() $e');
-      return false;
     }
   }
 }

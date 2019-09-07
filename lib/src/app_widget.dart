@@ -27,6 +27,7 @@ class AppWidget extends StatelessWidget {
                 break;
               case LoginState.SUCCESS:
                 {
+                  _bloc.mqttConnect();
                   return PlacesModule();
                 }
                 break;
