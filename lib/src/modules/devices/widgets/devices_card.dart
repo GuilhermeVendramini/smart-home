@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../modules/devices/modules/device/device_module.dart';
 
+import '../../../modules/devices/modules/device/device_module.dart';
 import '../../../shared/models/device/device_model.dart';
 
 class DevicesCard extends StatelessWidget {
@@ -16,8 +16,8 @@ class DevicesCard extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => DeviceModule(
-                _device,
-              )),
+                    _device,
+                  )),
         );
       },
       child: Card(

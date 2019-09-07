@@ -20,6 +20,7 @@ class MqttBloc extends ChangeNotifier with MqttValidators {
   final BehaviorSubject<String> _mqttUserController = BehaviorSubject<String>();
   final BehaviorSubject<String> _mqttPasswordController =
       BehaviorSubject<String>();
+  final BehaviorSubject<String> _portController = BehaviorSubject<String>();
   final BehaviorSubject<MqttState> _stateController =
       BehaviorSubject<MqttState>();
 
@@ -33,6 +34,7 @@ class MqttBloc extends ChangeNotifier with MqttValidators {
     _clientIdentifierController.close();
     _mqttUserController.close();
     _mqttPasswordController.close();
+    _portController.close();
     _stateController.close();
     super.dispose();
   }
@@ -53,6 +55,8 @@ class Mqtt extends MqttBloc {
   Stream<String> get getPassword =>
       _mqttPasswordController.stream.transform(validateMqttPassword);
 
+  Stream<String> get getPort => _portController.stream.transform(validatePort);
+
   Stream<MqttState> get getState => _stateController.stream;
 
   Function(String) get changeUser => _mqttUserController.sink.add;
@@ -64,8 +68,15 @@ class Mqtt extends MqttBloc {
   Function(String) get changeClientIdentifier =>
       _clientIdentifierController.sink.add;
 
-  Stream<bool> get outSubmitValid => Observable.combineLatest4(getBroker,
-      getClientIdentifier, getUser, getPassword, (a, b, c, d) => true);
+  Function(String) get changePort => _portController.sink.add;
+
+  Stream<bool> get outSubmitValid => Observable.combineLatest5(
+      getBroker,
+      getClientIdentifier,
+      getUser,
+      getPassword,
+      getPort,
+      (a, b, c, d, e) => true);
 }
 
 class MqttProvider extends Mqtt {
@@ -81,6 +92,7 @@ class MqttProvider extends Mqtt {
           'mqttClientIdentifier', _clientIdentifierController.value);
       _prefs.setString('mqttUser', _mqttUserController.value);
       _prefs.setString('mqttPassword', _mqttPasswordController.value);
+      _prefs.setString('mqttPort', _portController.value);
       _stateController.add(MqttState.CONNECTING);
       final bool connectResult = await connect();
 
@@ -108,18 +120,22 @@ class MqttProvider extends Mqtt {
           _prefs.getString('mqttClientIdentifier');
       final String _mqttUser = _prefs.getString('mqttUser');
       final String _mqttPassword = _prefs.getString('mqttPassword');
+      final String _mqttPort = _prefs.getString('mqttPort');
+
       final Map<String, dynamic> _mqttConfig = {
         "mqttBroker": _mqttBroker != null ? _mqttBroker : '',
         "mqttClientIdentifier":
             _mqttClientIdentifier != null ? _mqttClientIdentifier : '',
         "mqttUser": _mqttUser != null ? _mqttUser : '',
         "mqttPassword": _mqttPassword != null ? _mqttPassword : '',
+        "mqttPort": _mqttPort != null ? _mqttPort : '',
       };
 
       _brokerController.sink.add(_mqttConfig['mqttBroker']);
       _clientIdentifierController.sink.add(_mqttConfig['mqttClientIdentifier']);
       _mqttUserController.sink.add(_mqttConfig['mqttUser']);
       _mqttPasswordController.sink.add(_mqttConfig['mqttPassword']);
+      _portController.sink.add(_mqttConfig['mqttPort']);
       return _mqttConfig;
     } catch (e) {
       print('mqtt_bloc:getMqttValues() $e');
@@ -148,8 +164,9 @@ class MqttProvider extends Mqtt {
         .keepAliveFor(30)
         .withWillQos(mqtt.MqttQos.atLeastOnce);
     print('MQTT client connecting....');
+    print(_portController.value);
     _appBloc.getMqttClient.connectionMessage = connMess;
-    _appBloc.getMqttClient.port = 14933;
+    _appBloc.getMqttClient.port = int.tryParse(_portController.value);
     try {
       await _appBloc.getMqttClient
           .connect(_mqttUserController.value, _mqttPasswordController.value);

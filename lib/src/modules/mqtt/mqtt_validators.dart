@@ -4,7 +4,7 @@ import '../../shared/languages/pt-br/strings.dart';
 
 class MqttValidators {
   final validateBroker =
-  StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
+      StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
     if (name.isNotEmpty) {
       sink.add(name);
     } else {
@@ -13,7 +13,7 @@ class MqttValidators {
   });
 
   final validateClientIdentifier =
-  StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
+      StreamTransformer<String, String>.fromHandlers(handleData: (name, sink) {
     if (name.isNotEmpty) {
       sink.add(name);
     } else {
@@ -36,6 +36,15 @@ class MqttValidators {
       sink.add(password);
     } else {
       sink.addError(Strings.mqttRequiredPassword);
+    }
+  });
+
+  final validatePort =
+      StreamTransformer<String, String>.fromHandlers(handleData: (port, sink) {
+    if (port.isNotEmpty) {
+      sink.add(port);
+    } else {
+      sink.addError(Strings.mqttRequiredPort);
     }
   });
 }

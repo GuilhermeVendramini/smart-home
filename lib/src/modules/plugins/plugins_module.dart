@@ -10,8 +10,7 @@ class PluginsModule extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<PluginsProvider>(
-            builder: (_) => PluginsProvider(
-            )),
+            builder: (_) => PluginsProvider()),
       ],
       child: PluginsPage(),
     );

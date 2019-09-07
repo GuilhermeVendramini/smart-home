@@ -14,16 +14,18 @@ class MqttPage extends StatefulWidget {
 
 class _MqttPageState extends State<MqttPage> {
   final _mqttBrokerController = TextEditingController();
-  final _mqttClientIdentifier = TextEditingController();
-  final _mqttUser = TextEditingController();
-  final _mqttPassword = TextEditingController();
+  final _mqttClientIdentifierController = TextEditingController();
+  final _mqttUserController = TextEditingController();
+  final _mqttPasswordController = TextEditingController();
+  final _mqttPortController = TextEditingController();
 
   @override
   void dispose() {
     _mqttBrokerController.dispose();
-    _mqttClientIdentifier.dispose();
-    _mqttUser.dispose();
-    _mqttPassword.dispose();
+    _mqttClientIdentifierController.dispose();
+    _mqttUserController.dispose();
+    _mqttPasswordController.dispose();
+    _mqttPortController.dispose();
     super.dispose();
   }
 
@@ -47,12 +49,16 @@ class _MqttPageState extends State<MqttPage> {
           Map<String, dynamic> _data = snapshot.data;
           _mqttBrokerController.text =
               _data['mqttBroker'] != null ? _data['mqttBroker'] : '';
-          _mqttClientIdentifier.text = _data['mqttClientIdentifier'] != null
-              ? _data['mqttClientIdentifier']
-              : '';
-          _mqttUser.text = _data['mqttUser'] != null ? _data['mqttUser'] : '';
-          _mqttPassword.text =
+          _mqttClientIdentifierController.text =
+              _data['mqttClientIdentifier'] != null
+                  ? _data['mqttClientIdentifier']
+                  : '';
+          _mqttUserController.text =
+              _data['mqttUser'] != null ? _data['mqttUser'] : '';
+          _mqttPasswordController.text =
               _data['mqttPassword'] != null ? _data['mqttPassword'] : '';
+          _mqttPortController.text =
+              _data['mqttPort'] != null ? _data['mqttPort'] : '';
 
           return StreamBuilder<MqttState>(
             stream: _bloc.getState,
@@ -72,21 +78,28 @@ class _MqttPageState extends State<MqttPage> {
                     onChanged: _bloc.changeBroker,
                   ),
                   StreamInputField(
-                    controller: _mqttClientIdentifier,
+                    controller: _mqttClientIdentifierController,
                     hint: Strings.mqttClientIdentifier,
                     obscure: false,
                     stream: _bloc.getClientIdentifier,
                     onChanged: _bloc.changeClientIdentifier,
                   ),
                   StreamInputField(
-                    controller: _mqttUser,
+                    controller: _mqttUserController,
                     hint: Strings.mqttUser,
                     obscure: false,
                     stream: _bloc.getUser,
                     onChanged: _bloc.changeUser,
                   ),
                   StreamInputField(
-                    controller: _mqttPassword,
+                    controller: _mqttPortController,
+                    hint: Strings.mqttPort,
+                    obscure: false,
+                    stream: _bloc.getPort,
+                    onChanged: _bloc.changePort,
+                  ),
+                  StreamInputField(
+                    controller: _mqttPasswordController,
                     hint: Strings.mqttPassword,
                     obscure: false,
                     stream: _bloc.getPassword,

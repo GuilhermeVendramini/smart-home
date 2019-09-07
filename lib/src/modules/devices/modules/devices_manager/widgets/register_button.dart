@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../modules/devices/modules/device/device_module.dart';
 
+import '../../../../../modules/devices/modules/device/device_module.dart';
 import '../../../../../shared/languages/pt-br/strings.dart';
 import '../../../../../shared/models/device/device_model.dart';
 import '../devices_manager_bloc.dart';
@@ -23,8 +23,8 @@ class RegisterButton extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => DeviceModule(
-                _device,
-              )),
+                    _device,
+                  )),
         );
       }
     }

@@ -7,12 +7,13 @@ class StreamInputField extends StatelessWidget {
   final Function(String) onChanged;
   final TextEditingController controller;
 
-  StreamInputField(
-      {this.hint,
-      this.obscure = false,
-      @required this.stream,
-      @required this.onChanged,
-      this.controller});
+  StreamInputField({
+    this.hint,
+    this.obscure = false,
+    @required this.stream,
+    @required this.onChanged,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {

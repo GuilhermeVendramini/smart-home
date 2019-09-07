@@ -8,15 +8,13 @@ class PluginsList extends StatelessWidget {
         CheckboxListTile(
           title: Text('ON/OFF'),
           value: true,
-          onChanged: (bool value) {
-          },
+          onChanged: (bool value) {},
           secondary: const Icon(Icons.flash_on),
         ),
         CheckboxListTile(
           title: Text('Slider'),
           value: true,
-          onChanged: (bool value) {
-          },
+          onChanged: (bool value) {},
           secondary: const Icon(Icons.linear_scale),
         )
       ],
