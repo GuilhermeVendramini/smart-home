@@ -7,7 +7,7 @@ import '../../../shared/languages/pt-br/strings.dart';
 import '../../../shared/models/user/user_model.dart';
 import 'login_validators.dart';
 
-enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
+enum LoginState { LOADING, SUCCESS, FAIL }
 
 class LoginBloc extends ChangeNotifier with LoginValidators {
   final HasuraUsersRepository _usersRepository;

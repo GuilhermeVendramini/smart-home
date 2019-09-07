@@ -48,4 +48,15 @@ class Strings {
 
   // Plugins
   static const String pluginsTitle = "Plugins";
+
+  // Mqtt
+  static const String mqttRequiredUser = "Usuário é obrigatório";
+  static const String mqttRequiredPassword = "Senha é obrigatória";
+  static const String mqttRequiredBroker = "Broker é obrigatório";
+  static const String mqttRequiredClientIdentifier = "Client Identifier é obrigatório";
+  static const String mqttBroker = "Broker";
+  static const String mqttPassword = "Senha";
+  static const String mqttUser = "Usuário";
+  static const String mqttClientIdentifier = "Client Identifier";
+  static const String mqttSaveMessageError = "Erro ao salvar MQTT";
 }

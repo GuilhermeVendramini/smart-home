@@ -7,7 +7,7 @@ import '../../../shared/languages/pt-br/strings.dart';
 import '../../../shared/models/user/user_model.dart';
 import 'register_validators.dart';
 
-enum RegisterState { IDLE, LOADING, SUCCESS, FAIL }
+enum RegisterState { LOADING, SUCCESS, FAIL }
 
 class RegisterBloc extends ChangeNotifier with RegisterValidators {
   final HasuraUsersRepository _userRepository;
@@ -39,7 +39,7 @@ class Register extends RegisterBloc {
   Stream<String> get getPassword =>
       _passwordController.stream.transform(validatePassword);
 
-  Stream<RegisterState> get streamState => _stateController.stream;
+  Stream<RegisterState> get getState => _stateController.stream;
 
   Stream<bool> get outSubmitValid =>
       Observable.combineLatest2(getName, getPassword, (a, b) => true);

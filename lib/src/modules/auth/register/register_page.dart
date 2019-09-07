@@ -20,7 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
         title: Text(Strings.authRegister),
       ),
       body: StreamBuilder<RegisterState>(
-        stream: _bloc.streamState,
+        stream: _bloc.getState,
         builder: (context, snapshot) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,

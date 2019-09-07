@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../mqtt/mqtt_module.dart';
 
 import '../../../src/shared/languages/pt-br/strings.dart';
 import '../../../src/shared/widgets/components/side_drawer.dart';
@@ -16,6 +17,17 @@ class _PlacesPageState extends State<PlacesPage> {
       drawer: SideDrawer(),
       appBar: AppBar(
         title: Text(Strings.appName),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MqttModule()),
+              );
+            },
+          ),
+        ],
       ),
       body: PlacesLoad(),
     );
