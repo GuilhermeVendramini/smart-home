@@ -10,7 +10,7 @@ class PlacesBloc extends ChangeNotifier {
 
   PlacesBloc(this._placesRepository);
 
-  List<PlaceModel> _places;
+  List<PlaceModel> _places = [];
 
   @override
   void dispose() async {
@@ -29,7 +29,7 @@ class PlacesProvider extends Places {
       : super(placesRepository);
 
   Future<PlacesState> loadPlaces({bool cached = true}) async {
-    if (cached && _places != null) {
+    if (cached && _places.isNotEmpty) {
       return PlacesState.SUCCESS;
     }
 

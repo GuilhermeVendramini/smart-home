@@ -13,7 +13,7 @@ class DevicesBloc extends ChangeNotifier with DevicesValidators {
 
   DevicesBloc(this._devicesRepository, this._place);
 
-  List<DeviceModel> _devices;
+  List<DeviceModel> _devices = [];
 
   @override
   void dispose() async {
@@ -35,7 +35,7 @@ class DevicesProvider extends Devices {
       : super(devicesRepository, place);
 
   Future<DevicesState> loadDevices({bool cached = true}) async {
-    if (cached && _devices != null) {
+    if (cached && _devices.isNotEmpty) {
       return DevicesState.SUCCESS;
     }
 

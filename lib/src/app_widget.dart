@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<AppProvider>(context);
+    _bloc.mqttConnect();
     _bloc.userIsLogged();
     return MaterialApp(
       title: Strings.devicesTitle,
@@ -27,7 +28,6 @@ class AppWidget extends StatelessWidget {
                 break;
               case LoginState.SUCCESS:
                 {
-                  _bloc.mqttConnect();
                   return PlacesModule();
                 }
                 break;
