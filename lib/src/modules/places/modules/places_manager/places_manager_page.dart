@@ -7,6 +7,7 @@ import '../../../../shared/icons_list/places_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
 import '../../../../shared/widgets/fields/stream_input/stream_input_field.dart';
+import '../../../../shared/widgets/components/mqttStatus.dart';
 import 'places_manager_bloc.dart';
 
 class PlacesManagerPage extends StatefulWidget {
@@ -35,6 +36,9 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(Strings.placesAdd),
+        actions: <Widget>[
+          MqttStatus(),
+        ],
       ),
       body: StreamBuilder<PlacesManagerState>(
         stream: _bloc.streamState,

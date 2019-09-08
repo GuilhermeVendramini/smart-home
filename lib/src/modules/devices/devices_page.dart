@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../src/shared/widgets/components/side_drawer.dart';
 import '../../shared/models/place/place_model.dart';
+import '../../shared/widgets/components/mqttStatus.dart';
 import 'devices_bloc.dart';
 import 'widgets/devices_load.dart';
 
@@ -24,6 +25,9 @@ class _DevicesPageState extends State<DevicesPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context, false),
         ),
+        actions: <Widget>[
+          MqttStatus(),
+        ],
       ),
       body: DevicesLoad(),
     );

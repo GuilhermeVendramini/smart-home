@@ -7,6 +7,7 @@ import '../../../../shared/icons_list/devices_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
 import '../../../../shared/widgets/fields/stream_input/stream_input_field.dart';
+import '../../../../shared/widgets/components/mqttStatus.dart';
 import 'devices_manager_bloc.dart';
 
 class DevicesManagerPage extends StatefulWidget {
@@ -35,6 +36,9 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(Strings.devicesAdd),
+        actions: <Widget>[
+          MqttStatus(),
+        ],
       ),
       body: StreamBuilder<DevicesManagerState>(
         stream: _bloc.streamState,

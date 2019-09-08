@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../shared/languages/pt-br/strings.dart';
 import '../../shared/widgets/components/side_drawer.dart';
 import '../../shared/widgets/fields/stream_input/stream_input_field.dart';
+import '../../shared/widgets/components/mqttStatus.dart';
 import 'mqtt_bloc.dart';
 import 'widgets/save_button.dart';
 
@@ -41,6 +42,9 @@ class _MqttPageState extends State<MqttPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context, false),
         ),
+        actions: <Widget>[
+          MqttStatus(),
+        ],
       ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: _bloc.getMqttValues(),
