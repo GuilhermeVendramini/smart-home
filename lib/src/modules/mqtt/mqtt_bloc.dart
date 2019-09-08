@@ -94,6 +94,7 @@ class MqttProvider extends Mqtt {
       final bool connectResult = await _appBloc.mqttConnect();
 
       if (!connectResult) {
+        _appBloc.mqttDisconnect();
         _stateController.add(MqttState.FAIL);
         message = Strings.mqttConnectMessageError;
         return false;
@@ -103,6 +104,7 @@ class MqttProvider extends Mqtt {
       return true;
     } catch (e) {
       print('mqtt_bloc:save() $e');
+      _appBloc.mqttDisconnect();
       _stateController.add(MqttState.FAIL);
       message = Strings.mqttSaveMessageError;
       return false;

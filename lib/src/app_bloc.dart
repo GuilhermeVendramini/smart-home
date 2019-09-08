@@ -9,12 +9,15 @@ enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
 
 class AppBloc with ChangeNotifier {
   UserModel _user;
-  final _stateController = BehaviorSubject<LoginState>();
+  final BehaviorSubject<LoginState> _stateController =
+      BehaviorSubject<LoginState>();
   mqtt.MqttClient _mqttClient;
+  final BehaviorSubject<bool> _mqttConnectionStatus = BehaviorSubject<bool>();
 
   @override
   void dispose() {
     _stateController.close();
+    _mqttConnectionStatus.close();
     super.dispose();
   }
 }
@@ -33,19 +36,23 @@ class App extends AppBloc {
   }
 
   Stream<LoginState> get getState => _stateController.stream;
+
+  Stream<bool> get getMqttConnectionStatus => _mqttConnectionStatus.stream;
 }
 
 class AppMqtt extends App {
   void mqttDisconnect() {
     if (getMqttClient != null && getMqttClient.connectionStatus != null) {
       getMqttClient.disconnect();
+      print('MQTT client disconnected');
     }
+    _mqttConnectionStatus.add(false);
     _mqttOnDisconnected();
   }
 
   void _mqttOnDisconnected() {
     setMqttClient = null;
-    print('MQTT client disconnected');
+    print('MQTT client setted null');
   }
 
   Future<bool> mqttConnect() async {
@@ -55,26 +62,27 @@ class AppMqtt extends App {
         _prefs.getString('mqttClientIdentifier') == null ||
         _prefs.getString('mqttPort') == null ||
         _prefs.getString('mqttUser') == null ||
-        _prefs.getString('mqttPassword') == null
-    ) {
+        _prefs.getString('mqttPassword') == null) {
       return false;
     }
 
-    setMqttClient = mqtt.MqttClient(_prefs.getString('mqttBroker'), '');
-    getMqttClient.logging(on: true);
-    getMqttClient.keepAlivePeriod = 30;
-    getMqttClient.onDisconnected = _mqttOnDisconnected;
-    final mqtt.MqttConnectMessage connMess = mqtt.MqttConnectMessage()
-        .withClientIdentifier(_prefs.getString('mqttClientIdentifier'))
-        .startClean()
-        .keepAliveFor(30)
-        .withWillQos(mqtt.MqttQos.atLeastOnce);
-    print('MQTT client connecting....');
-    getMqttClient.connectionMessage = connMess;
-    getMqttClient.port = int.tryParse(_prefs.getString('mqttPort'));
     try {
+      setMqttClient = mqtt.MqttClient(_prefs.getString('mqttBroker'), '');
+      getMqttClient.logging(on: true);
+      getMqttClient.keepAlivePeriod = 30;
+      getMqttClient.onDisconnected = _mqttOnDisconnected;
+      final mqtt.MqttConnectMessage connMess = mqtt.MqttConnectMessage()
+          .withClientIdentifier(_prefs.getString('mqttClientIdentifier'))
+          .startClean()
+          .keepAliveFor(30)
+          .withWillQos(mqtt.MqttQos.atLeastOnce);
+      print('MQTT client connecting....');
+      getMqttClient.connectionMessage = connMess;
+      getMqttClient.port = int.tryParse(_prefs.getString('mqttPort'));
+
       await getMqttClient.connect(
           _prefs.getString('mqttUser'), _prefs.getString('mqttPassword'));
+      _mqttConnectionStatus.add(true);
       return true;
     } catch (e) {
       mqttDisconnect();
@@ -98,9 +106,7 @@ class AppProvider extends AppMqtt {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     try {
       if (_prefs.getString('name') != null &&
-          _prefs
-              .getString('name')
-              .isNotEmpty) {
+          _prefs.getString('name').isNotEmpty) {
         _user = UserModel(
           id: _prefs.getInt('id'),
           name: _prefs.getString('name'),
