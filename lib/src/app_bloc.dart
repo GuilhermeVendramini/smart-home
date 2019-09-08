@@ -32,7 +32,7 @@ class App extends AppBloc {
     return _mqttClient;
   }
 
-  Stream<LoginState> get streamState => _stateController.stream;
+  Stream<LoginState> get getState => _stateController.stream;
 }
 
 class AppMqtt extends App {
@@ -50,6 +50,15 @@ class AppMqtt extends App {
 
   Future<bool> mqttConnect() async {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
+
+    if (_prefs.getString('mqttBroker') == null ||
+        _prefs.getString('mqttClientIdentifier') == null ||
+        _prefs.getString('mqttPort') == null ||
+        _prefs.getString('mqttUser') == null ||
+        _prefs.getString('mqttPassword') == null
+    ) {
+      return false;
+    }
 
     setMqttClient = mqtt.MqttClient(_prefs.getString('mqttBroker'), '');
     getMqttClient.logging(on: true);
@@ -89,7 +98,9 @@ class AppProvider extends AppMqtt {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     try {
       if (_prefs.getString('name') != null &&
-          _prefs.getString('name').isNotEmpty) {
+          _prefs
+              .getString('name')
+              .isNotEmpty) {
         _user = UserModel(
           id: _prefs.getInt('id'),
           name: _prefs.getString('name'),

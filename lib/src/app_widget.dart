@@ -18,7 +18,7 @@ class AppWidget extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: StreamBuilder<LoginState>(
-          stream: _bloc.streamState,
+          stream: _bloc.getState,
           builder: (context, snapshot) {
             switch (snapshot.data) {
               case LoginState.LOADING:
