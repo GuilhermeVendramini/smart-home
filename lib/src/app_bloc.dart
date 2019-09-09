@@ -112,6 +112,7 @@ class AppProvider extends AppMqtt {
           name: _prefs.getString('name'),
         );
         _stateController.add(LoginState.SUCCESS);
+        mqttConnect();
         return true;
       }
       _stateController.add(LoginState.IDLE);

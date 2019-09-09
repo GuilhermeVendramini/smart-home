@@ -70,6 +70,7 @@ class LoginProvider extends Login {
 
       await _appBloc.setUser(user);
       _stateController.add(LoginState.SUCCESS);
+      _appBloc.mqttConnect();
       return true;
     } catch (e) {
       print('login_bloc:login() $e');
