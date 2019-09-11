@@ -5,9 +5,9 @@ import './widgets/register_button.dart';
 import '../../../../shared/fonts/smart_home_places_icons.dart';
 import '../../../../shared/icons_list/places_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
-import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
-import '../../../../shared/widgets/fields/stream_input/stream_input_field.dart';
 import '../../../../shared/widgets/components/mqttStatus.dart';
+import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
+import '../../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'places_manager_bloc.dart';
 
 class PlacesManagerPage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
               snapshot.data == PlacesManagerState.LOADING
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
-              StreamInputField(
+              StreamInputTextField(
                 hint: Strings.name,
                 stream: _bloc.getName,
                 onChanged: _bloc.changeName,

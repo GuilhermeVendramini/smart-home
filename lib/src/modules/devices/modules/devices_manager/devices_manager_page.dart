@@ -5,9 +5,9 @@ import './widgets/register_button.dart';
 import '../../../../shared/fonts/smart_home_devices_icons.dart';
 import '../../../../shared/icons_list/devices_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
-import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
-import '../../../../shared/widgets/fields/stream_input/stream_input_field.dart';
 import '../../../../shared/widgets/components/mqttStatus.dart';
+import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
+import '../../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'devices_manager_bloc.dart';
 
 class DevicesManagerPage extends StatefulWidget {
@@ -49,7 +49,7 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
               snapshot.data == DevicesManagerState.LOADING
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
-              StreamInputField(
+              StreamInputTextField(
                 hint: Strings.name,
                 stream: _bloc.getName,
                 onChanged: _bloc.changeName,

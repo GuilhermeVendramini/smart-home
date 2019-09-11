@@ -3,11 +3,12 @@ import 'package:provider/provider.dart';
 
 import '../../../../modules/plugins/plugins_module.dart';
 import '../../../../shared/models/device/device_model.dart';
-import '../../../../shared/widgets/components/side_drawer.dart';
 import '../../../../shared/widgets/components/mqttStatus.dart';
+import '../../../../shared/widgets/components/side_drawer.dart';
 import 'device_bloc.dart';
 
 class DevicePage extends StatefulWidget {
+
   @override
   _DevicePageState createState() => _DevicePageState();
 }
@@ -32,7 +33,7 @@ class _DevicePageState extends State<DevicePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PluginsModule()),
+                MaterialPageRoute(builder: (context) => PluginsModule(_device)),
               );
             },
           ),

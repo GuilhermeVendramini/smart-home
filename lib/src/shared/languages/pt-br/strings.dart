@@ -71,10 +71,19 @@ class Strings {
   static const String switchPluginTitle = "ON/OFF";
   static const String switchPluginDescription = "Switch the energy ON and OFF";
   static const String switchPluginRequiredTopic = "Tópico é obrigatório.";
-  static const String switchPluginRequiredMessageOn = "Mensagem ON é obrigatória";
-  static const String switchPluginRequiredMessageOff = "Mensagem OFF é obrigatória";
+  static const String switchPluginRequiredMessageOn =
+      "Mensagem ON é obrigatória";
+  static const String switchPluginRequiredMessageOff =
+      "Mensagem OFF é obrigatória";
+  static const String switchTopic = "Tópico";
+  static const String switchMessageOn = "Mensagem ON";
+  static const String switchMessageOff = "Mensagem OFF";
+  static const String switchSavedSuccessfully = "Salvo com sucesso";
+  static const String switchErrorSaving = "Erro ao salvar";
+  static const String switchStatus = "Habilitar/Desabilitar";
 
   // Slider
   static const String sliderPluginTitle = "Slider";
-  static const String sliderPluginDescription = "Regulate the energy using slider";
+  static const String sliderPluginDescription =
+      "Regulate the energy using slider";
 }

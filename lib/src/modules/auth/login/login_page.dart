@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../shared/languages/pt-br/strings.dart';
-import '../../../shared/widgets/fields/stream_input/stream_input_field.dart';
+import '../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'login_bloc.dart';
 import 'widgets/login_button.dart';
 //import 'widgets/register_button.dart';
@@ -29,13 +29,13 @@ class _LoginPageState extends State<LoginPage> {
               snapshot.data == LoginState.LOADING
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
-              StreamInputField(
+              StreamInputTextField(
                 hint: Strings.authName,
                 obscure: false,
                 stream: _bloc.getName,
                 onChanged: _bloc.changeName,
               ),
-              StreamInputField(
+              StreamInputTextField(
                 hint: Strings.authPassword,
                 obscure: true,
                 stream: _bloc.getPassword,

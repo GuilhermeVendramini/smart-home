@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class StreamInputField extends StatelessWidget {
+class StreamInputTextField extends StatelessWidget {
   final String hint;
   final bool obscure;
   final Stream<String> stream;
   final Function(String) onChanged;
   final TextEditingController controller;
 
-  StreamInputField({
+  StreamInputTextField({
     this.hint,
     this.obscure = false,
     @required this.stream,
