@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import '../../../shared/models/plugin/plugin_model.dart';
 import '../hasura_connection.dart';
 
@@ -31,6 +32,32 @@ class HasuraPluginsRepository extends HasuraConnection {
       deviceId: deviceId,
       config: config,
     );
+  }
+
+  Future<List<PluginModel>> getPlugins({@required int deviceId}) async {
+    String query = """
+     getPlugins(\$device_id:Int!){
+      plugins(where: {device_id: {_eq: \$device_id}}){
+        id
+        type
+        status
+        device_id
+        config
+      }
+    }
+    """;
+
+    Map<String, dynamic> data =
+    await hasuraConnect.query(query, variables: {"device_id": deviceId});
+    List<PluginModel> plugins = [];
+    if (data["data"]["plugins"].isEmpty) {
+      return plugins;
+    } else {
+      data["data"]["plugins"].forEach((v) {
+        plugins.add(new PluginModel.fromJson(v));
+      });
+      return plugins;
+    }
   }
 
   @override

@@ -6,6 +6,7 @@ import '../../../../shared/models/device/device_model.dart';
 import '../../../../shared/widgets/components/mqttStatus.dart';
 import '../../../../shared/widgets/components/side_drawer.dart';
 import 'device_bloc.dart';
+import 'widgets/plugins_load.dart';
 
 class DevicePage extends StatefulWidget {
 
@@ -39,7 +40,7 @@ class _DevicePageState extends State<DevicePage> {
           ),
         ],
       ),
-      body: Text('List Plugins'),
+      body: PluginsLoad(),
     );
   }
 }

@@ -48,6 +48,7 @@ class Strings {
 
   // Plugins
   static const String pluginsTitle = "Plugins";
+  static const String pluginsLoadingMessageError = "Erro ao carregar plugins";
 
   // Mqtt
   static const String mqttRequiredUser = "Usuário é obrigatório";
