@@ -64,4 +64,17 @@ class Strings {
   static const String mqttSaveMessageError = "Erro ao salvar MQTT";
   static const String mqttConnect = "Conectar";
   static const String mqttConnectMessageError = "Erro ao conectar MQTT";
+
+  // PLUGINS
+
+  // Switch ON/OFF
+  static const String switchPluginTitle = "ON/OFF";
+  static const String switchPluginDescription = "Switch the energy ON and OFF";
+  static const String switchPluginRequiredTopic = "Tópico é obrigatório.";
+  static const String switchPluginRequiredMessageOn = "Mensagem ON é obrigatória";
+  static const String switchPluginRequiredMessageOff = "Mensagem OFF é obrigatória";
+
+  // Slider
+  static const String sliderPluginTitle = "Slider";
+  static const String sliderPluginDescription = "Regulate the energy using slider";
 }
