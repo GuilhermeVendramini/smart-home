@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../../shared/languages/pt-br/strings.dart';
 
-class SwitchPluginValidators {
+class SwitchPluginManagerValidators {
   final validateTopic =
       StreamTransformer<String, String>.fromHandlers(handleData: (topic, sink) {
     if (topic.isNotEmpty) {

@@ -9,7 +9,6 @@ class PluginsLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<DeviceProvider>(context);
-    print('ooowwwwwwwwww');
     return FutureBuilder<PluginsState>(
       future: _bloc.loadPlugins(),
       initialData: PluginsState.LOADING,
