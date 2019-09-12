@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:smart_home/src/shared/fonts/smart_home_devices_icons.dart';
+
+import '../../shared/fonts/smart_home_devices_icons.dart';
 
 const List<IconData> devicesIconsList = [
   SmartHomeDevicesIcons.airconditioner,

@@ -27,9 +27,9 @@ class App extends AppBloc {
     return _user;
   }
 
-  set setMqttClient(mqtt.MqttClient mqttClient) {
+/*  set setMqttClient(mqtt.MqttClient mqttClient) {
     _mqttClient = mqttClient;
-  }
+  }*/
 
   mqtt.MqttClient get getMqttClient {
     return _mqttClient;
@@ -42,8 +42,8 @@ class App extends AppBloc {
 
 class AppMqtt extends App {
   void mqttDisconnect() {
-    if (getMqttClient != null && getMqttClient.connectionStatus != null) {
-      getMqttClient.disconnect();
+    if (_mqttClient != null && _mqttClient.connectionStatus != null) {
+      _mqttClient.disconnect();
       print('MQTT client disconnected');
     }
     _mqttConnectionStatus.add(false);
@@ -51,7 +51,7 @@ class AppMqtt extends App {
   }
 
   void _mqttOnDisconnected() {
-    setMqttClient = null;
+    _mqttClient = null;
     print('MQTT client setted null');
   }
 
@@ -67,21 +67,24 @@ class AppMqtt extends App {
     }
 
     try {
-      setMqttClient = mqtt.MqttClient(_prefs.getString('mqttBroker'), '');
-      getMqttClient.logging(on: true);
-      getMqttClient.keepAlivePeriod = 30;
-      getMqttClient.onDisconnected = _mqttOnDisconnected;
+      final _mqttConnect = mqtt.MqttClient(_prefs.getString('mqttBroker'), '');
+      _mqttConnect.logging(on: true);
+      _mqttConnect.keepAlivePeriod = 30;
+      _mqttConnect.onDisconnected = _mqttOnDisconnected;
       final mqtt.MqttConnectMessage connMess = mqtt.MqttConnectMessage()
           .withClientIdentifier(_prefs.getString('mqttClientIdentifier'))
           .startClean()
           .keepAliveFor(30)
           .withWillQos(mqtt.MqttQos.atLeastOnce);
       print('MQTT client connecting....');
-      getMqttClient.connectionMessage = connMess;
-      getMqttClient.port = int.tryParse(_prefs.getString('mqttPort'));
+      _mqttConnect.connectionMessage = connMess;
+      _mqttConnect.port = int.tryParse(_prefs.getString('mqttPort'));
 
-      await getMqttClient.connect(
+      await _mqttConnect.connect(
           _prefs.getString('mqttUser'), _prefs.getString('mqttPassword'));
+
+      _mqttClient = _mqttConnect;
+
       _mqttConnectionStatus.add(true);
       return true;
     } catch (e) {

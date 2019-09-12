@@ -82,6 +82,7 @@ class Strings {
   static const String switchSavedSuccessfully = "Salvo com sucesso";
   static const String switchErrorSaving = "Erro ao salvar";
   static const String switchStatus = "Habilitar/Desabilitar";
+  static const String switchErrorSendingMessage = "Erro ao enviar mensagem";
 
   // Slider
   static const String sliderPluginTitle = "Slider";

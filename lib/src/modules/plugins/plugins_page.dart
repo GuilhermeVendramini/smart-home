@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../src/shared/languages/pt-br/strings.dart';
-import '../../../src/shared/widgets/components/side_drawer.dart';
+import '../../shared/languages/pt-br/strings.dart';
+import '../../shared/widgets/components/side_drawer.dart';
 import 'widgets/plugins_list.dart';
 
 class PluginsPage extends StatefulWidget {

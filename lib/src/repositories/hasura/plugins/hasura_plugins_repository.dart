@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../../../shared/models/plugin/plugin_model.dart';
 import '../hasura_connection.dart';
 
@@ -48,7 +49,7 @@ class HasuraPluginsRepository extends HasuraConnection {
     """;
 
     Map<String, dynamic> data =
-    await hasuraConnect.query(query, variables: {"device_id": deviceId});
+        await hasuraConnect.query(query, variables: {"device_id": deviceId});
     List<PluginModel> plugins = [];
     if (data["data"]["plugins"].isEmpty) {
       return plugins;

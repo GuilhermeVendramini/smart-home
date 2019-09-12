@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../src/repositories/hasura/plugins/hasura_plugins_repository.dart';
 
+import '../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
 import '../../../../shared/models/device/device_model.dart';
 import 'device_bloc.dart';
 import 'device_page.dart';

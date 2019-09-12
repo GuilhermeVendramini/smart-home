@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-import '../../../../../src/repositories/hasura/plugins/hasura_plugins_repository.dart';
-import '../../../../../src/shared/models/device/device_model.dart';
-import '../../../../../src/shared/models/plugin/plugin_model.dart';
+import '../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
+import '../../../../shared/models/device/device_model.dart';
+import '../../../../shared/models/plugin/plugin_model.dart';
 
 enum PluginsState { LOADING, SUCCESS, FAIL }
 

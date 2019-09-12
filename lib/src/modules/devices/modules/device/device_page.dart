@@ -9,7 +9,6 @@ import 'device_bloc.dart';
 import 'widgets/plugins_load.dart';
 
 class DevicePage extends StatefulWidget {
-
   @override
   _DevicePageState createState() => _DevicePageState();
 }

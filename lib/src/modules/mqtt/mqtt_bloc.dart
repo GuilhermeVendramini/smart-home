@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_home/src/shared/languages/pt-br/strings.dart';
 
 import '../../app_bloc.dart';
+import '../../shared/languages/pt-br/strings.dart';
 import 'mqtt_validators.dart';
 
 enum MqttState { SAVING, CONNECTING, SUCCESS, FAIL }

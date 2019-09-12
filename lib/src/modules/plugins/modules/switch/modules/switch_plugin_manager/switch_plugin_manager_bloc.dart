@@ -2,13 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
-import '../../../../../../shared/models/device/device_model.dart';
 import '../../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../../shared/models/device/device_model.dart';
 import 'switch_plugin_manager_validators.dart';
 
 enum SavePluginState { SAVING, SUCCESS, FAIL }
 
-class SwitchPluginManagerBloc extends ChangeNotifier with SwitchPluginManagerValidators {
+class SwitchPluginManagerBloc extends ChangeNotifier
+    with SwitchPluginManagerValidators {
   final HasuraPluginsRepository _pluginsRepository;
   final DeviceModel _device;
 
@@ -34,7 +35,8 @@ class SwitchPluginManagerBloc extends ChangeNotifier with SwitchPluginManagerVal
 }
 
 class SwitchPluginManager extends SwitchPluginManagerBloc {
-  SwitchPluginManager(HasuraPluginsRepository pluginsRepository, DeviceModel device)
+  SwitchPluginManager(
+      HasuraPluginsRepository pluginsRepository, DeviceModel device)
       : super(pluginsRepository, device);
 
   Stream<String> get getTopic =>
@@ -87,7 +89,7 @@ class SwitchPluginManagerProvider extends SwitchPluginManager {
     } catch (e) {
       message = Strings.switchErrorSaving;
       _stateController.add(SavePluginState.FAIL);
-      print('switch_plugin_bloc:save() $e');
+      print('switch_plugin_manager_bloc:save() $e');
       return false;
     }
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../../../src/shared/models/device/device_model.dart';
+import '../../shared/models/device/device_model.dart';
 
 class PluginsBloc extends ChangeNotifier {
   final DeviceModel _device;

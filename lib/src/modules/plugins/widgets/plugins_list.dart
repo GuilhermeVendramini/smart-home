@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../src/shared/languages/pt-br/strings.dart';
+import '../../../shared/languages/pt-br/strings.dart';
 import '../modules/switch/modules/switch_plugin_manager/switch_plugin_manager_module.dart';
 import '../plugins_bloc.dart';
 
@@ -23,7 +23,8 @@ class PluginsList extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SwitchPluginManagerModule(_device)),
+              MaterialPageRoute(
+                  builder: (context) => SwitchPluginManagerModule(_device)),
             );
           },
         ),
