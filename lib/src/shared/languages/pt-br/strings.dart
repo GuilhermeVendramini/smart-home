@@ -76,9 +76,18 @@ class Strings {
       "Mensagem ON é obrigatória";
   static const String switchPluginRequiredMessageOff =
       "Mensagem OFF é obrigatória";
+  static const String switchPluginRequiredTopicResult =
+      "Tópico do resultado é obrigatório.";
+  static const String switchPluginRequiredResultOn =
+      "Resultado ON é obrigatório";
+  static const String switchPluginRequiredResultOff =
+      "Resultado OFF é obrigatório";
   static const String switchTopic = "Tópico";
   static const String switchMessageOn = "Mensagem ON";
   static const String switchMessageOff = "Mensagem OFF";
+  static const String switchTopicResult = "Tópico de resultado";
+  static const String switchResultOn = "Resultado ON";
+  static const String switchResultOff = "Resultado de OFF";
   static const String switchSavedSuccessfully = "Salvo com sucesso";
   static const String switchErrorSaving = "Erro ao salvar";
   static const String switchStatus = "Habilitar/Desabilitar";

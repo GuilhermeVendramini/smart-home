@@ -12,16 +12,20 @@ class SwitchPluginBloc extends ChangeNotifier {
   final PluginModel _plugin;
   final AppProvider _appBloc;
 
-  SwitchPluginBloc(this._plugin, this._appBloc);
+  SwitchPluginBloc(this._plugin, this._appBloc) {
+    _appBloc.getMqttClient
+        .subscribe(_plugin.config['topicResult'], mqtt.MqttQos.exactlyOnce);
+  }
 
-  final _statusController = BehaviorSubject<bool>();
+  final _switchStatusController = BehaviorSubject<bool>();
   final _stateController = BehaviorSubject<PluginState>();
   String message;
 
   @override
   void dispose() async {
     _stateController.close();
-    _statusController.close();
+    _switchStatusController.close();
+    _appBloc.getMqttClient.unsubscribe(_plugin.config['topicResult']);
     super.dispose();
   }
 }
@@ -30,28 +34,60 @@ class SwitchPlugin extends SwitchPluginBloc {
   SwitchPlugin(PluginModel plugin, AppProvider appBloc)
       : super(plugin, appBloc);
 
-  Stream<bool> get getStatus => _statusController.stream;
+  Stream<bool> get getSwitchStatus => _switchStatusController.stream;
 
   Stream<PluginState> get getState => _stateController.stream;
 }
 
 class SwitchPluginProvider extends SwitchPlugin {
   SwitchPluginProvider(PluginModel plugin, AppProvider appBloc)
-      : super(plugin, appBloc);
+      : super(plugin, appBloc) {
+    final mqtt.MqttClientPayloadBuilder _builder =
+        mqtt.MqttClientPayloadBuilder();
+    _builder.addString('state');
+    _publishMessage(_builder);
+    _listenMessage();
+  }
+
+  void _publishMessage(mqtt.MqttClientPayloadBuilder builder) {
+    _appBloc.getMqttClient.publishMessage(
+      _plugin.config['topic'],
+      mqtt.MqttQos.values[0],
+      builder.payload,
+      retain: false,
+    );
+  }
+
+  void _listenMessage() {
+    _appBloc.getMqttMessages.last.then((onValue) {
+      print(onValue.message);
+    });
+    _appBloc.getMqttMessages.listen((onData) {
+      if (onData.message == _plugin.config['resultOn']) {
+        _switchStatusController.value = true;
+      } else {
+        _switchStatusController.value = false;
+      }
+    });
+  }
 
   Future<bool> switchPower() async {
     try {
       _stateController.add(PluginState.LOADING);
-      final mqtt.MqttClientPayloadBuilder builder =
+      final mqtt.MqttClientPayloadBuilder _builder =
           mqtt.MqttClientPayloadBuilder();
 
-      builder.addString('ON');
-      _appBloc.getMqttClient.publishMessage(
-        'topico',
-        mqtt.MqttQos.values[0],
-        builder.payload,
-        retain: false,
-      );
+      if (_switchStatusController.value != null &&
+          _switchStatusController.value) {
+        _builder.addString(_plugin.config['messageOff']);
+      } else {
+        _builder.addString(_plugin.config['messageOn']);
+      }
+
+      _publishMessage(_builder);
+
+      _listenMessage();
+
       _stateController.add(PluginState.SUCCESS);
       return true;
     } catch (e) {

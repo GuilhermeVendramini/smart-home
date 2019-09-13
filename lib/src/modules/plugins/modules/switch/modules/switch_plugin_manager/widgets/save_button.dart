@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../../modules/devices/modules/device/device_module.dart';
 import '../../../../../../../shared/languages/pt-br/strings.dart';
 import '../switch_plugin_manager_bloc.dart';
 
@@ -19,6 +20,13 @@ class SaveButton extends StatelessWidget {
         );
       } else {
         Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DeviceModule(_bloc.getDevice)),
+        );
       }
     }
 

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../shared/models/device/device_model.dart';import 'plugins_bloc.dart';
+import '../../shared/models/device/device_model.dart';
+import 'plugins_bloc.dart';
 import 'plugins_page.dart';
 
 class PluginsModule extends StatelessWidget {

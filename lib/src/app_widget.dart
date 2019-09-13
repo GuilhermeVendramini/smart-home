@@ -10,14 +10,16 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<AppProvider>(context);
-    _bloc.userIsLogged();
+    if (_bloc.getUser == null) {
+      _bloc.autoAuthUser();
+    }
     return MaterialApp(
       title: Strings.devicesTitle,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: StreamBuilder<LoginState>(
-          stream: _bloc.getState,
+          stream: _bloc.getLoginState,
           builder: (context, snapshot) {
             switch (snapshot.data) {
               case LoginState.LOADING:

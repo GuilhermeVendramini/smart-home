@@ -18,6 +18,9 @@ class SwitchPluginManagerBloc extends ChangeNotifier
   final _topicController = BehaviorSubject<String>();
   final _messageOnController = BehaviorSubject<String>();
   final _messageOffController = BehaviorSubject<String>();
+  final _topicResultController = BehaviorSubject<String>();
+  final _resultOnController = BehaviorSubject<String>();
+  final _resultOffController = BehaviorSubject<String>();
   final _statusController = BehaviorSubject<bool>();
   final _stateController = BehaviorSubject<SavePluginState>();
 
@@ -30,6 +33,9 @@ class SwitchPluginManagerBloc extends ChangeNotifier
     _messageOffController.close();
     _statusController.close();
     _stateController.close();
+    _topicResultController.close();
+    _resultOnController.close();
+    _resultOffController.close();
     super.dispose();
   }
 }
@@ -38,6 +44,10 @@ class SwitchPluginManager extends SwitchPluginManagerBloc {
   SwitchPluginManager(
       HasuraPluginsRepository pluginsRepository, DeviceModel device)
       : super(pluginsRepository, device);
+
+  DeviceModel get getDevice {
+    return _device;
+  }
 
   Stream<String> get getTopic =>
       _topicController.stream.transform(validateTopic);
@@ -48,18 +58,39 @@ class SwitchPluginManager extends SwitchPluginManagerBloc {
   Stream<String> get getMessageOff =>
       _messageOffController.stream.transform(validateMessageOff);
 
+  Stream<String> get getTopicResult =>
+      _topicResultController.stream.transform(validateTopicResult);
+
+  Stream<String> get getResultOn =>
+      _resultOnController.stream.transform(validateResultOn);
+
+  Stream<String> get getResultOff =>
+      _resultOffController.stream.transform(validateResultOff);
+
   Stream<bool> get getStatus => _statusController.stream;
 
   Stream<SavePluginState> get getState => _stateController.stream;
 
-  Stream<bool> get outSubmitValid => Observable.combineLatest3(
-      getTopic, getMessageOn, getMessageOff, (a, b, c) => true);
+  Stream<bool> get outSubmitValid => Observable.combineLatest6(
+      getTopic,
+      getMessageOn,
+      getMessageOff,
+      getTopicResult,
+      getResultOn,
+      getResultOff,
+      (a, b, c, d, e, f) => true);
 
   Function(String) get changeTopic => _topicController.sink.add;
 
   Function(String) get changeMessageOn => _messageOnController.sink.add;
 
   Function(String) get changeMessageOff => _messageOffController.sink.add;
+
+  Function(String) get changeTopicResult => _topicResultController.sink.add;
+
+  Function(String) get changeResultOn => _resultOnController.sink.add;
+
+  Function(String) get changeResultOff => _resultOffController.sink.add;
 
   Function(bool) get changeStatus => _statusController.sink.add;
 }
@@ -81,6 +112,9 @@ class SwitchPluginManagerProvider extends SwitchPluginManager {
             "topic": _topicController.value,
             "messageOn": _messageOnController.value,
             "messageOff": _messageOffController.value,
+            "topicResult": _topicResultController.value,
+            "resultOn": _resultOnController.value,
+            "resultOff": _resultOffController.value,
           });
 
       message = Strings.switchSavedSuccessfully;

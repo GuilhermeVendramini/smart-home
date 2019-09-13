@@ -26,43 +26,64 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
           onPressed: () => Navigator.pop(context, false),
         ),
       ),
-      body: StreamBuilder<SavePluginState>(
-        stream: _bloc.getState,
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              snapshot.data == SavePluginState.SAVING
-                  ? CircularProgressIndicator()
-                  : SizedBox(height: 35.0),
-              StreamInputTextField(
-                hint: Strings.switchTopic,
-                obscure: false,
-                stream: _bloc.getTopic,
-                onChanged: _bloc.changeTopic,
-              ),
-              StreamInputTextField(
-                hint: Strings.switchMessageOn,
-                stream: _bloc.getMessageOn,
-                onChanged: _bloc.changeMessageOn,
-              ),
-              StreamInputTextField(
-                hint: Strings.switchMessageOff,
-                stream: _bloc.getMessageOff,
-                onChanged: _bloc.changeMessageOff,
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Text(Strings.switchStatus),
-              StreamInputCheckboxField(
-                stream: _bloc.getStatus,
-                onChanged: _bloc.changeStatus,
-              ),
-              SaveButton(),
-            ],
-          );
-        },
+      body: SingleChildScrollView(
+        child: StreamBuilder<SavePluginState>(
+          stream: _bloc.getState,
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                snapshot.data == SavePluginState.SAVING
+                    ? CircularProgressIndicator()
+                    : SizedBox(height: 35.0),
+                StreamInputTextField(
+                  hint: Strings.switchTopic,
+                  obscure: false,
+                  stream: _bloc.getTopic,
+                  onChanged: _bloc.changeTopic,
+                ),
+                StreamInputTextField(
+                  hint: Strings.switchMessageOn,
+                  stream: _bloc.getMessageOn,
+                  onChanged: _bloc.changeMessageOn,
+                ),
+                StreamInputTextField(
+                  hint: Strings.switchMessageOff,
+                  stream: _bloc.getMessageOff,
+                  onChanged: _bloc.changeMessageOff,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                StreamInputTextField(
+                  hint: Strings.switchTopicResult,
+                  obscure: false,
+                  stream: _bloc.getTopicResult,
+                  onChanged: _bloc.changeTopicResult,
+                ),
+                StreamInputTextField(
+                  hint: Strings.switchResultOn,
+                  stream: _bloc.getResultOn,
+                  onChanged: _bloc.changeResultOn,
+                ),
+                StreamInputTextField(
+                  hint: Strings.switchResultOff,
+                  stream: _bloc.getResultOff,
+                  onChanged: _bloc.changeResultOff,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(Strings.switchStatus),
+                StreamInputCheckboxField(
+                  stream: _bloc.getStatus,
+                  onChanged: _bloc.changeStatus,
+                ),
+                SaveButton(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

@@ -37,8 +37,8 @@ class HasuraPluginsRepository extends HasuraConnection {
 
   Future<List<PluginModel>> getPlugins({@required int deviceId}) async {
     String query = """
-     getPlugins(\$device_id:Int!){
-      plugins(where: {device_id: {_eq: \$device_id}}){
+     getPlugins(\$device_id:Int!, \$status:Boolean!){
+      plugins(where: {device_id: {_eq: \$device_id}, status: {_eq: \$status}}){
         id
         type
         status
@@ -48,8 +48,8 @@ class HasuraPluginsRepository extends HasuraConnection {
     }
     """;
 
-    Map<String, dynamic> data =
-        await hasuraConnect.query(query, variables: {"device_id": deviceId});
+    Map<String, dynamic> data = await hasuraConnect
+        .query(query, variables: {"device_id": deviceId, "status": true});
     List<PluginModel> plugins = [];
     if (data["data"]["plugins"].isEmpty) {
       return plugins;
