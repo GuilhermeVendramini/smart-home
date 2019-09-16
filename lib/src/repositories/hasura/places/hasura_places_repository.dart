@@ -62,6 +62,24 @@ class HasuraPlacesRepository extends HasuraConnection {
     return PlaceModel(id: id, name: place.name, icon: place.icon);
   }
 
+  Future<bool> deletePlace(int id) async {
+    String query = """
+      mutation deletePlace(\$id:Int!) {
+        delete_places(where: {id: {_eq: \$id}}) {
+          affected_rows
+        }
+      }
+      """;
+
+    Map<String, dynamic> data =
+        await hasuraConnect.mutation(query, variables: {"id": id});
+    int affectedRows = data["data"]["delete_places"]["affected_rows"];
+    if (affectedRows > 0) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   void dispose() {
     hasuraConnect.dispose();

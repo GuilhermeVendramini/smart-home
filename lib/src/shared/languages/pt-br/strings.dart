@@ -5,6 +5,8 @@ class Strings {
   static const String save = "Salvar";
   static const String name = "Nome";
   static const String icon = "Ícone";
+  static const String confirm = "Confirmar";
+  static const String cancel = "Cancelar";
 
   // App
   static const String appName = "SMART HOME";
@@ -32,11 +34,12 @@ class Strings {
   static const String placesRequiredName = "Nome é obrigatório";
   static const String placesRequiredIcon = "Ícone é obrigatório";
   static const String placesLoadingMessageError = "Erro ao carregar os locais";
-  static const String placesSavedSuccessfully = "Local salvo com sucesso";
   static const String placesErrorSaving = "Erro ao salvar local";
-  static const String placesSuccessfullyUpdated =
-      "Local atualizado com sucesso";
   static const String placesErrorUpdating = "Erro ao atualizar local";
+  static const String placesErrorDeleting = "Erro ao deletar local";
+  static const String placesConfirmDelete = "Deletar local?";
+  static const String placesConfirmDeleteMessage =
+      "Todos os devices e configurações atreladas ao local serão apagadas!";
 
   // Devices
   static const String devicesAdd = "Adicionar device";

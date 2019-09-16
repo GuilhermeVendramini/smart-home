@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './widgets/save_button.dart';
 import '../../../../shared/fonts/smart_home_places_icons.dart';
 import '../../../../shared/icons_list/places_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
@@ -10,6 +9,7 @@ import '../../../../shared/widgets/components/mqttStatus.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
 import '../../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'places_manager_bloc.dart';
+import 'widgets/floating_buttons.dart';
 
 class PlacesManagerPage extends StatefulWidget {
   final PlaceModel _place;
@@ -80,11 +80,12 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
                   _icon = newIcon;
                 }),
               ),
-              SaveButton(),
+              //SaveButton(),
             ],
           );
         },
       ),
+      floatingActionButton: PlacesFloatingButtons(),
     );
   }
 }

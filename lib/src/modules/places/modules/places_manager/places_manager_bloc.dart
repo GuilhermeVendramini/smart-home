@@ -75,7 +75,7 @@ class PlacesManagerProvider extends PlacesManager {
         icon: int.tryParse(_iconController.value),
       );
 
-      message = Strings.placesSavedSuccessfully;
+      //message = Strings.placesSavedSuccessfully;
       _placesProvider.addPlace(_place);
       _stateController.add(PlacesManagerState.SUCCESS);
       return _place;
@@ -98,7 +98,6 @@ class PlacesManagerProvider extends PlacesManager {
         icon: int.tryParse(_iconController.value),
       ));
 
-      message = Strings.placesSuccessfullyUpdated;
       _stateController.add(PlacesManagerState.SUCCESS);
       return _place;
     } catch (e) {
@@ -106,6 +105,23 @@ class PlacesManagerProvider extends PlacesManager {
       _stateController.add(PlacesManagerState.FAIL);
       message = Strings.placesErrorUpdating;
       return null;
+    }
+  }
+
+  Future<bool> deletePlace() async {
+    try {
+      _stateController.add(PlacesManagerState.LOADING);
+      bool _result;
+
+      _result = await _placesRepository.deletePlace(_currentPlace.id);
+
+      _stateController.add(PlacesManagerState.SUCCESS);
+      return _result;
+    } catch (e) {
+      print('places_bloc:deletePlace() $e');
+      _stateController.add(PlacesManagerState.FAIL);
+      message = Strings.placesErrorDeleting;
+      return false;
     }
   }
 }
