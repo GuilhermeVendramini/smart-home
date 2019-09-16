@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/languages/pt-br/strings.dart';
 import '../../shared/widgets/components/mqttStatus.dart';
@@ -19,6 +20,28 @@ class _MqttPageState extends State<MqttPage> {
   final _mqttUserController = TextEditingController();
   final _mqttPasswordController = TextEditingController();
   final _mqttPortController = TextEditingController();
+
+  @override
+  void initState() {
+    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    _prefs.then((pref) {
+      final String _mqttBroker = pref.getString('mqttBroker');
+      final String _mqttClientIdentifier =
+          pref.getString('mqttClientIdentifier');
+      final String _mqttUser = pref.getString('mqttUser');
+      final String _mqttPassword = pref.getString('mqttPassword');
+      final String _mqttPort = pref.getString('mqttPort');
+
+      _mqttBrokerController.text = _mqttBroker != null ? _mqttBroker : '';
+      _mqttClientIdentifierController.text =
+          _mqttClientIdentifier != null ? _mqttClientIdentifier : '';
+      _mqttUserController.text = _mqttUser != null ? _mqttUser : '';
+      _mqttPasswordController.text = _mqttPassword != null ? _mqttPassword : '';
+      _mqttPortController.text = _mqttPort != null ? _mqttPort : '';
+    });
+
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -46,73 +69,53 @@ class _MqttPageState extends State<MqttPage> {
           MqttStatus(),
         ],
       ),
-      body: FutureBuilder<Map<String, dynamic>>(
-        future: _bloc.getMqttValues(),
-        initialData: {},
+      body: StreamBuilder<MqttState>(
+        stream: _bloc.getState,
         builder: (context, snapshot) {
-          Map<String, dynamic> _data = snapshot.data;
-          _mqttBrokerController.text =
-              _data['mqttBroker'] != null ? _data['mqttBroker'] : '';
-          _mqttClientIdentifierController.text =
-              _data['mqttClientIdentifier'] != null
-                  ? _data['mqttClientIdentifier']
-                  : '';
-          _mqttUserController.text =
-              _data['mqttUser'] != null ? _data['mqttUser'] : '';
-          _mqttPasswordController.text =
-              _data['mqttPassword'] != null ? _data['mqttPassword'] : '';
-          _mqttPortController.text =
-              _data['mqttPort'] != null ? _data['mqttPort'] : '';
-
-          return StreamBuilder<MqttState>(
-            stream: _bloc.getState,
-            builder: (context, snapshot) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  snapshot.data == MqttState.SAVING ||
-                          snapshot.data == MqttState.CONNECTING
-                      ? CircularProgressIndicator()
-                      : SizedBox(height: 35.0),
-                  StreamInputTextField(
-                    controller: _mqttBrokerController,
-                    hint: Strings.mqttBroker,
-                    obscure: false,
-                    stream: _bloc.getBroker,
-                    onChanged: _bloc.changeBroker,
-                  ),
-                  StreamInputTextField(
-                    controller: _mqttClientIdentifierController,
-                    hint: Strings.mqttClientIdentifier,
-                    obscure: false,
-                    stream: _bloc.getClientIdentifier,
-                    onChanged: _bloc.changeClientIdentifier,
-                  ),
-                  StreamInputTextField(
-                    controller: _mqttUserController,
-                    hint: Strings.mqttUser,
-                    obscure: false,
-                    stream: _bloc.getUser,
-                    onChanged: _bloc.changeUser,
-                  ),
-                  StreamInputTextField(
-                    controller: _mqttPortController,
-                    hint: Strings.mqttPort,
-                    obscure: false,
-                    stream: _bloc.getPort,
-                    onChanged: _bloc.changePort,
-                  ),
-                  StreamInputTextField(
-                    controller: _mqttPasswordController,
-                    hint: Strings.mqttPassword,
-                    obscure: false,
-                    stream: _bloc.getPassword,
-                    onChanged: _bloc.changePassword,
-                  ),
-                  SaveButton(),
-                ],
-              );
-            },
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              snapshot.data == MqttState.SAVING ||
+                      snapshot.data == MqttState.CONNECTING
+                  ? CircularProgressIndicator()
+                  : SizedBox(height: 35.0),
+              StreamInputTextField(
+                controller: _mqttBrokerController,
+                hint: Strings.mqttBroker,
+                obscure: false,
+                stream: _bloc.getBroker,
+                onChanged: _bloc.changeBroker,
+              ),
+              StreamInputTextField(
+                controller: _mqttClientIdentifierController,
+                hint: Strings.mqttClientIdentifier,
+                obscure: false,
+                stream: _bloc.getClientIdentifier,
+                onChanged: _bloc.changeClientIdentifier,
+              ),
+              StreamInputTextField(
+                controller: _mqttUserController,
+                hint: Strings.mqttUser,
+                obscure: false,
+                stream: _bloc.getUser,
+                onChanged: _bloc.changeUser,
+              ),
+              StreamInputTextField(
+                controller: _mqttPortController,
+                hint: Strings.mqttPort,
+                obscure: false,
+                stream: _bloc.getPort,
+                onChanged: _bloc.changePort,
+              ),
+              StreamInputTextField(
+                controller: _mqttPasswordController,
+                hint: Strings.mqttPassword,
+                obscure: false,
+                stream: _bloc.getPassword,
+                onChanged: _bloc.changePassword,
+              ),
+              SaveButton(),
+            ],
           );
         },
       ),

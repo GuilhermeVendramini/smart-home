@@ -11,7 +11,7 @@ String placeModelToJson(PlaceModel data) => json.encode(data.toJson());
 class PlaceModel {
   int id;
   String name;
-  String icon;
+  int icon;
 
   // List<DeviceModel> devices;
 

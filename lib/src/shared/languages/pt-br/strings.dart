@@ -34,6 +34,9 @@ class Strings {
   static const String placesLoadingMessageError = "Erro ao carregar os locais";
   static const String placesSavedSuccessfully = "Local salvo com sucesso";
   static const String placesErrorSaving = "Erro ao salvar local";
+  static const String placesSuccessfullyUpdated =
+      "Local atualizado com sucesso";
+  static const String placesErrorUpdating = "Erro ao atualizar local";
 
   // Devices
   static const String devicesAdd = "Adicionar device";

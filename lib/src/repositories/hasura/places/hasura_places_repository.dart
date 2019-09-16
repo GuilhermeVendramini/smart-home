@@ -25,9 +25,9 @@ class HasuraPlacesRepository extends HasuraConnection {
     }
   }
 
-  Future<PlaceModel> createPlace({String name, String icon}) async {
+  Future<PlaceModel> createPlace({String name, int icon}) async {
     String query = """
-      mutation createPlace(\$name:String!, \$icon:String!) {
+      mutation createPlace(\$name:String!, \$icon:Int!) {
         insert_places(objects: {name: \$name, icon: \$icon}) {
           returning {
             id
@@ -40,6 +40,26 @@ class HasuraPlacesRepository extends HasuraConnection {
         .mutation(query, variables: {"name": name, "icon": icon});
     int id = data["data"]["insert_places"]["returning"][0]["id"];
     return PlaceModel(id: id, name: name, icon: icon);
+  }
+
+  Future<PlaceModel> updatePlace(PlaceModel place) async {
+    String query = """
+      mutation updatePlace(\$id:Int!, \$name:String!, \$icon:Int!) {
+        update_places(where: {id: {_eq: \$id}}, _set: {
+          name: \$name,
+          icon: \$icon
+        }) {
+          returning {
+            id
+          }
+        }
+      }
+    """;
+
+    Map<String, dynamic> data = await hasuraConnect.mutation(query,
+        variables: {"id": place.id, "name": place.name, "icon": place.icon});
+    int id = data["data"]["update_places"]["returning"][0]["id"];
+    return PlaceModel(id: id, name: place.name, icon: place.icon);
   }
 
   @override

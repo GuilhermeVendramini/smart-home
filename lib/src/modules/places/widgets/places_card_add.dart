@@ -12,7 +12,9 @@ class PlacesCardAdd extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PlacesManagerModule(_bloc)),
+          MaterialPageRoute(
+            builder: (context) => PlacesManagerModule(_bloc, null),
+          ),
         );
       },
       child: Card(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -12,8 +14,10 @@ enum PlacesManagerState { LOADING, SUCCESS, FAIL }
 class PlacesManagerBloc extends ChangeNotifier with PlacesManagerValidators {
   final PlacesProvider _placesProvider;
   final HasuraPlacesRepository _placesRepository;
+  final PlaceModel _currentPlace;
 
-  PlacesManagerBloc(this._placesProvider, this._placesRepository);
+  PlacesManagerBloc(
+      this._placesProvider, this._currentPlace, this._placesRepository);
 
   final _nameController = BehaviorSubject<String>();
   final _iconController = BehaviorSubject<String>();
@@ -30,9 +34,9 @@ class PlacesManagerBloc extends ChangeNotifier with PlacesManagerValidators {
 }
 
 class PlacesManager extends PlacesManagerBloc {
-  PlacesManager(
-      PlacesProvider placesProvider, HasuraPlacesRepository placesRepository)
-      : super(placesProvider, placesRepository);
+  PlacesManager(PlacesProvider placesProvider, PlaceModel currentPlace,
+      HasuraPlacesRepository placesRepository)
+      : super(placesProvider, currentPlace, placesRepository);
 
   Stream<String> get getName => _nameController.stream.transform(validateName);
 
@@ -41,6 +45,8 @@ class PlacesManager extends PlacesManagerBloc {
   Stream<PlacesManagerState> get streamState => _stateController.stream;
 
   Function(String) get changeName => _nameController.sink.add;
+
+  PlaceModel get getCurrentPlace => _currentPlace;
 
   set setIcon(String icon) {
     _iconController.sink.add(icon);
@@ -51,9 +57,13 @@ class PlacesManager extends PlacesManagerBloc {
 }
 
 class PlacesManagerProvider extends PlacesManager {
-  PlacesManagerProvider(
-      PlacesProvider placesProvider, HasuraPlacesRepository placesRepository)
-      : super(placesProvider, placesRepository);
+  PlacesManagerProvider(PlacesProvider placesProvider, PlaceModel currentPlace,
+      HasuraPlacesRepository placesRepository)
+      : super(placesProvider, currentPlace, placesRepository) {
+    if (currentPlace != null) {
+      _nameController.add(_currentPlace.name);
+    }
+  }
 
   Future<PlaceModel> addPlace() async {
     try {
@@ -62,7 +72,7 @@ class PlacesManagerProvider extends PlacesManager {
 
       _place = await _placesRepository.createPlace(
         name: _nameController.value,
-        icon: _iconController.value,
+        icon: int.tryParse(_iconController.value),
       );
 
       message = Strings.placesSavedSuccessfully;
@@ -73,6 +83,28 @@ class PlacesManagerProvider extends PlacesManager {
       print('places_bloc:addUser() $e');
       _stateController.add(PlacesManagerState.FAIL);
       message = Strings.placesErrorSaving;
+      return null;
+    }
+  }
+
+  Future<PlaceModel> updatePlace() async {
+    try {
+      _stateController.add(PlacesManagerState.LOADING);
+      PlaceModel _place;
+
+      _place = await _placesRepository.updatePlace(PlaceModel(
+        id: _currentPlace.id,
+        name: _nameController.value,
+        icon: int.tryParse(_iconController.value),
+      ));
+
+      message = Strings.placesSuccessfullyUpdated;
+      _stateController.add(PlacesManagerState.SUCCESS);
+      return _place;
+    } catch (e) {
+      print('places_bloc:updatePlace() $e');
+      _stateController.add(PlacesManagerState.FAIL);
+      message = Strings.placesErrorUpdating;
       return null;
     }
   }

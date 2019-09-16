@@ -77,7 +77,24 @@ class Mqtt extends MqttBloc {
 }
 
 class MqttProvider extends Mqtt {
-  MqttProvider(AppProvider appBloc) : super(appBloc);
+  MqttProvider(AppProvider appBloc) : super(appBloc) {
+    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+    _prefs.then((pref) {
+      final String _mqttBroker = pref.getString('mqttBroker');
+      final String _mqttClientIdentifier =
+          pref.getString('mqttClientIdentifier');
+      final String _mqttUser = pref.getString('mqttUser');
+      final String _mqttPassword = pref.getString('mqttPassword');
+      final String _mqttPort = pref.getString('mqttPort');
+
+      _brokerController.add(_mqttBroker != null ? _mqttBroker : '');
+      _clientIdentifierController
+          .add(_mqttClientIdentifier != null ? _mqttClientIdentifier : '');
+      _mqttUserController.add(_mqttUser != null ? _mqttUser : '');
+      _mqttPasswordController.add(_mqttPassword != null ? _mqttPassword : '');
+      _portController.add(_mqttPort != null ? _mqttPort : '');
+    });
+  }
 
   Future<bool> save() async {
     try {
@@ -108,37 +125,6 @@ class MqttProvider extends Mqtt {
       _stateController.add(MqttState.FAIL);
       message = Strings.mqttSaveMessageError;
       return false;
-    }
-  }
-
-  Future<Map<String, dynamic>> getMqttValues() async {
-    try {
-      final SharedPreferences _prefs = await SharedPreferences.getInstance();
-      final String _mqttBroker = _prefs.getString('mqttBroker');
-      final String _mqttClientIdentifier =
-          _prefs.getString('mqttClientIdentifier');
-      final String _mqttUser = _prefs.getString('mqttUser');
-      final String _mqttPassword = _prefs.getString('mqttPassword');
-      final String _mqttPort = _prefs.getString('mqttPort');
-
-      final Map<String, dynamic> _mqttConfig = {
-        "mqttBroker": _mqttBroker != null ? _mqttBroker : '',
-        "mqttClientIdentifier":
-            _mqttClientIdentifier != null ? _mqttClientIdentifier : '',
-        "mqttUser": _mqttUser != null ? _mqttUser : '',
-        "mqttPassword": _mqttPassword != null ? _mqttPassword : '',
-        "mqttPort": _mqttPort != null ? _mqttPort : '',
-      };
-
-      _brokerController.sink.add(_mqttConfig['mqttBroker']);
-      _clientIdentifierController.sink.add(_mqttConfig['mqttClientIdentifier']);
-      _mqttUserController.sink.add(_mqttConfig['mqttUser']);
-      _mqttPasswordController.sink.add(_mqttConfig['mqttPassword']);
-      _portController.sink.add(_mqttConfig['mqttPort']);
-      return _mqttConfig;
-    } catch (e) {
-      print('mqtt_bloc:getMqttValues() $e');
-      return {};
     }
   }
 }

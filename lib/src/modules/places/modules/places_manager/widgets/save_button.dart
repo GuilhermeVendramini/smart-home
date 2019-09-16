@@ -4,27 +4,37 @@ import 'package:provider/provider.dart';
 import '../../../../../shared/languages/pt-br/strings.dart';
 import '../../../../../shared/models/place/place_model.dart';
 import '../../../../devices/devices_module.dart';
+import '../../../places_module.dart';
 import '../places_manager_bloc.dart';
 
-class RegisterButton extends StatelessWidget {
+class SaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<PlacesManagerProvider>(context);
+    final PlaceModel _currentPlace = _bloc.getCurrentPlace;
     void _submit() async {
-      PlaceModel _place = await _bloc.addPlace();
+      PlaceModel _place = _currentPlace == null
+          ? await _bloc.addPlace()
+          : await _bloc.updatePlace();
       Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text(_bloc.message),
           duration: Duration(seconds: 3),
         ),
       );
-      if (_place != null) {
+      if (_place != null && _currentPlace == null) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => DevicesModule(
                     _place,
                   )),
+        );
+      }
+      if (_place != null && _currentPlace != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => PlacesModule()),
         );
       }
     }

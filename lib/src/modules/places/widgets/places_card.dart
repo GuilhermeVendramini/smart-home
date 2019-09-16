@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../modules/devices/devices_module.dart';
+import '../../../modules/places/modules/places_manager/places_manager_module.dart';
 import '../../../shared/models/place/place_model.dart';
+import '../places_bloc.dart';
 
 class PlacesCard extends StatelessWidget {
   final PlaceModel _place;
@@ -10,14 +13,27 @@ class PlacesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _bloc = Provider.of<PlacesProvider>(context);
     return InkWell(
+      onLongPress: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlacesManagerModule(
+              _bloc,
+              _place,
+            ),
+          ),
+        );
+      },
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => DevicesModule(
-                    _place,
-                  )),
+            builder: (context) => DevicesModule(
+              _place,
+            ),
+          ),
         );
       },
       child: Card(
@@ -25,8 +41,7 @@ class PlacesCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Icon(
-              IconData(int.tryParse(_place.icon),
-                  fontFamily: 'SmartHomePlacesIcons'),
+              IconData(_place.icon, fontFamily: 'SmartHomePlacesIcons'),
             ),
             Text(_place.name),
           ],
