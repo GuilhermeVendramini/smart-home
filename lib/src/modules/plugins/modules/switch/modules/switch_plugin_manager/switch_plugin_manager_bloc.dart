@@ -4,6 +4,7 @@ import 'package:rxdart/rxdart.dart';
 import '../../../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
 import '../../../../../../shared/languages/pt-br/strings.dart';
 import '../../../../../../shared/models/device/device_model.dart';
+import '../../../../../../shared/models/plugin/plugin_model.dart';
 import 'switch_plugin_manager_validators.dart';
 
 enum SavePluginState { SAVING, SUCCESS, FAIL }
@@ -12,8 +13,9 @@ class SwitchPluginManagerBloc extends ChangeNotifier
     with SwitchPluginManagerValidators {
   final HasuraPluginsRepository _pluginsRepository;
   final DeviceModel _device;
+  final PluginModel _plugin;
 
-  SwitchPluginManagerBloc(this._pluginsRepository, this._device);
+  SwitchPluginManagerBloc(this._pluginsRepository, this._device, this._plugin);
 
   final _topicController = BehaviorSubject<String>();
   final _messageOnController = BehaviorSubject<String>();
@@ -41,9 +43,9 @@ class SwitchPluginManagerBloc extends ChangeNotifier
 }
 
 class SwitchPluginManager extends SwitchPluginManagerBloc {
-  SwitchPluginManager(
-      HasuraPluginsRepository pluginsRepository, DeviceModel device)
-      : super(pluginsRepository, device);
+  SwitchPluginManager(HasuraPluginsRepository pluginsRepository,
+      DeviceModel device, PluginModel plugin)
+      : super(pluginsRepository, device, plugin);
 
   DeviceModel get getDevice {
     return _device;
@@ -96,9 +98,19 @@ class SwitchPluginManager extends SwitchPluginManagerBloc {
 }
 
 class SwitchPluginManagerProvider extends SwitchPluginManager {
-  SwitchPluginManagerProvider(
-      HasuraPluginsRepository pluginsRepository, DeviceModel device)
-      : super(pluginsRepository, device);
+  SwitchPluginManagerProvider(HasuraPluginsRepository pluginsRepository,
+      DeviceModel device, PluginModel plugin)
+      : super(pluginsRepository, device, plugin) {
+    if (_plugin != null) {
+      _topicController.add(_plugin.config['topic']);
+      _messageOnController.add(_plugin.config["messageOn"]);
+      _messageOffController.add(_plugin.config["messageOff"]);
+      _statusController.add(_plugin.status);
+      _topicResultController.add(_plugin.config["topicResult"]);
+      _resultOnController.add(_plugin.config["resultOn"]);
+      _resultOffController.add(_plugin.config["resultOff"]);
+    }
+  }
 
   Future<bool> save() async {
     try {

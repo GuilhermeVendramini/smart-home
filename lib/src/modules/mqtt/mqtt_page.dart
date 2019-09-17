@@ -114,11 +114,11 @@ class _MqttPageState extends State<MqttPage> {
                 stream: _bloc.getPassword,
                 onChanged: _bloc.changePassword,
               ),
-              SaveButton(),
             ],
           );
         },
       ),
+      floatingActionButton: SaveButton(),
     );
   }
 }

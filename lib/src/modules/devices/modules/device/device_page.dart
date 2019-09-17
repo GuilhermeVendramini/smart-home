@@ -33,7 +33,11 @@ class _DevicePageState extends State<DevicePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PluginsModule(_device)),
+                MaterialPageRoute(
+                    builder: (context) => PluginsModule(
+                          _device,
+                          _bloc.getPlugins,
+                        )),
               );
             },
           ),

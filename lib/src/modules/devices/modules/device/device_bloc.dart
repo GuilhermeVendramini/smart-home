@@ -29,6 +29,10 @@ class Device extends DeviceBloc {
   List<PluginModel> get getPlugins {
     return _plugins;
   }
+
+  List<PluginModel> get getEnabledPlugins {
+    return _plugins.where((plugin) => plugin.status == true).toList();
+  }
 }
 
 class DeviceProvider extends Device {

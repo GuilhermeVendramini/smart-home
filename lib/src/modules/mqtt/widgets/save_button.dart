@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shared/languages/pt-br/strings.dart';
 import '../mqtt_bloc.dart';
 
 class SaveButton extends StatelessWidget {
@@ -26,8 +25,9 @@ class SaveButton extends StatelessWidget {
     return StreamBuilder<bool>(
       stream: _bloc.outSubmitValid,
       builder: (context, snapshot) {
-        return RaisedButton(
-          child: Text(Strings.save),
+        return FloatingActionButton(
+          child: Icon(Icons.check),
+          backgroundColor: snapshot.hasData ? Colors.blue : Colors.grey,
           onPressed: snapshot.hasData ? _submit : null,
         );
       },

@@ -3,13 +3,15 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
 import '../../../../../../shared/models/device/device_model.dart';
+import '../../../../../../shared/models/plugin/plugin_model.dart';
 import 'switch_plugin_manager_bloc.dart';
 import 'switch_plugin_manager_page.dart';
 
 class SwitchPluginManagerModule extends StatelessWidget {
   final DeviceModel _device;
+  final PluginModel _plugin;
 
-  SwitchPluginManagerModule(this._device);
+  SwitchPluginManagerModule(this._device, this._plugin);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +21,10 @@ class SwitchPluginManagerModule extends StatelessWidget {
             builder: (_) => SwitchPluginManagerProvider(
                   HasuraPluginsRepository(),
                   _device,
+                  _plugin,
                 )),
       ],
-      child: SwitchPluginManagerPage(),
+      child: SwitchPluginManagerPage(_plugin),
     );
   }
 }
