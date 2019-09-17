@@ -18,7 +18,7 @@ class DevicesList extends StatelessWidget {
         itemCount: _devices != null ? _devices.length + 1 : 1,
         itemBuilder: (context, index) {
           if (_devices == null || index == _devices.length) {
-            return PlacesCardAdd();
+            return DevicesCardAdd();
           }
           return DevicesCard(_devices[index]);
         });

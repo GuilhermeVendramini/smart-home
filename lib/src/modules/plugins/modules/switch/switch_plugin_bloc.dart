@@ -24,8 +24,8 @@ class SwitchPluginBloc extends ChangeNotifier {
   @override
   void dispose() async {
     _stateController.close();
-    _switchStatusController.close();
     _appBloc.getMqttClient.unsubscribe(_plugin.config['topicResult']);
+    _switchStatusController.close();
     super.dispose();
   }
 }
@@ -59,14 +59,13 @@ class SwitchPluginProvider extends SwitchPlugin {
   }
 
   void _listenMessage() {
-    _appBloc.getMqttMessages.last.then((onValue) {
-      print(onValue.message);
-    });
     _appBloc.getMqttMessages.listen((onData) {
-      if (onData.message == _plugin.config['resultOn']) {
-        _switchStatusController.value = true;
-      } else {
-        _switchStatusController.value = false;
+      if (!_switchStatusController.isClosed) {
+        if (onData.message == _plugin.config['resultOn']) {
+          _switchStatusController.add(true);
+        } else {
+          _switchStatusController.add(false);
+        }
       }
     });
   }

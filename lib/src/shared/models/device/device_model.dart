@@ -10,7 +10,7 @@ String deviceModelToJson(DeviceModel data) => json.encode(data.toJson());
 class DeviceModel {
   int id;
   String name;
-  String icon;
+  int icon;
   int placeId;
 
   DeviceModel({

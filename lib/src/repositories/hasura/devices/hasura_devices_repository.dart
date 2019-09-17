@@ -29,10 +29,9 @@ class HasuraDevicesRepository extends HasuraConnection {
     }
   }
 
-  Future<DeviceModel> createDevice(
-      {String name, String icon, int placeId}) async {
+  Future<DeviceModel> createDevice({String name, int icon, int placeId}) async {
     String query = """
-      mutation createDevice(\$name:String!, \$icon:String!, \$placeId:Int!) {
+      mutation createDevice(\$name:String!, \$icon:Int!, \$placeId:Int!) {
         insert_devices(objects: {name: \$name, icon: \$icon, place_id: \$placeId}) {
           returning {
             id
@@ -45,6 +44,54 @@ class HasuraDevicesRepository extends HasuraConnection {
         variables: {"name": name, "icon": icon, "placeId": placeId});
     int id = data["data"]["insert_devices"]["returning"][0]["id"];
     return DeviceModel(id: id, name: name, icon: icon, placeId: placeId);
+  }
+
+  Future<DeviceModel> updateDevice(DeviceModel device) async {
+    String query = """
+      mutation updateDevice(\$id:Int!, \$name:String!, \$icon:Int!, \$placeId:Int!) {
+        update_devices(where: {id: {_eq: \$id}}, _set: {
+          name: \$name,
+          icon: \$icon,
+          place_id: \$placeId
+        }) {
+          returning {
+            id
+          }
+        }
+      }
+    """;
+
+    Map<String, dynamic> data = await hasuraConnect.mutation(query, variables: {
+      "id": device.id,
+      "name": device.name,
+      "icon": device.icon,
+      "placeId": device.placeId
+    });
+    int id = data["data"]["update_devices"]["returning"][0]["id"];
+    return DeviceModel(
+      id: id,
+      name: device.name,
+      icon: device.icon,
+      placeId: device.placeId,
+    );
+  }
+
+  Future<bool> deleteDevice(int id) async {
+    String query = """
+      mutation deleteDevice(\$id:Int!) {
+        delete_devices(where: {id: {_eq: \$id}}) {
+          affected_rows
+        }
+      }
+      """;
+
+    Map<String, dynamic> data =
+        await hasuraConnect.mutation(query, variables: {"id": id});
+    int affectedRows = data["data"]["delete_devices"]["affected_rows"];
+    if (affectedRows > 0) {
+      return true;
+    }
+    return false;
   }
 
   @override

@@ -1,31 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './widgets/register_button.dart';
 import '../../../../shared/fonts/smart_home_devices_icons.dart';
 import '../../../../shared/icons_list/devices_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../shared/models/device/device_model.dart';
 import '../../../../shared/widgets/components/mqttStatus.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
 import '../../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'devices_manager_bloc.dart';
+import 'widgets/floating_buttons.dart';
 
 class DevicesManagerPage extends StatefulWidget {
+  final DeviceModel _device;
+
+  DevicesManagerPage(this._device);
+
   @override
   _DevicesManagerPageState createState() => _DevicesManagerPageState();
 }
 
 class _DevicesManagerPageState extends State<DevicesManagerPage> {
   IconData _icon;
+  final _nameController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _icon = SmartHomeDevicesIcons.home;
+
+    if (widget._device != null) {
+      _nameController.text = widget._device.name;
+      _icon = IconData(widget._device.icon);
+    }
   }
 
   @override
   void dispose() {
+    _nameController.dispose();
     super.dispose();
   }
 
@@ -33,6 +45,7 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
   Widget build(BuildContext context) {
     final _bloc = Provider.of<DevicesManagerProvider>(context);
     _bloc.setIcon = _icon.codePoint.toString();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(Strings.devicesAdd),
@@ -50,6 +63,7 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
                   ? CircularProgressIndicator()
                   : SizedBox(height: 35.0),
               StreamInputTextField(
+                controller: _nameController,
                 hint: Strings.name,
                 stream: _bloc.getName,
                 onChanged: _bloc.changeName,
@@ -66,11 +80,11 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
                   _icon = newIcon;
                 }),
               ),
-              RegisterButton(),
             ],
           );
         },
       ),
+      floatingActionButton: DevicesFloatingButtons(),
     );
   }
 }

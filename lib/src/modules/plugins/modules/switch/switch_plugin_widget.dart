@@ -14,24 +14,20 @@ class SwitchPluginWidget extends StatelessWidget {
           initialData: false,
           builder: (context, snapshot) {
             if (snapshot.data) {
-              _switchColor = Colors.green;
+              _switchColor = Colors.amber;
             } else {
               _switchColor = Colors.grey;
             }
-            return InkWell(
-              onTap: _bloc.switchPower,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: _switchColor,
-                  ),
-                ),
-                padding: EdgeInsets.all(30.0),
-                child: Icon(
-                  Icons.flash_on,
-                  size: 40.0,
-                  color: _switchColor,
-                ),
+            return RawMaterialButton(
+              onPressed: _bloc.switchPower,
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: _switchColor,
+              padding: const EdgeInsets.all(15.0),
+              child: Icon(
+                Icons.flash_on,
+                size: 40.0,
+                color: Colors.white,
               ),
             );
           }),

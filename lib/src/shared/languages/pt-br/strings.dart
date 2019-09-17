@@ -46,8 +46,12 @@ class Strings {
   static const String devicesRequiredName = "Nome é obrigatório";
   static const String devicesRequiredIcon = "Ícone é obrigatório";
   static const String devicesLoadingMessageError = "Erro ao carregar devices";
-  static const String devicesSavedSuccessfully = "Device salvo com sucesso";
   static const String devicesErrorSaving = "Erro ao salvar device";
+  static const String devicesErrorDeleting = "Erro ao deletar device";
+  static const String devicesErrorUpdating = "Erro ao atualizar device";
+  static const String devicesConfirmDelete = "Deletar device?";
+  static const String devicesConfirmDeleteMessage =
+      "Todos as configurações atreladas ao device serão apagadas!";
 
   // Icon Picker
   static const String iconPickerTitleBox = "Selecione um ícone";

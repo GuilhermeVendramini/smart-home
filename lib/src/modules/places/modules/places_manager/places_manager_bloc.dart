@@ -75,12 +75,11 @@ class PlacesManagerProvider extends PlacesManager {
         icon: int.tryParse(_iconController.value),
       );
 
-      //message = Strings.placesSavedSuccessfully;
       _placesProvider.addPlace(_place);
       _stateController.add(PlacesManagerState.SUCCESS);
       return _place;
     } catch (e) {
-      print('places_bloc:addUser() $e');
+      print('places_manager_bloc:addUser() $e');
       _stateController.add(PlacesManagerState.FAIL);
       message = Strings.placesErrorSaving;
       return null;
@@ -101,7 +100,7 @@ class PlacesManagerProvider extends PlacesManager {
       _stateController.add(PlacesManagerState.SUCCESS);
       return _place;
     } catch (e) {
-      print('places_bloc:updatePlace() $e');
+      print('places_manager_bloc:updatePlace() $e');
       _stateController.add(PlacesManagerState.FAIL);
       message = Strings.placesErrorUpdating;
       return null;
@@ -118,7 +117,7 @@ class PlacesManagerProvider extends PlacesManager {
       _stateController.add(PlacesManagerState.SUCCESS);
       return _result;
     } catch (e) {
-      print('places_bloc:deletePlace() $e');
+      print('places_manager_bloc:deletePlace() $e');
       _stateController.add(PlacesManagerState.FAIL);
       message = Strings.placesErrorDeleting;
       return false;

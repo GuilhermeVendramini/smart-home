@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../modules/devices/modules/devices_manager/devices_manager_module.dart';
 import '../devices_bloc.dart';
 
-class PlacesCardAdd extends StatelessWidget {
+class DevicesCardAdd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = Provider.of<DevicesProvider>(context);
@@ -12,7 +12,9 @@ class PlacesCardAdd extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DevicesManagerModule(_bloc)),
+          MaterialPageRoute(
+            builder: (context) => DevicesManagerModule(_bloc, null),
+          ),
         );
       },
       child: Card(
