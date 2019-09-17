@@ -61,6 +61,42 @@ class HasuraPluginsRepository extends HasuraConnection {
     }
   }
 
+  Future<PluginModel> updatePlugin(PluginModel plugin) async {
+    print('IIIIIIIIIIIIIIIIIIIIIIIII');
+    String query = """
+      mutation updatePlugin(\$id:Int!, \$type:String!, \$status:Boolean!, \$deviceId:Int!, \$config:jsonb!) {
+        update_plugins(where: {id: {_eq: \$id}}, _set: {
+          type: \$type, 
+          status: \$status, 
+          device_id: \$deviceId, 
+          config: \$config
+        }) {
+          returning {
+            id
+          }
+        }
+      }
+    """;
+
+    Map<String, dynamic> data = await hasuraConnect.mutation(query, variables: {
+      "id": plugin.id,
+      "type": plugin.type,
+      "status": plugin.status,
+      "deviceId": plugin.deviceId,
+      "config": plugin.config,
+    });
+
+    int id = data["data"]["update_plugins"]["returning"][0]["id"];
+
+    return PluginModel(
+      id: id,
+      type: plugin.type,
+      status: plugin.status,
+      deviceId: plugin.deviceId,
+      config: plugin.config,
+    );
+  }
+
   @override
   void dispose() {
     hasuraConnect.dispose();

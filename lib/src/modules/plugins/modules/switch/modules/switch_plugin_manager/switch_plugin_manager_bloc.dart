@@ -13,9 +13,10 @@ class SwitchPluginManagerBloc extends ChangeNotifier
     with SwitchPluginManagerValidators {
   final HasuraPluginsRepository _pluginsRepository;
   final DeviceModel _device;
-  final PluginModel _plugin;
+  final PluginModel _currentPlugin;
 
-  SwitchPluginManagerBloc(this._pluginsRepository, this._device, this._plugin);
+  SwitchPluginManagerBloc(
+      this._pluginsRepository, this._device, this._currentPlugin);
 
   final _topicController = BehaviorSubject<String>();
   final _messageOnController = BehaviorSubject<String>();
@@ -49,6 +50,10 @@ class SwitchPluginManager extends SwitchPluginManagerBloc {
 
   DeviceModel get getDevice {
     return _device;
+  }
+
+  PluginModel get getCurrentPlugin {
+    return _currentPlugin;
   }
 
   Stream<String> get getTopic =>
@@ -101,14 +106,14 @@ class SwitchPluginManagerProvider extends SwitchPluginManager {
   SwitchPluginManagerProvider(HasuraPluginsRepository pluginsRepository,
       DeviceModel device, PluginModel plugin)
       : super(pluginsRepository, device, plugin) {
-    if (_plugin != null) {
-      _topicController.add(_plugin.config['topic']);
-      _messageOnController.add(_plugin.config["messageOn"]);
-      _messageOffController.add(_plugin.config["messageOff"]);
-      _statusController.add(_plugin.status);
-      _topicResultController.add(_plugin.config["topicResult"]);
-      _resultOnController.add(_plugin.config["resultOn"]);
-      _resultOffController.add(_plugin.config["resultOff"]);
+    if (_currentPlugin != null) {
+      _topicController.add(_currentPlugin.config['topic']);
+      _messageOnController.add(_currentPlugin.config["messageOn"]);
+      _messageOffController.add(_currentPlugin.config["messageOff"]);
+      _statusController.add(_currentPlugin.status);
+      _topicResultController.add(_currentPlugin.config["topicResult"]);
+      _resultOnController.add(_currentPlugin.config["resultOn"]);
+      _resultOffController.add(_currentPlugin.config["resultOff"]);
     }
   }
 
@@ -136,6 +141,34 @@ class SwitchPluginManagerProvider extends SwitchPluginManager {
       message = Strings.switchErrorSaving;
       _stateController.add(SavePluginState.FAIL);
       print('switch_plugin_manager_bloc:save() $e');
+      return false;
+    }
+  }
+
+  Future<bool> update() async {
+    try {
+      _stateController.add(SavePluginState.SAVING);
+      PluginModel _updatedPlugin = PluginModel(
+          id: _currentPlugin.id,
+          type: 'switch',
+          status: _statusController.value,
+          deviceId: _currentPlugin.deviceId,
+          config: {
+            "topic": _topicController.value,
+            "messageOn": _messageOnController.value,
+            "messageOff": _messageOffController.value,
+            "topicResult": _topicResultController.value,
+            "resultOn": _resultOnController.value,
+            "resultOff": _resultOffController.value,
+          });
+
+      await _pluginsRepository.updatePlugin(_updatedPlugin);
+      _stateController.add(SavePluginState.SUCCESS);
+      return true;
+    } catch (e) {
+      message = Strings.switchErrorUpdating;
+      _stateController.add(SavePluginState.FAIL);
+      print('switch_plugin_manager_bloc:update() $e');
       return false;
     }
   }

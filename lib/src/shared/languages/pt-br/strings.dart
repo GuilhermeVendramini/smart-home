@@ -100,6 +100,7 @@ class Strings {
   static const String switchResultOff = "Resultado de OFF";
   static const String switchSavedSuccessfully = "Salvo com sucesso";
   static const String switchErrorSaving = "Erro ao salvar";
+  static const String switchErrorUpdating = "Erro ao atualizar";
   static const String switchStatus = "Habilitar/Desabilitar";
   static const String switchErrorSendingMessage = "Erro ao enviar mensagem";
 

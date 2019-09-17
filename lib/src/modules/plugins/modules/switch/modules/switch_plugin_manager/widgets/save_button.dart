@@ -9,7 +9,9 @@ class SaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _bloc = Provider.of<SwitchPluginManagerProvider>(context);
     void _submit() async {
-      bool result = await _bloc.save();
+      bool result = _bloc.getCurrentPlugin != null
+          ? await _bloc.update()
+          : await _bloc.save();
       if (!result) {
         Scaffold.of(context).showSnackBar(
           SnackBar(

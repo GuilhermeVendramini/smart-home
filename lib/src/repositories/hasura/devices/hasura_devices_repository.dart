@@ -67,7 +67,9 @@ class HasuraDevicesRepository extends HasuraConnection {
       "icon": device.icon,
       "placeId": device.placeId
     });
+
     int id = data["data"]["update_devices"]["returning"][0]["id"];
+
     return DeviceModel(
       id: id,
       name: device.name,
