@@ -61,6 +61,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
         ),
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.all(10.0),
         child: StreamBuilder<SavePluginState>(
           stream: _bloc.getState,
           builder: (context, snapshot) {
@@ -71,6 +72,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                     ? CircularProgressIndicator()
                     : SizedBox(height: 35.0),
                 StreamInputTextField(
+                  helperText: Strings.switchTopic,
                   controller: _topicController,
                   hint: Strings.switchTopic,
                   obscure: false,
@@ -78,12 +80,14 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeTopic,
                 ),
                 StreamInputTextField(
+                  helperText: Strings.switchMessageOn,
                   controller: _messageOnController,
                   hint: Strings.switchMessageOn,
                   stream: _bloc.getMessageOn,
                   onChanged: _bloc.changeMessageOn,
                 ),
                 StreamInputTextField(
+                  helperText: Strings.switchMessageOff,
                   controller: _messageOffController,
                   hint: Strings.switchMessageOff,
                   stream: _bloc.getMessageOff,
@@ -93,6 +97,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   height: 10.0,
                 ),
                 StreamInputTextField(
+                  helperText: Strings.switchTopicResult,
                   controller: _topicResultController,
                   hint: Strings.switchTopicResult,
                   obscure: false,
@@ -100,12 +105,14 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeTopicResult,
                 ),
                 StreamInputTextField(
+                  helperText: Strings.switchResultOn,
                   controller: _resultOnController,
                   hint: Strings.switchResultOn,
                   stream: _bloc.getResultOn,
                   onChanged: _bloc.changeResultOn,
                 ),
                 StreamInputTextField(
+                  helperText: Strings.switchResultOff,
                   controller: _resultOffController,
                   hint: Strings.switchResultOff,
                   stream: _bloc.getResultOff,

@@ -18,7 +18,10 @@ class PlacesCardAdd extends StatelessWidget {
         );
       },
       child: Card(
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          size: 40.0,
+        ),
       ),
     );
   }

@@ -20,32 +20,35 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text(Strings.authLogin),
       ),
-      body: StreamBuilder<LoginState>(
-        stream: _bloc.getState,
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              snapshot.data == LoginState.LOADING
-                  ? CircularProgressIndicator()
-                  : SizedBox(height: 35.0),
-              StreamInputTextField(
-                hint: Strings.authName,
-                obscure: false,
-                stream: _bloc.getName,
-                onChanged: _bloc.changeName,
-              ),
-              StreamInputTextField(
-                hint: Strings.authPassword,
-                obscure: true,
-                stream: _bloc.getPassword,
-                onChanged: _bloc.changePassword,
-              ),
-              LoginButton(),
-              //RegisterButton(),
-            ],
-          );
-        },
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: StreamBuilder<LoginState>(
+          stream: _bloc.getState,
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                snapshot.data == LoginState.LOADING
+                    ? CircularProgressIndicator()
+                    : SizedBox(height: 35.0),
+                StreamInputTextField(
+                  hint: Strings.authName,
+                  obscure: false,
+                  stream: _bloc.getName,
+                  onChanged: _bloc.changeName,
+                ),
+                StreamInputTextField(
+                  hint: Strings.authPassword,
+                  obscure: true,
+                  stream: _bloc.getPassword,
+                  onChanged: _bloc.changePassword,
+                ),
+                LoginButton(),
+                //RegisterButton(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

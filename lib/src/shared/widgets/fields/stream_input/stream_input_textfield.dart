@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class StreamInputTextField extends StatelessWidget {
   final String hint;
+  final String helperText;
   final bool obscure;
   final Stream<String> stream;
   final Function(String) onChanged;
@@ -9,6 +10,7 @@ class StreamInputTextField extends StatelessWidget {
 
   StreamInputTextField({
     this.hint,
+    this.helperText,
     this.obscure = false,
     @required this.stream,
     @required this.onChanged,
@@ -25,6 +27,7 @@ class StreamInputTextField extends StatelessWidget {
             controller: controller,
             onChanged: onChanged,
             decoration: InputDecoration(
+              helperText: helperText,
               hintText: hint,
               errorText: snapshot.hasError ? snapshot.error : null,
             ),

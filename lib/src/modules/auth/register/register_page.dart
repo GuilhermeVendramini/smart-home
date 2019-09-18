@@ -19,31 +19,34 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: Text(Strings.authRegister),
       ),
-      body: StreamBuilder<RegisterState>(
-        stream: _bloc.getState,
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              snapshot.data == RegisterState.LOADING
-                  ? CircularProgressIndicator()
-                  : SizedBox(height: 35.0),
-              StreamInputTextField(
-                hint: Strings.authName,
-                obscure: false,
-                stream: _bloc.getName,
-                onChanged: _bloc.changeName,
-              ),
-              StreamInputTextField(
-                hint: Strings.authPassword,
-                obscure: true,
-                stream: _bloc.getPassword,
-                onChanged: _bloc.changePassword,
-              ),
-              RegisterButton(),
-            ],
-          );
-        },
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: StreamBuilder<RegisterState>(
+          stream: _bloc.getState,
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                snapshot.data == RegisterState.LOADING
+                    ? CircularProgressIndicator()
+                    : SizedBox(height: 35.0),
+                StreamInputTextField(
+                  hint: Strings.authName,
+                  obscure: false,
+                  stream: _bloc.getName,
+                  onChanged: _bloc.changeName,
+                ),
+                StreamInputTextField(
+                  hint: Strings.authPassword,
+                  obscure: true,
+                  stream: _bloc.getPassword,
+                  onChanged: _bloc.changePassword,
+                ),
+                RegisterButton(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

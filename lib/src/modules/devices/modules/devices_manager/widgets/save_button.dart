@@ -53,7 +53,13 @@ class DevicesSaveButton extends StatelessWidget {
         return FloatingActionButton(
           heroTag: 'save',
           child: Icon(Icons.check),
-          backgroundColor: snapshot.hasData ? Colors.blue : Colors.grey,
+          backgroundColor:
+              snapshot.hasData ? Theme
+                  .of(context)
+                  .floatingActionButtonTheme
+                  .backgroundColor : Theme
+                  .of(context)
+                  .disabledColor,
           onPressed: snapshot.hasData ? _submit : null,
         );
       },

@@ -27,17 +27,18 @@ class FieldIconPicker extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               titlePadding: EdgeInsets.only(top: 40.0),
-              backgroundColor: Colors.white,
               title: Text(
                 Strings.iconPickerTitleBox,
                 textAlign: TextAlign.center,
               ),
               content: SingleChildScrollView(
                 child: IconPicker(
+                  highlightColor: Theme.of(context).accentColor,
                   currentIconData: iconData,
                   fontFamily: fontFamily,
                   icons: icons,
                   onIconChanged: action,
+                  outlineColor: Theme.of(context).disabledColor,
                 ),
               ),
             );
@@ -47,6 +48,7 @@ class FieldIconPicker extends StatelessWidget {
       child: IconDisplay(
         codePoint: iconData.codePoint,
         fontFamily: fontFamily,
+        outlineColor: Theme.of(context).accentColor,
       ),
     );
   }

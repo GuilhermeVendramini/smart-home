@@ -9,7 +9,7 @@ class Strings {
   static const String cancel = "Cancelar";
 
   // App
-  static const String appName = "SMART HOME";
+  static const String appName = "Smart Home";
 
   // Auth
   static const String authName = "Nome do usuário";

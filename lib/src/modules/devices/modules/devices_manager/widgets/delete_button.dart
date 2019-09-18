@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../shared/colors/default_colors.dart';
 import '../../../../../shared/languages/pt-br/strings.dart';
 import '../../../devices_module.dart';
 import '../devices_manager_bloc.dart';
@@ -52,7 +53,7 @@ class DevicesDeleteButton extends StatelessWidget {
     return FloatingActionButton(
       heroTag: "delete",
       child: Icon(Icons.delete),
-      backgroundColor: Colors.red,
+      backgroundColor: DefaultColors.red,
       onPressed: () async {
         await _confirmDelete(context, _bloc);
       },

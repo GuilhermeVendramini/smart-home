@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../shared/models/place/place_model.dart';
-import '../../shared/widgets/components/mqttStatus.dart';
+import '../../shared/widgets/components/mqtt_status.dart';
 import '../../shared/widgets/components/side_drawer.dart';
 import 'devices_bloc.dart';
 import 'widgets/devices_load.dart';

@@ -5,7 +5,7 @@ import '../../../../shared/fonts/smart_home_devices_icons.dart';
 import '../../../../shared/icons_list/devices_icons_list.dart';
 import '../../../../shared/languages/pt-br/strings.dart';
 import '../../../../shared/models/device/device_model.dart';
-import '../../../../shared/widgets/components/mqttStatus.dart';
+import '../../../../shared/widgets/components/mqtt_status.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';
 import '../../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'devices_manager_bloc.dart';
@@ -53,36 +53,40 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
           MqttStatus(),
         ],
       ),
-      body: StreamBuilder<DevicesManagerState>(
-        stream: _bloc.streamState,
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              snapshot.data == DevicesManagerState.LOADING
-                  ? CircularProgressIndicator()
-                  : SizedBox(height: 35.0),
-              StreamInputTextField(
-                controller: _nameController,
-                hint: Strings.name,
-                stream: _bloc.getName,
-                onChanged: _bloc.changeName,
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              FieldIconPicker(
-                iconData: _icon,
-                fontFamily: 'SmartHomeDevicesIcons',
-                icons: devicesIconsList,
-                action: (newIcon) => setState(() {
-                  _bloc.setIcon = newIcon.codePoint.toString();
-                  _icon = newIcon;
-                }),
-              ),
-            ],
-          );
-        },
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: StreamBuilder<DevicesManagerState>(
+          stream: _bloc.streamState,
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                snapshot.data == DevicesManagerState.LOADING
+                    ? CircularProgressIndicator()
+                    : SizedBox(height: 35.0),
+                StreamInputTextField(
+                  helperText: Strings.name,
+                  controller: _nameController,
+                  hint: Strings.name,
+                  stream: _bloc.getName,
+                  onChanged: _bloc.changeName,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                FieldIconPicker(
+                  iconData: _icon,
+                  fontFamily: 'SmartHomeDevicesIcons',
+                  icons: devicesIconsList,
+                  action: (newIcon) => setState(() {
+                    _bloc.setIcon = newIcon.codePoint.toString();
+                    _icon = newIcon;
+                  }),
+                ),
+              ],
+            );
+          },
+        ),
       ),
       floatingActionButton: DevicesFloatingButtons(),
     );

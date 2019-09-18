@@ -41,8 +41,15 @@ class DevicesCard extends StatelessWidget {
           children: <Widget>[
             Icon(
               IconData(_device.icon, fontFamily: 'SmartHomeDevicesIcons'),
+              size: 40.0,
             ),
-            Text(_device.name),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              _device.name,
+              style: Theme.of(context).textTheme.subtitle,
+            ),
           ],
         ),
       ),

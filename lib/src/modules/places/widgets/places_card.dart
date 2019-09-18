@@ -42,8 +42,15 @@ class PlacesCard extends StatelessWidget {
           children: <Widget>[
             Icon(
               IconData(_place.icon, fontFamily: 'SmartHomePlacesIcons'),
+              size: 40.0,
             ),
-            Text(_place.name),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              _place.name,
+              style: Theme.of(context).textTheme.subtitle,
+            ),
           ],
         ),
       ),

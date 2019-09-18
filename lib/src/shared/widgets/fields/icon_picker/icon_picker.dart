@@ -6,62 +6,9 @@ class IconPicker extends StatefulWidget {
   final ValueChanged<IconData> onIconChanged;
   final IconData currentIconData;
   final Color highlightColor;
+  final Color outlineColor;
   final String fontFamily;
   final List<IconData> icons;
-
-/*  final List<IconData> icons = [
-    SmartHomeIcons.house,
-    SmartHomeIcons.alarmclock,
-    SmartHomeIcons.aquarium,
-    SmartHomeIcons.armchair,
-    SmartHomeIcons.basin,
-    SmartHomeIcons.bathtub,
-    SmartHomeIcons.bed,
-    SmartHomeIcons.bookshelf,
-    SmartHomeIcons.cactus,
-    SmartHomeIcons.candles,
-    SmartHomeIcons.carpet,
-    SmartHomeIcons.clock,
-    SmartHomeIcons.cuckoo,
-    SmartHomeIcons.cushion,
-    SmartHomeIcons.desk,
-    SmartHomeIcons.desklamp,
-    SmartHomeIcons.desk_light,
-    SmartHomeIcons.door,
-    SmartHomeIcons.doorhandle,
-    SmartHomeIcons.drawer,
-    SmartHomeIcons.dresser,
-    SmartHomeIcons.fence,
-    SmartHomeIcons.fireplace,
-    SmartHomeIcons.floorlamp,
-    SmartHomeIcons.flowers,
-    SmartHomeIcons.globe,
-    SmartHomeIcons.hanger,
-    SmartHomeIcons.homecinema,
-    SmartHomeIcons.hourglass,
-    SmartHomeIcons.house,
-    SmartHomeIcons.lamp,
-    SmartHomeIcons.light,
-    SmartHomeIcons.lights,
-    SmartHomeIcons.livingroom,
-    SmartHomeIcons.mirror,
-    SmartHomeIcons.outlet,
-    SmartHomeIcons.painting,
-    SmartHomeIcons.plant,
-    SmartHomeIcons.refrigerator,
-    SmartHomeIcons.shower,
-    SmartHomeIcons.sofa,
-    SmartHomeIcons.stairs,
-    SmartHomeIcons.table,
-    SmartHomeIcons.toilet,
-    SmartHomeIcons.towel,
-    SmartHomeIcons.tv,
-    SmartHomeIcons.vase,
-    SmartHomeIcons.wallclock,
-    SmartHomeIcons.wallpaper,
-    SmartHomeIcons.wardrobe,
-    SmartHomeIcons.window,
-  ];*/
 
   IconPicker({
     @required this.currentIconData,
@@ -69,6 +16,7 @@ class IconPicker extends StatefulWidget {
     @required this.fontFamily,
     @required this.icons,
     Color highlightColor,
+    this.outlineColor,
   }) : this.highlightColor = highlightColor ?? Colors.blue;
 
   @override
@@ -78,11 +26,11 @@ class IconPicker extends StatefulWidget {
 }
 
 class _IconPickerState extends State<IconPicker> {
-  IconData selectedIconData;
+  int selectedIconData;
 
   @override
   void initState() {
-    selectedIconData = widget.currentIconData;
+    selectedIconData = widget.currentIconData.codePoint;
     super.initState();
   }
 
@@ -100,7 +48,7 @@ class _IconPickerState extends State<IconPicker> {
             child: InkWell(
               onTap: () {
                 setState(() {
-                  selectedIconData = iconData;
+                  selectedIconData = iconData.codePoint;
                 });
                 widget.onIconChanged(iconData);
               },
@@ -108,8 +56,9 @@ class _IconPickerState extends State<IconPicker> {
               child: IconDisplay(
                 codePoint: iconData.codePoint,
                 fontFamily: widget.fontFamily,
-                outlineColor:
-                    iconData == selectedIconData ? widget.highlightColor : null,
+                outlineColor: iconData.codePoint == selectedIconData
+                    ? widget.highlightColor
+                    : widget.outlineColor,
               ),
             ),
           );

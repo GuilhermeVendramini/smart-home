@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../shared/languages/pt-br/strings.dart';
-import '../../shared/widgets/components/mqttStatus.dart';
+import '../../shared/widgets/components/mqtt_status.dart';
 import '../../shared/widgets/components/side_drawer.dart';
 import '../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'mqtt_bloc.dart';
@@ -69,54 +69,61 @@ class _MqttPageState extends State<MqttPage> {
           MqttStatus(),
         ],
       ),
-      body: StreamBuilder<MqttState>(
-        stream: _bloc.getState,
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              snapshot.data == MqttState.SAVING ||
-                      snapshot.data == MqttState.CONNECTING
-                  ? CircularProgressIndicator()
-                  : SizedBox(height: 35.0),
-              StreamInputTextField(
-                controller: _mqttBrokerController,
-                hint: Strings.mqttBroker,
-                obscure: false,
-                stream: _bloc.getBroker,
-                onChanged: _bloc.changeBroker,
-              ),
-              StreamInputTextField(
-                controller: _mqttClientIdentifierController,
-                hint: Strings.mqttClientIdentifier,
-                obscure: false,
-                stream: _bloc.getClientIdentifier,
-                onChanged: _bloc.changeClientIdentifier,
-              ),
-              StreamInputTextField(
-                controller: _mqttUserController,
-                hint: Strings.mqttUser,
-                obscure: false,
-                stream: _bloc.getUser,
-                onChanged: _bloc.changeUser,
-              ),
-              StreamInputTextField(
-                controller: _mqttPortController,
-                hint: Strings.mqttPort,
-                obscure: false,
-                stream: _bloc.getPort,
-                onChanged: _bloc.changePort,
-              ),
-              StreamInputTextField(
-                controller: _mqttPasswordController,
-                hint: Strings.mqttPassword,
-                obscure: false,
-                stream: _bloc.getPassword,
-                onChanged: _bloc.changePassword,
-              ),
-            ],
-          );
-        },
+      body: Container(
+        padding: EdgeInsets.all(10.0),
+        child: StreamBuilder<MqttState>(
+          stream: _bloc.getState,
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                snapshot.data == MqttState.SAVING ||
+                    snapshot.data == MqttState.CONNECTING
+                    ? CircularProgressIndicator()
+                    : SizedBox(height: 35.0),
+                StreamInputTextField(
+                  helperText: Strings.mqttBroker,
+                  controller: _mqttBrokerController,
+                  hint: Strings.mqttBroker,
+                  obscure: false,
+                  stream: _bloc.getBroker,
+                  onChanged: _bloc.changeBroker,
+                ),
+                StreamInputTextField(
+                  helperText: Strings.mqttClientIdentifier,
+                  controller: _mqttClientIdentifierController,
+                  hint: Strings.mqttClientIdentifier,
+                  obscure: false,
+                  stream: _bloc.getClientIdentifier,
+                  onChanged: _bloc.changeClientIdentifier,
+                ),
+                StreamInputTextField(
+                  helperText: Strings.mqttUser,
+                  controller: _mqttUserController,
+                  hint: Strings.mqttUser,
+                  obscure: false,
+                  stream: _bloc.getUser,
+                  onChanged: _bloc.changeUser,
+                ),
+                StreamInputTextField(
+                  helperText: Strings.mqttPort,
+                  controller: _mqttPortController,
+                  hint: Strings.mqttPort,
+                  obscure: false,
+                  stream: _bloc.getPort,
+                  onChanged: _bloc.changePort,
+                ),
+                StreamInputTextField(
+                  controller: _mqttPasswordController,
+                  hint: Strings.mqttPassword,
+                  obscure: false,
+                  stream: _bloc.getPassword,
+                  onChanged: _bloc.changePassword,
+                ),
+              ],
+            );
+          },
+        ),
       ),
       floatingActionButton: SaveButton(),
     );

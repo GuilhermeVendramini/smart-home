@@ -36,7 +36,7 @@ class SaveButton extends StatelessWidget {
       builder: (context, snapshot) {
         return FloatingActionButton(
           child: Icon(Icons.check),
-          backgroundColor: snapshot.hasData ? Colors.blue : Colors.grey,
+          backgroundColor: snapshot.hasData ? Theme.of(context).floatingActionButtonTheme.backgroundColor : Theme.of(context).disabledColor,
           onPressed: snapshot.hasData ? _submit : null,
         );
       },

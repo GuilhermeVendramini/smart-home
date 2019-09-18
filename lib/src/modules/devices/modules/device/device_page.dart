@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../modules/plugins/plugins_module.dart';
 import '../../../../shared/models/device/device_model.dart';
-import '../../../../shared/widgets/components/mqttStatus.dart';
+import '../../../../shared/widgets/components/mqtt_status.dart';
 import '../../../../shared/widgets/components/side_drawer.dart';
 import 'device_bloc.dart';
 import 'widgets/plugins_load.dart';
