@@ -43,6 +43,9 @@ class _LoginPageState extends State<LoginPage> {
                   stream: _bloc.getPassword,
                   onChanged: _bloc.changePassword,
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 LoginButton(),
                 //RegisterButton(),
               ],

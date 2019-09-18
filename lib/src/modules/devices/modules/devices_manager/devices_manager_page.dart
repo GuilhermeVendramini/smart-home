@@ -48,7 +48,7 @@ class _DevicesManagerPageState extends State<DevicesManagerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.devicesAdd),
+        title: Text(Strings.devicesManager),
         actions: <Widget>[
           MqttStatus(),
         ],

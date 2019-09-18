@@ -7,6 +7,7 @@ class AppTheme {
   AppTheme._();
 
   static final ThemeData themeData = new ThemeData(
+    buttonColor: DefaultColors.primary,
     errorColor: DefaultColors.red,
     cursorColor: DefaultColors.primary,
     toggleableActiveColor: DefaultColors.primary,

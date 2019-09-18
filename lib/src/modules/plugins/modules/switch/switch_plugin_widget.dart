@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../shared/colors/default_colors.dart';
 
 import 'switch_plugin_bloc.dart';
 
@@ -13,9 +14,9 @@ class SwitchPluginWidget extends StatelessWidget {
         initialData: false,
         builder: (context, snapshot) {
           if (snapshot.data) {
-            _switchColor = Colors.amber;
+            _switchColor = DefaultColors.amber;
           } else {
-            _switchColor = Colors.grey;
+            _switchColor = DefaultColors.grey;
           }
           return RawMaterialButton(
             onPressed: _bloc.switchPower,

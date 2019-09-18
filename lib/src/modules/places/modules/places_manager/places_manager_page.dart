@@ -48,7 +48,7 @@ class _PlacesManagerPageState extends State<PlacesManagerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.placesAdd),
+        title: Text(Strings.placesManager),
         actions: <Widget>[
           MqttStatus(),
         ],

@@ -30,7 +30,7 @@ class Strings {
   static const String devicesTitle = "Devices";
 
   // Places
-  static const String placesAdd = "Adicionar local";
+  static const String placesManager = "Gerenciar local";
   static const String placesRequiredName = "Nome é obrigatório";
   static const String placesRequiredIcon = "Ícone é obrigatório";
   static const String placesLoadingMessageError = "Erro ao carregar os locais";
@@ -42,7 +42,7 @@ class Strings {
       "Todos os devices e configurações atreladas ao local serão apagadas!";
 
   // Devices
-  static const String devicesAdd = "Adicionar device";
+  static const String devicesManager = "Gerenciar device";
   static const String devicesRequiredName = "Nome é obrigatório";
   static const String devicesRequiredIcon = "Ícone é obrigatório";
   static const String devicesLoadingMessageError = "Erro ao carregar devices";

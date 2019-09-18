@@ -42,6 +42,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   stream: _bloc.getPassword,
                   onChanged: _bloc.changePassword,
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 RegisterButton(),
               ],
             );
