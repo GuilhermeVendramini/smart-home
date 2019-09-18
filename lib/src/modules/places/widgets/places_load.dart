@@ -23,7 +23,9 @@ class PlacesLoad extends StatelessWidget {
             break;
           case PlacesState.FAIL:
             {
-              return Text(Strings.placesLoadingMessageError);
+              return Center(
+                child: Text(Strings.placesLoadingMessageError),
+              );
             }
             break;
           case PlacesState.SUCCESS:

@@ -23,7 +23,9 @@ class DevicesLoad extends StatelessWidget {
             break;
           case DevicesState.FAIL:
             {
-              return Text(Strings.devicesLoadingMessageError);
+              return Center(
+                child: Text(Strings.devicesLoadingMessageError),
+              );
             }
             break;
           case DevicesState.SUCCESS:
