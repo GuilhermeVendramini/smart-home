@@ -69,7 +69,7 @@ class _MqttPageState extends State<MqttPage> {
           MqttStatus(),
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(10.0),
         child: StreamBuilder<MqttState>(
           stream: _bloc.getState,
@@ -114,6 +114,7 @@ class _MqttPageState extends State<MqttPage> {
                   onChanged: _bloc.changePort,
                 ),
                 StreamInputTextField(
+                  helperText: Strings.mqttPassword,
                   controller: _mqttPasswordController,
                   hint: Strings.mqttPassword,
                   obscure: false,
