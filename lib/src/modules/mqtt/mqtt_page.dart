@@ -78,7 +78,7 @@ class _MqttPageState extends State<MqttPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 snapshot.data == MqttState.SAVING ||
-                    snapshot.data == MqttState.CONNECTING
+                        snapshot.data == MqttState.CONNECTING
                     ? CircularProgressIndicator()
                     : SizedBox(height: 35.0),
                 StreamInputTextField(
@@ -89,6 +89,9 @@ class _MqttPageState extends State<MqttPage> {
                   stream: _bloc.getBroker,
                   onChanged: _bloc.changeBroker,
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 StreamInputTextField(
                   helperText: Strings.mqttClientIdentifier,
                   controller: _mqttClientIdentifierController,
@@ -96,6 +99,9 @@ class _MqttPageState extends State<MqttPage> {
                   obscure: false,
                   stream: _bloc.getClientIdentifier,
                   onChanged: _bloc.changeClientIdentifier,
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.mqttUser,
@@ -105,6 +111,9 @@ class _MqttPageState extends State<MqttPage> {
                   stream: _bloc.getUser,
                   onChanged: _bloc.changeUser,
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 StreamInputTextField(
                   helperText: Strings.mqttPort,
                   controller: _mqttPortController,
@@ -112,6 +121,9 @@ class _MqttPageState extends State<MqttPage> {
                   obscure: false,
                   stream: _bloc.getPort,
                   onChanged: _bloc.changePort,
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.mqttPassword,

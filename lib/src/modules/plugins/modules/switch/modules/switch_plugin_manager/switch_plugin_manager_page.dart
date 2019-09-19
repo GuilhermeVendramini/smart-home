@@ -79,12 +79,18 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   stream: _bloc.getTopic,
                   onChanged: _bloc.changeTopic,
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 StreamInputTextField(
                   helperText: Strings.switchMessageOn,
                   controller: _messageOnController,
                   hint: Strings.switchMessageOn,
                   stream: _bloc.getMessageOn,
                   onChanged: _bloc.changeMessageOn,
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchMessageOff,
@@ -104,12 +110,18 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   stream: _bloc.getTopicResult,
                   onChanged: _bloc.changeTopicResult,
                 ),
+                SizedBox(
+                  height: 10.0,
+                ),
                 StreamInputTextField(
                   helperText: Strings.switchResultOn,
                   controller: _resultOnController,
                   hint: Strings.switchResultOn,
                   stream: _bloc.getResultOn,
                   onChanged: _bloc.changeResultOn,
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchResultOff,
