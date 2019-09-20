@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,6 +63,24 @@ class AppMqtt extends App {
     print('MQTT client setted null');
   }
 
+    getSwitchNote() async {
+    print('aquiii');
+    String sharedData = await const MethodChannel('app.channel.shared.data')
+        .invokeMethod("getSavedNote");
+
+    print('---------------------------');
+    final mqtt.MqttClientPayloadBuilder _builder =
+          mqtt.MqttClientPayloadBuilder();
+    print(sharedData);
+    _builder.addString(sharedData);
+    _mqttClient.publishMessage(
+        'cmnd/sonoff/POWER',
+        mqtt.MqttQos.values[0],
+        _builder.payload,
+        retain: false,
+    );
+  }
+
   Future<bool> mqttConnect() async {
     if (_mqttClient != null && _mqttClient.connectionStatus != null) {
       print('Already connected');
@@ -99,6 +118,7 @@ class AppMqtt extends App {
       _mqttClient = _mqttConnect;
 
       _mqttConnectionStatus.add(true);
+      getSwitchNote();
       return true;
     } catch (e) {
       mqttDisconnect();
@@ -121,6 +141,7 @@ class AppMqtt extends App {
 }
 
 class AppProvider extends AppMqtt {
+
   Future<Null> cleanUser() async {
     final SharedPreferences _prefs = await SharedPreferences.getInstance();
     _user = null;
