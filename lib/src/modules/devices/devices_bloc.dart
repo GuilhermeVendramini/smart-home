@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import '../../repositories/hasura/devices/hasura_devices_repository.dart';
+import '../../repositories/sqflite/devices/sqflite_devices_repository.dart';
 import '../../shared/models/device/device_model.dart';
 import '../../shared/models/place/place_model.dart';
 import 'devices_validators.dart';
@@ -8,7 +8,7 @@ import 'devices_validators.dart';
 enum DevicesState { LOADING, SUCCESS, FAIL }
 
 class DevicesBloc extends ChangeNotifier with DevicesValidators {
-  final HasuraDevicesRepository _devicesRepository;
+  final SQFLiteDevicesRepository _devicesRepository;
   final PlaceModel _place;
 
   DevicesBloc(this._devicesRepository, this._place);
@@ -22,7 +22,7 @@ class DevicesBloc extends ChangeNotifier with DevicesValidators {
 }
 
 class Devices extends DevicesBloc {
-  Devices(HasuraDevicesRepository devicesRepository, PlaceModel place)
+  Devices(SQFLiteDevicesRepository devicesRepository, PlaceModel place)
       : super(devicesRepository, place);
 
   PlaceModel get getPlace => _place;
@@ -31,7 +31,7 @@ class Devices extends DevicesBloc {
 }
 
 class DevicesProvider extends Devices {
-  DevicesProvider(HasuraDevicesRepository devicesRepository, PlaceModel place)
+  DevicesProvider(SQFLiteDevicesRepository devicesRepository, PlaceModel place)
       : super(devicesRepository, place);
 
   Future<DevicesState> loadDevices({bool cached = true}) async {

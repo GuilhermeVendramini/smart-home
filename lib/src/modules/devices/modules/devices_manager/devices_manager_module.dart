@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../repositories/hasura/devices/hasura_devices_repository.dart';
+import '../../../../repositories/sqflite/devices/sqflite_devices_repository.dart';
 import '../../../../shared/models/device/device_model.dart';
 import '../../devices_bloc.dart';
 import 'devices_manager_bloc.dart';
@@ -21,7 +21,7 @@ class DevicesManagerModule extends StatelessWidget {
             builder: (_) => DevicesManagerProvider(
                   _devicesProvider,
                   _device,
-                  HasuraDevicesRepository(),
+                  SQFLiteDevicesRepository(),
                 )),
       ],
       child: DevicesManagerPage(_device),

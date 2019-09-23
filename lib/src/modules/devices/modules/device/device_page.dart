@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../../modules/plugins/plugins_module.dart';
 import '../../../../shared/models/device/device_model.dart';
 import '../../../../shared/widgets/components/mqtt_status.dart';
-import '../../../../shared/widgets/components/side_drawer.dart';
 import 'device_bloc.dart';
 import 'widgets/plugins_load.dart';
 
@@ -19,7 +18,6 @@ class _DevicePageState extends State<DevicePage> {
     final _bloc = Provider.of<DeviceProvider>(context);
     final DeviceModel _device = _bloc.getDevice;
     return Scaffold(
-      drawer: SideDrawer(),
       appBar: AppBar(
         title: Text(_device.name),
         leading: IconButton(

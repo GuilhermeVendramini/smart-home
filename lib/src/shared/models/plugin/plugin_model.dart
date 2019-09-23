@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 class PluginModel {
@@ -14,12 +16,12 @@ class PluginModel {
       @required this.deviceId,
       @required this.config});
 
-  PluginModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    type = json['type'];
-    status = json['status'];
-    deviceId = json['device_id'];
-    config = json['config'];
+  PluginModel.fromJson(Map<String, dynamic> data) {
+    id = data['id'];
+    type = data['type'];
+    status = data['status'] == 1 ? true : false;
+    deviceId = data['device_id'];
+    config = jsonDecode(data['config']);
   }
 
   Map<String, dynamic> toJson() {
@@ -28,7 +30,7 @@ class PluginModel {
     data['type'] = this.type;
     data['status'] = this.status;
     data['device_id'] = this.deviceId;
-    data['config'] = this.config;
+    data['config'] = jsonEncode(this.config);
     return data;
   }
 }

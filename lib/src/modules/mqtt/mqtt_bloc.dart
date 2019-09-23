@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app_bloc.dart';
-import '../../shared/languages/pt-br/strings.dart';
+import '../../shared/languages/en/strings.dart';
 import 'mqtt_validators.dart';
 
 enum MqttState { SAVING, CONNECTING, SUCCESS, FAIL }

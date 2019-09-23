@@ -6,14 +6,8 @@ import 'package:rxdart/subjects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'shared/models/mqtt/mqtt_message_model.dart';
-import 'shared/models/user/user_model.dart';
-
-enum LoginState { IDLE, LOADING, SUCCESS, FAIL }
 
 class AppBloc with ChangeNotifier {
-  UserModel _user;
-  final BehaviorSubject<LoginState> _loginStateController =
-      BehaviorSubject<LoginState>();
   mqtt.MqttClient _mqttClient;
   final BehaviorSubject<bool> _mqttConnectionStatus = BehaviorSubject<bool>();
   final BehaviorSubject<MqttMessageModel> _mqttMessages =
@@ -21,7 +15,6 @@ class AppBloc with ChangeNotifier {
 
   @override
   void dispose() {
-    _loginStateController.close();
     _mqttConnectionStatus.close();
     _mqttMessages.close();
     super.dispose();
@@ -29,10 +22,6 @@ class AppBloc with ChangeNotifier {
 }
 
 class App extends AppBloc {
-  UserModel get getUser {
-    return _user;
-  }
-
   Stream<MqttMessageModel> get getMqttMessages {
     return _mqttMessages.stream;
   }
@@ -41,12 +30,14 @@ class App extends AppBloc {
     return _mqttClient;
   }
 
-  Stream<LoginState> get getLoginState => _loginStateController.stream;
-
   Stream<bool> get getMqttConnectionStatus => _mqttConnectionStatus.stream;
 }
 
-class AppMqtt extends App {
+class AppProvider extends App {
+  AppProvider() {
+    mqttConnect();
+  }
+
   void mqttDisconnect() {
     if (_mqttClient != null && _mqttClient.connectionStatus != null) {
       _mqttClient.disconnect();
@@ -117,46 +108,5 @@ class AppMqtt extends App {
       message: message,
       qos: recMess.payload.header.qos,
     ));
-  }
-}
-
-class AppProvider extends AppMqtt {
-  Future<Null> cleanUser() async {
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    _user = null;
-    _prefs.remove('name');
-    _prefs.remove('id');
-    _loginStateController.add(LoginState.IDLE);
-  }
-
-  Future<bool> autoAuthUser() async {
-    _loginStateController.add(LoginState.LOADING);
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    try {
-      if (_prefs.getString('name') != null &&
-          _prefs.getString('name').isNotEmpty) {
-        _user = UserModel(
-          id: _prefs.getInt('id'),
-          name: _prefs.getString('name'),
-        );
-        mqttConnect();
-        _loginStateController.add(LoginState.SUCCESS);
-        return true;
-      }
-      _loginStateController.add(LoginState.IDLE);
-      return false;
-    } catch (e) {
-      print('app_bloc:userIsLogged() $e');
-      _loginStateController.add(LoginState.FAIL);
-      return false;
-    }
-  }
-
-  Future<Null> setUser(UserModel user) async {
-    final SharedPreferences _prefs = await SharedPreferences.getInstance();
-    _user = user;
-    _prefs.setString('name', user.name);
-    _prefs.setInt('id', user.id);
-    _loginStateController.add(LoginState.SUCCESS);
   }
 }

@@ -19,7 +19,7 @@ class AppTheme {
       ),
       errorBorder: UnderlineInputBorder(
         borderSide: BorderSide(
-            color: DefaultColors.red,
+          color: DefaultColors.red,
         ),
       ),
       focusedErrorBorder: UnderlineInputBorder(

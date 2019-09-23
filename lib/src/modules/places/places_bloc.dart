@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 
-import '../../repositories/hasura/places/hasura_places_repository.dart';
+import '../../repositories/sqflite/places/sqflite_places_repository.dart';
 import '../../shared/models/place/place_model.dart';
 
 enum PlacesState { LOADING, SUCCESS, FAIL }
 
 class PlacesBloc extends ChangeNotifier {
-  final HasuraPlacesRepository _placesRepository;
+  final SQFLitePlacesRepository _placesRepository;
 
   PlacesBloc(this._placesRepository);
 
@@ -19,13 +19,13 @@ class PlacesBloc extends ChangeNotifier {
 }
 
 class Places extends PlacesBloc {
-  Places(HasuraPlacesRepository placesRepository) : super(placesRepository);
+  Places(SQFLitePlacesRepository placesRepository) : super(placesRepository);
 
   List<PlaceModel> get getPlaces => _places;
 }
 
 class PlacesProvider extends Places {
-  PlacesProvider(HasuraPlacesRepository placesRepository)
+  PlacesProvider(SQFLitePlacesRepository placesRepository)
       : super(placesRepository);
 
   Future<PlacesState> loadPlaces({bool cached = true}) async {

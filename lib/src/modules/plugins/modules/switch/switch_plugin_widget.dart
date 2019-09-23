@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../shared/colors/default_colors.dart';
 
+import '../../../../shared/colors/default_colors.dart';
 import 'switch_plugin_bloc.dart';
 
 class SwitchPluginWidget extends StatelessWidget {

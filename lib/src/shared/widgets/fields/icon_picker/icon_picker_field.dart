@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../languages/pt-br/strings.dart';
+import '../../../languages/en/strings.dart';
 import 'icon_display.dart';
 import 'icon_picker.dart';
 

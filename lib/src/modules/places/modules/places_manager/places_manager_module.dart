@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../repositories/hasura/places/hasura_places_repository.dart';
+import '../../../../repositories/sqflite/places/sqflite_places_repository.dart';
 import '../../../../shared/models/place/place_model.dart';
 import '../../places_bloc.dart';
 import 'places_manager_bloc.dart';
@@ -21,7 +21,7 @@ class PlacesManagerModule extends StatelessWidget {
             builder: (_) => PlacesManagerProvider(
                   _placesProvider,
                   _place,
-                  HasuraPlacesRepository(),
+                  SQFLitePlacesRepository(),
                 )),
       ],
       child: PlacesManagerPage(_place),

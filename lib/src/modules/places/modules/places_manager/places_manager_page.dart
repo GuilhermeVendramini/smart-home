@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../shared/fonts/smart_home_places_icons.dart';
 import '../../../../shared/icons_list/places_icons_list.dart';
-import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../shared/languages/en/strings.dart';
 import '../../../../shared/models/place/place_model.dart';
 import '../../../../shared/widgets/components/mqtt_status.dart';
 import '../../../../shared/widgets/fields/icon_picker/icon_picker_field.dart';

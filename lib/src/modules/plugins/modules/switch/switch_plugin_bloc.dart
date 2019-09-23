@@ -3,7 +3,7 @@ import 'package:mqtt_client/mqtt_client.dart' as mqtt;
 import 'package:rxdart/subjects.dart';
 
 import '../../../../app_bloc.dart';
-import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../shared/languages/en/strings.dart';
 import '../../../../shared/models/plugin/plugin_model.dart';
 
 enum PluginState { LOADING, SUCCESS, FAIL, IDLE }
@@ -13,8 +13,11 @@ class SwitchPluginBloc extends ChangeNotifier {
   final AppProvider _appBloc;
 
   SwitchPluginBloc(this._plugin, this._appBloc) {
-    _appBloc.getMqttClient
-        .subscribe(_plugin.config['topicResult'], mqtt.MqttQos.exactlyOnce);
+    if (_appBloc.getMqttClient != null &&
+        _appBloc.getMqttClient.connectionStatus != null) {
+      _appBloc.getMqttClient
+          .subscribe(_plugin.config['topicResult'], mqtt.MqttQos.exactlyOnce);
+    }
   }
 
   final _switchStatusController = BehaviorSubject<bool>();
@@ -24,8 +27,11 @@ class SwitchPluginBloc extends ChangeNotifier {
   @override
   void dispose() async {
     _stateController.close();
-    _appBloc.getMqttClient.unsubscribe(_plugin.config['topicResult']);
     _switchStatusController.close();
+    if (_appBloc.getMqttClient != null &&
+        _appBloc.getMqttClient.connectionStatus != null) {
+      _appBloc.getMqttClient.unsubscribe(_plugin.config['topicResult']);
+    }
     super.dispose();
   }
 }
@@ -42,11 +48,14 @@ class SwitchPlugin extends SwitchPluginBloc {
 class SwitchPluginProvider extends SwitchPlugin {
   SwitchPluginProvider(PluginModel plugin, AppProvider appBloc)
       : super(plugin, appBloc) {
-    final mqtt.MqttClientPayloadBuilder _builder =
-        mqtt.MqttClientPayloadBuilder();
-    _builder.addString('state');
-    _publishMessage(_builder);
-    _listenMessage();
+    if (_appBloc.getMqttClient != null &&
+        _appBloc.getMqttClient.connectionStatus != null) {
+      final mqtt.MqttClientPayloadBuilder _builder =
+          mqtt.MqttClientPayloadBuilder();
+      _builder.addString('state');
+      _publishMessage(_builder);
+      _listenMessage();
+    }
   }
 
   void _publishMessage(mqtt.MqttClientPayloadBuilder builder) {

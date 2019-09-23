@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../../shared/languages/en/strings.dart';
 import '../../../../../../shared/models/plugin/plugin_model.dart';
-import '../../../../../../shared/widgets/components/side_drawer.dart';
 import '../../../../../../shared/widgets/fields/stream_input/stream_input_checkbox.dart';
 import '../../../../../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'switch_plugin_manager_bloc.dart';
@@ -52,7 +51,6 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
   Widget build(BuildContext context) {
     final _bloc = Provider.of<SwitchPluginManagerProvider>(context);
     return Scaffold(
-      drawer: SideDrawer(),
       appBar: AppBar(
         title: Text(Strings.switchPluginTitle),
         leading: IconButton(
@@ -80,7 +78,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeTopic,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchMessageOn,
@@ -90,7 +88,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeMessageOn,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchMessageOff,
@@ -100,7 +98,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeMessageOff,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchTopicResult,
@@ -111,7 +109,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeTopicResult,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchResultOn,
@@ -121,7 +119,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeResultOn,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.switchResultOff,
@@ -131,7 +129,7 @@ class _SwitchPluginManagerState extends State<SwitchPluginManagerPage> {
                   onChanged: _bloc.changeResultOff,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 Text(Strings.switchStatus),
                 StreamInputCheckboxField(

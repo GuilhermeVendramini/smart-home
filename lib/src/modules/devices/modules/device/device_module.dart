@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
+import '../../../../repositories/sqflite/plugins/sqflite_plugins_repository.dart';
 import '../../../../shared/models/device/device_model.dart';
 import 'device_bloc.dart';
 import 'device_page.dart';
@@ -17,7 +17,7 @@ class DeviceModule extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<DeviceProvider>(
             builder: (_) => DeviceProvider(
-                  HasuraPluginsRepository(),
+                  SQFLitePluginsRepository(),
                   _device,
                 )),
       ],

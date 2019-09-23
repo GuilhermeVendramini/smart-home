@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../shared/colors/default_colors.dart';
-import '../../../../shared/models/plugin/plugin_model.dart';
 
-import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../shared/colors/default_colors.dart';
+import '../../../../shared/languages/en/strings.dart';
+import '../../../../shared/models/plugin/plugin_model.dart';
 import '../../modules/switch/modules/switch_plugin_manager/switch_plugin_manager_module.dart';
 import '../../plugins_bloc.dart';
 

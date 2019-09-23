@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../shared/languages/pt-br/strings.dart';
+import '../../shared/languages/en/strings.dart';
 import '../../shared/widgets/components/mqtt_status.dart';
-import '../../shared/widgets/components/side_drawer.dart';
 import '../../shared/widgets/fields/stream_input/stream_input_textfield.dart';
 import 'mqtt_bloc.dart';
 import 'widgets/save_button.dart';
@@ -58,7 +57,6 @@ class _MqttPageState extends State<MqttPage> {
     final _bloc = Provider.of<MqttProvider>(context);
 
     return Scaffold(
-      drawer: SideDrawer(),
       appBar: AppBar(
         title: Text('MQTT'),
         leading: IconButton(
@@ -90,7 +88,7 @@ class _MqttPageState extends State<MqttPage> {
                   onChanged: _bloc.changeBroker,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.mqttClientIdentifier,
@@ -101,7 +99,7 @@ class _MqttPageState extends State<MqttPage> {
                   onChanged: _bloc.changeClientIdentifier,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.mqttUser,
@@ -112,18 +110,7 @@ class _MqttPageState extends State<MqttPage> {
                   onChanged: _bloc.changeUser,
                 ),
                 SizedBox(
-                  height: 10.0,
-                ),
-                StreamInputTextField(
-                  helperText: Strings.mqttPort,
-                  controller: _mqttPortController,
-                  hint: Strings.mqttPort,
-                  obscure: false,
-                  stream: _bloc.getPort,
-                  onChanged: _bloc.changePort,
-                ),
-                SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 StreamInputTextField(
                   helperText: Strings.mqttPassword,
@@ -132,6 +119,17 @@ class _MqttPageState extends State<MqttPage> {
                   obscure: false,
                   stream: _bloc.getPassword,
                   onChanged: _bloc.changePassword,
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                StreamInputTextField(
+                  helperText: Strings.mqttPort,
+                  controller: _mqttPortController,
+                  hint: Strings.mqttPort,
+                  obscure: false,
+                  stream: _bloc.getPort,
+                  onChanged: _bloc.changePort,
                 ),
               ],
             );

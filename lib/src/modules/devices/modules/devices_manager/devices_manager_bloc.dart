@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../repositories/hasura/devices/hasura_devices_repository.dart';
-import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../repositories/sqflite/devices/sqflite_devices_repository.dart';
+import '../../../../shared/languages/en/strings.dart';
 import '../../../../shared/models/device/device_model.dart';
 import '../../../../shared/models/place/place_model.dart';
 import '../../devices_bloc.dart';
@@ -12,7 +12,7 @@ enum DevicesManagerState { LOADING, SUCCESS, FAIL }
 
 class DevicesManagerBloc extends ChangeNotifier with DevicesManagerValidators {
   final DevicesProvider _devicesProvider;
-  final HasuraDevicesRepository _devicesRepository;
+  final SQFLiteDevicesRepository _devicesRepository;
   final DeviceModel _currentDevice;
 
   DevicesManagerBloc(
@@ -34,7 +34,7 @@ class DevicesManagerBloc extends ChangeNotifier with DevicesManagerValidators {
 
 class DevicesManager extends DevicesManagerBloc {
   DevicesManager(DevicesProvider devicesProvider, DeviceModel currentDevice,
-      HasuraDevicesRepository devicesRepository)
+      SQFLiteDevicesRepository devicesRepository)
       : super(devicesProvider, currentDevice, devicesRepository);
 
   Stream<String> get getName => _nameController.stream.transform(validateName);
@@ -59,7 +59,7 @@ class DevicesManager extends DevicesManagerBloc {
 
 class DevicesManagerProvider extends DevicesManager {
   DevicesManagerProvider(DevicesProvider devicesProvider,
-      DeviceModel currentDevice, HasuraDevicesRepository devicesRepository)
+      DeviceModel currentDevice, SQFLiteDevicesRepository devicesRepository)
       : super(devicesProvider, currentDevice, devicesRepository) {
     if (currentDevice != null) {
       _nameController.add(_currentDevice.name);

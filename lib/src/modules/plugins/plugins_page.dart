@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/languages/pt-br/strings.dart';
-import '../../shared/widgets/components/side_drawer.dart';
+import '../../shared/languages/en/strings.dart';
 import 'widgets/plugins_list.dart';
 
 class PluginsPage extends StatefulWidget {
@@ -13,7 +12,6 @@ class _PluginsPageState extends State<PluginsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideDrawer(),
       appBar: AppBar(
         title: Text(Strings.pluginsTitle),
         leading: IconButton(

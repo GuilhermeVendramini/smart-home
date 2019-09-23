@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../shared/models/place/place_model.dart';
 import '../../shared/widgets/components/mqtt_status.dart';
-import '../../shared/widgets/components/side_drawer.dart';
 import 'devices_bloc.dart';
 import 'widgets/devices_load.dart';
 
@@ -18,7 +17,6 @@ class _DevicesPageState extends State<DevicesPage> {
     final _bloc = Provider.of<DevicesProvider>(context);
     final PlaceModel _place = _bloc.getPlace;
     return Scaffold(
-      drawer: SideDrawer(),
       appBar: AppBar(
         title: Text(_place.name),
         leading: IconButton(

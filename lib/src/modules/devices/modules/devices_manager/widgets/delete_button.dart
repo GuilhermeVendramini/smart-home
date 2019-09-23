@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../shared/colors/default_colors.dart';
-import '../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../shared/languages/en/strings.dart';
 import '../../../devices_module.dart';
 import '../devices_manager_bloc.dart';
 

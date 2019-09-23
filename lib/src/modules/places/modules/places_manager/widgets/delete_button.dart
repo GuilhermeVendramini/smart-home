@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../shared/colors/default_colors.dart';
 
-import '../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../shared/colors/default_colors.dart';
+import '../../../../../shared/languages/en/strings.dart';
 import '../../../places_module.dart';
 import '../places_manager_bloc.dart';
 

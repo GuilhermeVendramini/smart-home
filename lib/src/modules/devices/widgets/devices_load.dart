@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shared/languages/pt-br/strings.dart';
+import '../../../shared/languages/en/strings.dart';
 import '../devices_bloc.dart';
 import 'devices_list.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../shared/languages/en/strings.dart';
 import '../device_bloc.dart';
 import 'plugins_list.dart';
 
@@ -23,12 +23,16 @@ class PluginsLoad extends StatelessWidget {
             break;
           case PluginsState.FAIL:
             {
-              return Text(Strings.pluginsLoadingMessageError);
+              return Center(
+                child: Text(Strings.pluginsLoadingMessageError),
+              );
             }
             break;
           case PluginsState.SUCCESS:
             {
-              return PluginsList();
+              return Center(
+                child: PluginsList(),
+              );
             }
             break;
           default:

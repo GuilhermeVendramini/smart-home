@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
-import '../../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../../repositories/sqflite/plugins/sqflite_plugins_repository.dart';
+import '../../../../../../shared/languages/en/strings.dart';
 import '../../../../../../shared/models/device/device_model.dart';
 import '../../../../../../shared/models/plugin/plugin_model.dart';
 import 'switch_plugin_manager_validators.dart';
@@ -11,7 +11,7 @@ enum SavePluginState { SAVING, SUCCESS, FAIL }
 
 class SwitchPluginManagerBloc extends ChangeNotifier
     with SwitchPluginManagerValidators {
-  final HasuraPluginsRepository _pluginsRepository;
+  final SQFLitePluginsRepository _pluginsRepository;
   final DeviceModel _device;
   final PluginModel _currentPlugin;
 
@@ -44,7 +44,7 @@ class SwitchPluginManagerBloc extends ChangeNotifier
 }
 
 class SwitchPluginManager extends SwitchPluginManagerBloc {
-  SwitchPluginManager(HasuraPluginsRepository pluginsRepository,
+  SwitchPluginManager(SQFLitePluginsRepository pluginsRepository,
       DeviceModel device, PluginModel plugin)
       : super(pluginsRepository, device, plugin);
 
@@ -103,7 +103,7 @@ class SwitchPluginManager extends SwitchPluginManagerBloc {
 }
 
 class SwitchPluginManagerProvider extends SwitchPluginManager {
-  SwitchPluginManagerProvider(HasuraPluginsRepository pluginsRepository,
+  SwitchPluginManagerProvider(SQFLitePluginsRepository pluginsRepository,
       DeviceModel device, PluginModel plugin)
       : super(pluginsRepository, device, plugin) {
     if (_currentPlugin != null) {

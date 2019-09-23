@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../../../../../shared/languages/pt-br/strings.dart';
+import '../../../../../../shared/languages/en/strings.dart';
 
 class SwitchPluginManagerValidators {
   final validateTopic =

@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 
-import '../../../../repositories/hasura/plugins/hasura_plugins_repository.dart';
+import '../../../../repositories/sqflite/plugins/sqflite_plugins_repository.dart';
 import '../../../../shared/models/device/device_model.dart';
 import '../../../../shared/models/plugin/plugin_model.dart';
 
 enum PluginsState { LOADING, SUCCESS, FAIL }
 
 class DeviceBloc extends ChangeNotifier {
-  final HasuraPluginsRepository _pluginsRepository;
+  final SQFLitePluginsRepository _pluginsRepository;
   final DeviceModel _device;
 
   DeviceBloc(this._pluginsRepository, this._device);
@@ -21,7 +21,7 @@ class DeviceBloc extends ChangeNotifier {
 }
 
 class Device extends DeviceBloc {
-  Device(HasuraPluginsRepository pluginsRepository, DeviceModel device)
+  Device(SQFLitePluginsRepository pluginsRepository, DeviceModel device)
       : super(pluginsRepository, device);
 
   DeviceModel get getDevice => _device;
@@ -36,7 +36,7 @@ class Device extends DeviceBloc {
 }
 
 class DeviceProvider extends Device {
-  DeviceProvider(HasuraPluginsRepository pluginsRepository, DeviceModel device)
+  DeviceProvider(SQFLitePluginsRepository pluginsRepository, DeviceModel device)
       : super(pluginsRepository, device);
 
   Future<PluginsState> loadPlugins({bool cached = true}) async {

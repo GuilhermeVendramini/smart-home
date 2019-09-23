@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../repositories/hasura/places/hasura_places_repository.dart';
-import '../../../../shared/languages/pt-br/strings.dart';
+import '../../../../repositories/sqflite/places/sqflite_places_repository.dart';
+import '../../../../shared/languages/en/strings.dart';
 import '../../../../shared/models/place/place_model.dart';
 import '../../places_bloc.dart';
 import 'places_manager_validators.dart';
@@ -13,7 +13,7 @@ enum PlacesManagerState { LOADING, SUCCESS, FAIL }
 
 class PlacesManagerBloc extends ChangeNotifier with PlacesManagerValidators {
   final PlacesProvider _placesProvider;
-  final HasuraPlacesRepository _placesRepository;
+  final SQFLitePlacesRepository _placesRepository;
   final PlaceModel _currentPlace;
 
   PlacesManagerBloc(
@@ -35,7 +35,7 @@ class PlacesManagerBloc extends ChangeNotifier with PlacesManagerValidators {
 
 class PlacesManager extends PlacesManagerBloc {
   PlacesManager(PlacesProvider placesProvider, PlaceModel currentPlace,
-      HasuraPlacesRepository placesRepository)
+      SQFLitePlacesRepository placesRepository)
       : super(placesProvider, currentPlace, placesRepository);
 
   Stream<String> get getName => _nameController.stream.transform(validateName);
@@ -58,7 +58,7 @@ class PlacesManager extends PlacesManagerBloc {
 
 class PlacesManagerProvider extends PlacesManager {
   PlacesManagerProvider(PlacesProvider placesProvider, PlaceModel currentPlace,
-      HasuraPlacesRepository placesRepository)
+      SQFLitePlacesRepository placesRepository)
       : super(placesProvider, currentPlace, placesRepository) {
     if (currentPlace != null) {
       _nameController.add(_currentPlace.name);
