@@ -11,7 +11,10 @@ class MqttStatus extends StatelessWidget {
         initialData: false,
         stream: _bloc.getMqttConnectionStatus,
         builder: (context, snapshot) {
-          return Icon(snapshot.data ? Icons.cloud : Icons.cloud_off);
+          return Padding(
+            padding: EdgeInsets.only(right: 10.0),
+            child: Icon(snapshot.data ? Icons.cloud : Icons.cloud_off),
+          );
         });
   }
 }
