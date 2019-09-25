@@ -1,30 +1,19 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import '../../../shared/models/plugin/plugin_model.dart';
 import '../sqflite_connection.dart';
 
 class SQFLitePluginsRepository extends SQFLiteConnection {
-  Future<PluginModel> savePlugin(
-      {String type,
-      bool status,
-      int deviceId,
-      Map<String, dynamic> config}) async {
+  Future<PluginModel> savePlugin(PluginModel plugin) async {
     final db = await database;
-    int id = await db.insert('plugins', {
-      "type": type,
-      "status": status,
-      "device_id": deviceId,
-      "config": jsonEncode(config).toString(),
-    });
+    int id = await db.insert('plugins', plugin.toJson());
 
     return PluginModel(
       id: id,
-      type: type,
-      status: status,
-      deviceId: deviceId,
-      config: config,
+      type: plugin.type,
+      status: plugin.status,
+      deviceId: plugin.deviceId,
+      config: plugin.config,
     );
   }
 

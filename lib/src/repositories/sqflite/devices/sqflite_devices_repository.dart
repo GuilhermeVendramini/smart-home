@@ -12,15 +12,12 @@ class SQFLiteDevicesRepository extends SQFLiteConnection {
     return result.map((it) => DeviceModel.fromJson(it)).toList();
   }
 
-  Future<DeviceModel> createDevice({String name, int icon, int placeId}) async {
+  Future<DeviceModel> createDevice(DeviceModel device) async {
     final db = await database;
-    int id = await db.insert('devices', {
-      "name": name,
-      "icon": icon,
-      "place_id": placeId,
-    });
+    int id = await db.insert('devices', device.toJson());
 
-    return DeviceModel(id: id, name: name, icon: icon, placeId: placeId);
+    return DeviceModel(
+        id: id, name: device.name, icon: device.icon, placeId: device.placeId);
   }
 
   Future<DeviceModel> updateDevice(DeviceModel device) async {

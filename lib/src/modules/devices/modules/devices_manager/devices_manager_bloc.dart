@@ -71,11 +71,11 @@ class DevicesManagerProvider extends DevicesManager {
       _stateController.add(DevicesManagerState.LOADING);
       DeviceModel _device;
 
-      _device = await _devicesRepository.createDevice(
+      _device = await _devicesRepository.createDevice(DeviceModel(
         name: _nameController.value,
         icon: int.tryParse(_iconController.value),
         placeId: _devicesProvider.getPlace.id,
-      );
+      ));
 
       _devicesProvider.addDevice(_device);
       _stateController.add(DevicesManagerState.SUCCESS);

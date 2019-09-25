@@ -70,10 +70,10 @@ class PlacesManagerProvider extends PlacesManager {
       _stateController.add(PlacesManagerState.LOADING);
       PlaceModel _place;
 
-      _place = await _placesRepository.createPlace(
+      _place = await _placesRepository.createPlace(PlaceModel(
         name: _nameController.value,
         icon: int.tryParse(_iconController.value),
-      );
+      ));
 
       _placesProvider.addPlace(_place);
       _stateController.add(PlacesManagerState.SUCCESS);

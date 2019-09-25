@@ -9,14 +9,11 @@ class SQFLitePlacesRepository extends SQFLiteConnection {
     return result.map((it) => PlaceModel.fromJson(it)).toList();
   }
 
-  Future<PlaceModel> createPlace({String name, int icon}) async {
+  Future<PlaceModel> createPlace(PlaceModel place) async {
     final db = await database;
-    int id = await db.insert('places', {
-      "name": name,
-      "icon": icon,
-    });
+    int id = await db.insert('places', place.toJson());
 
-    return PlaceModel(id: id, name: name, icon: icon);
+    return PlaceModel(id: id, name: place.name, icon: place.icon);
   }
 
   Future<PlaceModel> updatePlace(PlaceModel place) async {

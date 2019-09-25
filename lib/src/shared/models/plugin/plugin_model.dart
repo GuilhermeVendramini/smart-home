@@ -16,21 +16,19 @@ class PluginModel {
       @required this.deviceId,
       @required this.config});
 
-  PluginModel.fromJson(Map<String, dynamic> data) {
-    id = data['id'];
-    type = data['type'];
-    status = data['status'] == 1 ? true : false;
-    deviceId = data['device_id'];
-    config = jsonDecode(data['config']);
-  }
+  factory PluginModel.fromJson(Map<String, dynamic> json) => new PluginModel(
+        id: json["id"],
+        type: json["type"],
+        deviceId: json["device_id"],
+        config: jsonDecode(json["config"]),
+        status: json["status"] == 1 ? true : false,
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
-    data['status'] = this.status;
-    data['device_id'] = this.deviceId;
-    data['config'] = jsonEncode(this.config);
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "type": type,
+        "device_id": deviceId,
+        "config": jsonEncode(this.config).toString(),
+        "status": status,
+      };
 }

@@ -1,11 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
-
-DeviceModel deviceModelFromJson(String str) =>
-    DeviceModel.fromJson(json.decode(str));
-
-String deviceModelToJson(DeviceModel data) => json.encode(data.toJson());
 
 class DeviceModel {
   int id;

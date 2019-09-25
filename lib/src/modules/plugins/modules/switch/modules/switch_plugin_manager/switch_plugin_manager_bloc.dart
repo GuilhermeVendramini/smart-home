@@ -121,7 +121,7 @@ class SwitchPluginManagerProvider extends SwitchPluginManager {
     try {
       _stateController.add(SavePluginState.SAVING);
 
-      await _pluginsRepository.savePlugin(
+      await _pluginsRepository.savePlugin(PluginModel(
           type: 'switch',
           status: _statusController.value,
           deviceId: _device.id,
@@ -132,7 +132,7 @@ class SwitchPluginManagerProvider extends SwitchPluginManager {
             "topicResult": _topicResultController.value,
             "resultOn": _resultOnController.value,
             "resultOff": _resultOffController.value,
-          });
+          }));
 
       message = Strings.switchSavedSuccessfully;
       _stateController.add(SavePluginState.SUCCESS);
